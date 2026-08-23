@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import { withBasePath } from '@/lib/helpers';
 import { useInViewVideo } from '@/lib/hooks';
 import { Assets } from '@/utils/consts';
 
@@ -21,9 +20,9 @@ export const Showreel: React.FC = () => {
           muted
           playsInline
           preload="metadata"
-          poster={withBasePath(Assets.showreelPoster)}
+          poster={Assets.showreelPoster}
         >
-          <source src={withBasePath(Assets.showreelVideo)} type="video/mp4" />
+          <source src={Assets.showreelVideo} type="video/mp4" />
         </video>
       </div>
     </section>

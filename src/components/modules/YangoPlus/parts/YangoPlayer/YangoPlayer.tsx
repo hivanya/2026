@@ -3,7 +3,6 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { withBasePath } from '@/lib/helpers';
 import { Assets } from '@/utils/consts';
 
 import classes from './YangoPlayer.module.scss';
@@ -34,7 +33,7 @@ export const YangoPlayer: React.FC = () => {
           setProgress(video.duration ? video.currentTime / video.duration : 0);
         }}
       >
-        <source src={withBasePath(Assets.yangoPlayVideo)} type="video/mp4" />
+        <source src={Assets.yangoPlayVideo} type="video/mp4" />
       </video>
 
       {started ? (

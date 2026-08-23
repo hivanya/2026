@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { PressNote } from '@/components/ui';
-import { withBasePath } from '@/lib/helpers';
 import { useInViewVideo } from '@/lib/hooks';
 import { Assets, PressNotes } from '@/utils/consts';
 
@@ -28,10 +27,10 @@ export const YangoHero: React.FC = () => {
             loop
             playsInline
             preload="metadata"
-            poster={withBasePath(Assets.yangoPhone)}
+            poster={Assets.yangoPhone}
             className={classes.video}
           >
-            <source src={withBasePath(Assets.myWaveVideo)} type="video/mp4" />
+            <source src={Assets.myWaveVideo} type="video/mp4" />
           </video>
         </div>
 
