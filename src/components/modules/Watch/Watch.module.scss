@@ -29,6 +29,10 @@
 }
 
 @include s.mobile {
+  .box {
+    display: none;
+  }
+
   .section {
     // Кадр на 5190, секция начинается на 5180
     padding-top: 10px;

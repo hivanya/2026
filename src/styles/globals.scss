@@ -2,7 +2,6 @@
 @use 'mixins' as *;
 
 :root {
-  // Шрифт подключается в lib/helpers/getFonts.ts
   --font-graphik: var(--font-graphik-local), system-ui, sans-serif;
 }
 
@@ -11,11 +10,7 @@
 }
 
 html {
-  // Без резерва полоса прокрутки появляется после подгрузки картинок
-  // и сдвигает всю композицию вбок
   scrollbar-gutter: stable;
-
-  // clip, а не hidden: не создаёт лишний контейнер прокрутки
   overflow-x: clip;
 }
 
@@ -27,7 +22,6 @@ body {
 
   @include text_body;
 
-  // Засветы и ленты выходят за края холста, режет их html
   overflow-x: clip;
 }
 
@@ -59,7 +53,5 @@ video {
 }
 
 img {
-  // Атрибут height у <img> работает как презентационная подсказка
-  // и делает высоту определённой — aspect-ratio тогда игнорируется
   height: auto;
 }

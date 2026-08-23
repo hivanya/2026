@@ -1,13 +1,7 @@
-// Тексты с макета, обновляются через npm run figma:pull
-
 export const PersonName = 'Ivan Pokalyuk';
 
-// Переносы в текстах ниже принудительные, U+2028 — без них строки
-// ложатся иначе; блоки набраны с white-space: pre-line
-export const PersonBio =
-  'Product design lead with 12+ years of experience. For the last 7 years \nI have been leading design teams, building products and digital experiences';
+export const PersonBio = 'Product design lead with 12+ years of experience. For the last 7 years \nI have been leading design teams, building products and digital experiences';
 
-// Адреса лежат в макете отдельными подписями рядом с фреймами
 export const SocialLinks = [
   {
     id: 'linkedin',
@@ -20,7 +14,6 @@ export const SocialLinks = [
 
 export const ExperienceTitle = 'Experience for last 5 years';
 
-// Компания, роль, годы
 export const Experience = [
   {
     id: 'yandex-music',
@@ -58,14 +51,11 @@ export const YangoIntro = {
 
 export const ShowreelTitle = 'Showreel';
 
-// Кнопка внизу страницы
-// TODO: сверить подпись и цвет с макетом, узел 310:18274
 export const ContactCta = {
   label: 'Say hi',
   href: 'https://t.me/hivanya',
 } as const;
 
-// TODO: адресов в макете нет, проставлены найденные — сверить с Иваном
 export const PressNotes = {
   rebrand: {
     text: 'Yandex Music has rebranded for the first\ntime in 9 years. The service unveiled\nan updated brand platform, logo, visual\nstyle, and a number of product changes',

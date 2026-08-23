@@ -25,11 +25,7 @@ export const YandexMusic: FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Секция высокая, при меньшем размахе движение не читается
   const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 2.1]);
-  // Только вверх: артист стоит над карточкой иконки, сдвиг вниз накрыл
-  // бы её; 30% от 800 — это 240px
-  const artistY = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
 
   return (
     <section id="music" ref={sectionRef} className={classes.section}>
@@ -49,7 +45,7 @@ export const YandexMusic: FC = () => {
 
       <div className={classes.box}>
         <MusicHeading />
-        <MusicCollage artistY={prefersReduced ? null : artistY} />
+        <MusicCollage />
 
         <PressNote
           {...PressNotes.rebrand}

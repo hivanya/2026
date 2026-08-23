@@ -90,7 +90,7 @@
 }
 
 .progress {
-  stroke: #4d74ff;
+  stroke: #ffdb4d;
   // timeupdate приходит примерно раз в 250мс, переход сглаживает шаг
   transition: stroke-dashoffset 0.25s linear;
 }

@@ -101,7 +101,7 @@ $gap: 20px;
   }
 
   .phone {
-    order: 2;
+    order: 9;
     // Телефон на 1294, заголовок кончается на 1254
     margin-top: 40px;
     aspect-ratio: 370 / 754;
@@ -124,6 +124,8 @@ $gap: 20px;
   }
 
   .artist {
+    display: none;
+
     order: 9;
     // Артист на 3616, упоминание кончается на 3576
     margin-top: 40px;

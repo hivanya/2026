@@ -1,5 +1,3 @@
-// Значения с макета Figma, обновляются через npm run figma:pull
-
 // === Раскладка ===
 
 $design_width: 1280;
@@ -18,18 +16,14 @@ $medium: 500;
 $background: #171717;
 $text: #ffffff;
 
-// Акцент кнопки внизу страницы
 $accent: #27a6e6;
 
-// Разделители строк — белый 8%, подчёркивания ссылок — белый 20%
 $hairline_row: rgba(255, 255, 255, 0.08);
 $hairline_link: rgba(255, 255, 255, 0.2);
 
-// Насколько гаснут соседние иконки сетки 4×4 при наведении
 $dimmed_opacity: 0.2;
 
 $transition_duration: 0.3s;
 $transition_ease: ease;
 
-// Граница между десктопным и мобильным макетами
 $breakpoint_mobile: 768px;

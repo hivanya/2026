@@ -1,7 +1,7 @@
 'use client';
 
 import React, { FC } from 'react';
-import { motion, MotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { TiltCard } from '@/components/ui';
@@ -9,14 +9,9 @@ import { Assets } from '@/utils/consts';
 
 import classes from './MusicCollage.module.scss';
 
-interface Props {
-  /** Подъём артиста при скролле, null при выключенных анимациях */
-  artistY: MotionValue<string> | null;
-}
-
 // Две колонки: слева главный экран и ноутбук, справа артист и карточка
 // Высота берётся из содержимого
-export const MusicCollage: FC<Props> = ({ artistY }) => (
+export const MusicCollage: FC = () => (
   <div className={classes.collage}>
     <div className={classes.left}>
       <Image
@@ -37,10 +32,7 @@ export const MusicCollage: FC<Props> = ({ artistY }) => (
     </div>
 
     <div className={classes.right}>
-      <motion.div
-        className={classes.artist}
-        style={artistY ? { y: artistY } : undefined}
-      >
+      <motion.div className={classes.artist}>
         <Image
           src={Assets.musicArtist}
           alt="Artist page"

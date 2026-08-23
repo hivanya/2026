@@ -1,7 +1,3 @@
-// Экспорт из макета: растры тянет figma-fills, составные кадры —
-// figma-rest, иконки — figma-icons и rasterize-icons
-// Имена здесь и в скриптах должны совпадать
-
 export const Assets = {
   // Блок 2 — превью видео, в макете «image 1»
   showreelPoster: '/images/showreel-poster.webp',

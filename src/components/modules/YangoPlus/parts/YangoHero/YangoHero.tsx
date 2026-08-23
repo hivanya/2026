@@ -25,8 +25,6 @@ export const YangoHero: FC = () => {
 
       <div className={classes.stage}>
         <div className={classes.phone}>
-          <span aria-hidden className={classes.island} />
-
           <video
             ref={videoRef}
             // Без muted и playsInline автоплей блокируется, на iOS
