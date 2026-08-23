@@ -4,7 +4,6 @@
   @include s.section;
 
   z-index: 1;
-  // Заголовок на 1273, начало секции 1145
   padding-top: 128px;
   padding-bottom: 40px;
 }
@@ -13,19 +12,16 @@
   @include s.box;
 }
 
-// Засвет втрое шире фрейма и уходит за края
 .backdrop {
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
 
-  // 3677 из 1280
   width: 200%;
   aspect-ratio: 1 / 1;
   translate: -50% 0;
 
-  // От центра, иначе уползает в угол и обнажает край
   transform-origin: center;
   will-change: transform;
 }
@@ -34,16 +30,13 @@
   object-fit: contain;
 }
 
-// Упоминание на 2103, коллаж кончается на 2083
 .pressRebrand {
   width: 310px;
   max-width: 100%;
   margin-top: 20px;
-  // 530 − 20 от левого края полосы
   margin-left: 510px;
 }
 
-// Второе упоминание под точками карусели
 .pressWeb {
   width: 769px;
   max-width: 100%;
@@ -51,12 +44,9 @@
   margin-left: 236px;
 }
 
-// В мобильном макете порядок другой: телефон, ноутбук, карточка,
-// упоминание, карусель, упоминание и только потом артист
 @include s.mobile {
   .section {
     padding-top: 0;
-    // Сетка «Моей волны» на 4418, артист кончается на 4370
     padding-bottom: 30px;
   }
 
@@ -77,13 +67,11 @@
 
   .pressRebrand {
     order: 5;
-    // Упоминание на 2818, карточка кончается на 2798
     margin-top: 20px;
   }
 
   .pressWeb {
     order: 8;
-    // Упоминание на 3476, карусель кончается на 3456
     margin-top: 20px;
   }
 }

@@ -4,7 +4,6 @@
   @include s.section;
 
   z-index: 2;
-  // Заголовок на 10938, начало секции 10870
   padding-top: 70px;
   padding-bottom: 128px;
 }
@@ -15,20 +14,17 @@
 
 .title {
   width: 181px;
-  // 550 − 20 от левого края полосы
   margin-left: 530px;
 
   @include s.text_display;
 }
 
-// Две колонки по 610 с просветом 20
 .stage {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: start;
 
-  // Заголовок кончается на 10986, первый кадр на 11066
   margin-top: 80px;
 }
 
@@ -49,8 +45,6 @@
   object-fit: cover;
 }
 
-// Пропорции из макета: экспорт приходит с полем в доли пикселя,
-// на четырёх кадрах подряд это набегает в заметный сдвиг
 .stalo {
   aspect-ratio: 610 / 1320;
 }
@@ -65,17 +59,13 @@
   aspect-ratio: 610 / 760;
 }
 
-// Левая колонка опущена: 11266 против 11066
 .five {
   margin-top: 200px;
 }
 
-// Билет поверх кадра, в макете отдельный слой
 .ticket {
   position: absolute;
-  // 12632 − 11066
   top: 1566px;
-  // 96 − 20 от левого края полосы
   left: 76px;
 
   width: 459px;
@@ -91,9 +81,7 @@
 
 .plate {
   position: absolute;
-  // 12430 − 12406 от верха кадра
   top: 24px;
-  // 697 − 650 от левого края колонки
   left: 47px;
 
   width: 538px;
@@ -113,21 +101,17 @@
 }
 
 .carousel {
-  // Лента на 13294, разделитель на 13166
   width: 1030px;
   max-width: 100%;
   margin-top: 128px;
-  // 125 − 20 от левого края полосы
   margin-left: 105px;
 
   aspect-ratio: 1030 / 280;
   object-fit: cover;
 }
 
-// В мобильном макете доведён только заголовок
 @include s.mobile {
   .section {
-    // Заголовок на 10480, секция начинается на 10470
     padding-top: 10px;
     padding-bottom: 40px;
   }

@@ -1,13 +1,11 @@
 'use client';
 
-import { useCallback, useSyncExternalStore } from 'react';
+import React from 'react';
 
 const Query = '(prefers-reduced-motion: reduce)';
 
-// Motion-значения живут вне каскада, поэтому CSS-медиазапроса мало —
-// анимации приходится гасить и в JS
 export function usePrefersReducedMotion() {
-  const subscribe = useCallback((onChange: () => void) => {
+  const subscribe = React.useCallback((onChange: () => void) => {
     const query = window.matchMedia(Query);
 
     query.addEventListener('change', onChange);
@@ -15,10 +13,9 @@ export function usePrefersReducedMotion() {
     return () => query.removeEventListener('change', onChange);
   }, []);
 
-  return useSyncExternalStore(
+  return React.useSyncExternalStore(
     subscribe,
     () => window.matchMedia(Query).matches,
-    // На сервере медиазапрос не спросить, разметка от него не зависит
     () => false,
   );
 }

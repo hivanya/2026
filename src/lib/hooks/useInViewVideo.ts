@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
 export function useInViewVideo(threshold = 0.5) {
-  const ref = useRef<HTMLVideoElement>(null);
+  const ref = React.useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const video = ref.current;
     if (!video) return;
 

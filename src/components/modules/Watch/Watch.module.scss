@@ -11,7 +11,6 @@
   @include s.box;
 }
 
-// Оба кадра от одного верха, просвет 20
 .stage {
   display: flex;
   align-items: flex-start;
@@ -34,16 +33,13 @@
   }
 
   .section {
-    // Кадр на 5190, секция начинается на 5180
     padding-top: 10px;
-    // Рамка Yango на 6199, второй кадр кончается на 6159
     padding-bottom: 31px;
   }
 
   .stage {
     flex-direction: column;
     align-items: center;
-    // 5766 − 5746
     gap: 20px;
   }
 
@@ -55,7 +51,6 @@
   }
 
   .right {
-    // В макете кадр 350 при полосе 370
     width: 350px;
     max-width: 100%;
     aspect-ratio: 350 / 393;

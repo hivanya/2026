@@ -12,7 +12,6 @@ import {
   YangoPlus,
 } from '@/components/modules';
 
-// Порядок секций из макета, сверху вниз
 export default function HomePage() {
   return (
     <>

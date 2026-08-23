@@ -1,0 +1,67 @@
+@use '@/styles/index' as s;
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+
+  padding: 20px 0;
+
+  background: rgba(23, 23, 23, 0.72);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid s.$hairline_row;
+}
+
+.box {
+  @include s.box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.name {
+  @include s.text_body(s.$medium);
+}
+
+.links {
+  display: flex;
+  gap: 30px;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+
+  @include s.text_body(s.$regular);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+
+    @include s.hairline(s.$hairline_link);
+
+    transition: background-color s.$transition_duration s.$transition_ease;
+  }
+
+  &:hover::after {
+    background-color: s.$text;
+  }
+}
+
+@include s.mobile {
+  .header {
+    padding: 12px 0;
+  }
+
+  .links {
+    gap: 16px;
+  }
+}

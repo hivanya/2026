@@ -10,7 +10,6 @@
   @include s.box;
 }
 
-// Кадр из макета: 1240×778
 .video {
   width: 100%;
   aspect-ratio: 1240 / 778;
@@ -21,7 +20,6 @@
 
 @include s.mobile {
   .section {
-    // До заголовка следующего блока: 894 − 854
     padding-bottom: 40px;
   }
 

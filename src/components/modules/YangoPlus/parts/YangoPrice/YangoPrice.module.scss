@@ -1,20 +1,15 @@
 @use '@/styles/index' as s;
 
-// Высоту задаёт кадр Deli в потоке, цитата и цена поверх него
 .stage {
   position: relative;
 
-  // Карточки выше кончаются на 8754, цитата на 8768
   margin-top: 14px;
-  // Кадр Deli на 8974
   padding-top: 206px;
 }
 
 .press {
   position: absolute;
-  // 8774 − 8768
   top: 6px;
-  // 230 − 20 от левого края полосы
   left: 210px;
   z-index: 3;
 
@@ -50,7 +45,6 @@
   border-radius: 40px;
 }
 
-// В мобильном макете этого блока нет
 @include s.mobile {
   .stage {
     display: none;

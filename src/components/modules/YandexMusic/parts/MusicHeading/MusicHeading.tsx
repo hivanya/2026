@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import { Reveal } from '@/components/ui';
@@ -6,9 +6,7 @@ import { Assets, MusicIntro } from '@/utils/consts';
 
 import classes from './MusicHeading.module.scss';
 
-// Внутри строки две иконки, под них в макете оставлены пробелы —
-// поэтому текст разрезан на три куска
-export const MusicHeading: FC = () => (
+export const MusicHeading: React.FC = () => (
   <Reveal as="h2" className={classes.heading}>
     {MusicIntro.before}
     <Image

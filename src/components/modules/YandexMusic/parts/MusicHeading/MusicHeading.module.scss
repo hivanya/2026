@@ -1,15 +1,12 @@
 @use '@/styles/index' as s;
 
 .heading {
-  // От ширины зависят переносы
   width: 984px;
   max-width: 100%;
-  // 148 − 20 от левого края полосы
   margin-left: 128px;
 
   @include s.text_display;
   text-align: center;
-  // В макете переносы принудительные, U+2028
   white-space: pre-line;
 }
 
@@ -17,8 +14,6 @@
 .plus {
   display: inline-block;
   position: relative;
-  // vertical-align: middle считает от середины x-высоты и сажает иконку
-  // на 4px ниже, чем в макете
   top: -4px;
   vertical-align: middle;
 

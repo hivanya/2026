@@ -1,12 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { Experience, ExperienceTitle } from '@/utils/consts';
 
 import classes from './ExperienceTable.module.scss';
 
-// Три строки с шагом 53, над каждой разделитель и ещё один под последней
-// Подсветка строки — комментарий в макете «Показать стейт по ховеру»
-export const ExperienceTable: FC = () => (
+export const ExperienceTable: React.FC = () => (
   <React.Fragment>
     <p className={classes.title}>{ExperienceTitle}</p>
 

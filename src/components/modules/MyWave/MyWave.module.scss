@@ -12,7 +12,6 @@
   @include s.box;
 }
 
-// Просвет между колонками: 550 − 420
 .stage {
   display: flex;
   align-items: flex-start;
@@ -22,12 +21,10 @@
 .phone {
   flex: 0 0 auto;
   width: 400px;
-  // Пропорция из макета: рендер приходит с полем в пару пикселей
   aspect-ratio: 400 / 815;
   object-fit: cover;
 }
 
-// Иконки 90×90 с шагом 170
 .grid {
   flex: 0 0 auto;
 
@@ -35,7 +32,6 @@
   grid-template-columns: repeat(4, 90px);
   gap: 80px;
 
-  // Сетка на 4600 при экране на 4492
   margin-top: 108px;
 }
 
@@ -52,8 +48,6 @@
   }
 }
 
-// Комментарий в макете: «снижается опасити до 20»
-// Второе правило ниже по каскаду, поэтому оно и выигрывает
 .grid:hover .icon,
 .grid:focus-within .icon {
   opacity: s.$dimmed_opacity;
@@ -71,16 +65,13 @@
 
 @include s.mobile {
   .section {
-    // Первый кадр на 4418, секция начинается на 4400
     padding-top: 18px;
-    // Кадр часов на 5190, второй кадр кончается на 5170
     padding-bottom: 10px;
   }
 
   .stage {
     flex-direction: column;
     align-items: center;
-    // 4786 − 4738
     gap: 48px;
   }
 
@@ -93,7 +84,6 @@
   .mobileExtra {
     display: block;
 
-    // В макете кадры 320 при полосе 370
     width: 320px;
     max-width: 100%;
   }

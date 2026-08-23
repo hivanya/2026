@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 
 import { withBasePath } from '@/lib/helpers';
 import { useInViewVideo } from '@/lib/hooks';
@@ -8,10 +8,7 @@ import { Assets } from '@/utils/consts';
 
 import classes from './Showreel.module.scss';
 
-// Блок 2 — ролик, плеер нативный
-// Стартует в зоне видимости; автозапуск браузеры разрешают только
-// беззвучным, звук включается кнопкой в плеере
-export const Showreel: FC = () => {
+export const Showreel: React.FC = () => {
   const videoRef = useInViewVideo();
 
   return (

@@ -4,9 +4,7 @@
   @include s.section;
 
   z-index: 1;
-  // Кадры часов заезжают сверху: блок на 5864, предыдущий кончается на 6035
   margin-top: -171px;
-  // Рамка с роликом на 6163
   padding-top: 299px;
   padding-bottom: 40px;
 }
@@ -18,9 +16,7 @@
 @include s.mobile {
   .section {
     margin-top: 0;
-    // Рамка на 6199, секция начинается на 6190
     padding-top: 9px;
-    // Лента интерфейсов на 9550, карточка кончается на 9540
     padding-bottom: 5px;
   }
 }

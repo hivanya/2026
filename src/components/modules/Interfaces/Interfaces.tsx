@@ -1,6 +1,6 @@
 'use client';
 
-import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -13,30 +13,23 @@ import classes from './Interfaces.module.scss';
 const ScreenWidth = 375;
 const ScreenHeight = 812;
 
-// Блок 8 — нижняя лента интерфейсов
-// Секция залипает, вертикальный скролл гонит ленту вправо и отпускает
-// страницу, когда последний экран встал по центру окна
-// Путь меряем: он зависит от ширины окна и числа кадров
-export const Interfaces: FC = () => {
-  const pinRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const stripRef = useRef<HTMLUListElement>(null);
+export const Interfaces: React.FC = () => {
+  const pinRef = React.useRef<HTMLDivElement>(null);
+  const viewportRef = React.useRef<HTMLDivElement>(null);
+  const stripRef = React.useRef<HTMLUListElement>(null);
   const prefersReduced = usePrefersReducedMotion();
 
-  const [travel, setTravel] = useState(0);
+  const [travel, setTravel] = React.useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const viewport = viewportRef.current;
     const strip = stripRef.current;
     if (!viewport || !strip) return;
 
-    // ResizeObserver срабатывает сразу при подписке, отдельный замер не нужен
     const observer = new ResizeObserver(() => {
       const last = strip.lastElementChild;
       if (!last) return;
 
-      // Центр последнего экрана относительно начала ленты: сдвиг обоих
-      // прямоугольников одинаковый, поэтому трансформа не мешает
       const offset =
         last.getBoundingClientRect().left - strip.getBoundingClientRect().left;
       const centre = offset + last.getBoundingClientRect().width / 2;
@@ -52,7 +45,6 @@ export const Interfaces: FC = () => {
 
   const { scrollYProgress } = useScroll({
     target: pinRef,
-    // От момента прилипания до момента, когда участок дошёл до низа
     offset: ['start start', 'end end'],
   });
 
@@ -63,7 +55,7 @@ export const Interfaces: FC = () => {
       <div
         ref={pinRef}
         className={classes.pin}
-        style={{ '--travel': `${travel}px` } as CSSProperties}
+        style={{ '--travel': `${travel}px` } as React.CSSProperties}
       >
         <div className={classes.sticky}>
           <div ref={viewportRef} className={classes.viewport}>

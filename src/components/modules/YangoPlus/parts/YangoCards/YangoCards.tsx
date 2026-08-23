@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import { Assets } from '@/utils/consts';
@@ -6,8 +6,7 @@ import { Assets } from '@/utils/consts';
 import classes from './YangoCards.module.scss';
 import { YangoPlayer } from '../YangoPlayer/YangoPlayer';
 
-// Три карточки сервисов и кружок плеера
-export const YangoCards: FC = () => (
+export const YangoCards: React.FC = () => (
   <div className={classes.stage}>
     <div className={classes.tall}>
       <Image

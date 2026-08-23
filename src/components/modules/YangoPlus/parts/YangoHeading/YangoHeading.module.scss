@@ -1,9 +1,7 @@
 @use '@/styles/index' as s;
 
 .heading {
-  // Заголовок на 7131, блок выше кончается на 6875
   margin-top: 256px;
-  // 296 − 20 от левого края полосы
   margin-left: 276px;
 
   width: 688px;
@@ -11,7 +9,6 @@
 
   @include s.text_display;
   text-align: center;
-  // В макете переносы принудительные, U+2028
   white-space: pre-line;
 }
 
@@ -29,7 +26,6 @@
 @include s.mobile {
   .heading {
     width: auto;
-    // Заголовок на 6897, рамка кончается на 6857
     margin-top: 40px;
     margin-left: 0;
     text-align: left;

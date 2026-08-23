@@ -30,6 +30,11 @@ jobs:
           cache: npm
 
       - uses: actions/configure-pages@v5
+        with:
+          # Включает Pages и переводит источник на Actions, если в
+          # настройках репозитория это ещё не сделано — иначе шаг
+          # падает с Get Pages site failed
+          enablement: true
 
       - run: npm ci
 

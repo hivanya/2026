@@ -1,6 +1,5 @@
 @use '@/styles/index' as s;
 
-// Три колонки: пустая, рамка по центру, цитата справа
 .stage {
   position: relative;
 
@@ -8,10 +7,6 @@
   grid-template-columns: 1fr 400px 1fr;
   align-items: start;
 }
-
-// === Свечение ===
-//
-// alternate и ease-in-out: движение не дёргается на стыке циклов
 
 .glow {
   position: absolute;
@@ -28,7 +23,6 @@
   position: absolute;
 
   border-radius: 50%;
-  // Чистая белизна на тёмном фоне выглядит как засвет
   background: radial-gradient(
     circle,
     rgba(214, 214, 214, 0.16) 0%,
@@ -70,7 +64,6 @@
   animation: drift-three 28s ease-in-out infinite alternate;
 }
 
-// Периоды не совпадают по фазе, поэтому картина не повторяется
 @keyframes drift-one {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -107,10 +100,6 @@
   }
 }
 
-// === Рамка телефона ===
-//
-// На CSS, а не картинкой: чётче на любом масштабе и без лишнего кадра
-
 .phone {
   grid-column: 2;
   z-index: 2;
@@ -121,7 +110,6 @@
   border-radius: 54px;
   background: linear-gradient(160deg, #3a3a3d 0%, #141416 38%, #1d1d20 100%);
   box-shadow:
-    // Кант по грани корпуса
     inset 0 0 0 1px rgba(255, 255, 255, 0.22),
     0 30px 70px rgba(0, 0, 0, 0.55);
 }
@@ -140,9 +128,7 @@
   z-index: 2;
 
   width: 190px;
-  // Цитата на 6695 при рамке на 6163
   margin-top: 532px;
-  // 860 − 840 от левого края третьей колонки
   margin-left: 20px;
 }
 
@@ -153,7 +139,6 @@
 
   .phone {
     grid-column: 1;
-    // 370×658 в мобильном макете
     aspect-ratio: 370 / 658;
     padding: 8px;
 
@@ -169,13 +154,11 @@
     border-radius: 32px;
   }
 
-  // В мобильном макете этой цитаты нет
   .press {
     display: none;
   }
 }
 
-// При выключенных анимациях дым замирает
 @include s.reduced_motion {
   .blobOne,
   .blobTwo,

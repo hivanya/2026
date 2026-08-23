@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import { Reveal } from '@/components/ui';
@@ -6,9 +6,7 @@ import { Assets, ShowreelTitle } from '@/utils/consts';
 
 import classes from './ShowreelCase.module.scss';
 
-// Блок 9 — кейс «Showreel», две колонки
-// Высоту задаёт правая: два кадра друг под другом
-export const ShowreelCase: FC = () => (
+export const ShowreelCase: React.FC = () => (
   <section id="showreel-case" className={classes.section}>
     <div className={classes.box}>
       <Reveal as="h2" className={classes.title}>
@@ -52,7 +50,6 @@ export const ShowreelCase: FC = () => (
               className={classes.thirtyTwo}
             />
 
-            {/* Плашка поверх кадра, в макете отдельный слой */}
             <span aria-hidden className={classes.plate} />
           </div>
         </div>

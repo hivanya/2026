@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -8,19 +8,16 @@ import { Assets } from '@/utils/consts';
 
 import classes from './MusicCarousel.module.scss';
 
-// Два кадра и две точки, комментарий в макете: «добавить карусель»
 const Slides = [
   { id: 'web', src: Assets.musicCarouselOne, label: 'Yandex Music web player' },
   { id: 'concert', src: Assets.musicCarouselTwo, label: 'Concert page' },
 ];
 
-export const MusicCarousel: FC = () => {
+export const MusicCarousel: React.FC = () => {
   const trackRef = React.useRef<HTMLUListElement>(null);
   const [active, setActive] = React.useState(0);
   const [dragging, setDragging] = React.useState(false);
 
-  // Листание на нативной прокрутке со snap: так работают тачпад, свайп
-  // и колесо с шифтом; точки показывают позицию и прокручивают к кадру
   const onScroll = () => {
     const track = trackRef.current;
     if (!track) return;
@@ -35,10 +32,6 @@ export const MusicCarousel: FC = () => {
     track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
   };
 
-  // Перетаскивание мышью: нативная прокрутка его не даёт
-  // При scroll-snap: mandatory браузер откатывает присвоение scrollLeft,
-  // поэтому снап снимается со стиля — через состояние он применился бы
-  // после ре-рендера
   const drag = React.useRef<{ pointerX: number; scrollLeft: number } | null>(
     null,
   );
@@ -69,7 +62,6 @@ export const MusicCarousel: FC = () => {
     setDragging(false);
     track.releasePointerCapture(event.pointerId);
 
-    // Снап сам доводит ближайший кадр до края
     track.style.scrollSnapType = '';
   };
 
@@ -92,7 +84,6 @@ export const MusicCarousel: FC = () => {
                 alt={label}
                 width={1240}
                 height={800}
-                // Иначе браузер начинает своё перетаскивание картинки
                 draggable={false}
               />
             </li>

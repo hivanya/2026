@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import { motion, MotionValue } from 'framer-motion';
 import Image from 'next/image';
 
@@ -10,13 +10,10 @@ import { Assets, PressNotes } from '@/utils/consts';
 import classes from './YangoPrice.module.scss';
 
 interface Props {
-  /** Параллакс карточки цены, null при выключенных анимациях */
   priceY: MotionValue<string> | null;
 }
 
-// Упоминание слева, карточка цены справа, кадр Deli под ними
-// Комментарий в макете: «паралакс эффект»
-export const YangoPrice: FC<Props> = ({ priceY }) => (
+export const YangoPrice: React.FC<Props> = ({ priceY }) => (
   <div className={classes.stage}>
     <PressNote {...PressNotes.israel} align="left" className={classes.press} />
 

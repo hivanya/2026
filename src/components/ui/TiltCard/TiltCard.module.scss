@@ -1,6 +1,5 @@
 @use '@/styles/index' as s;
 
-// Внешний контейнер задаёт перспективу и место, ничего не рисует
 .scene {
   perspective: 1000px;
 }
@@ -11,17 +10,14 @@
   width: 100%;
   height: 100%;
 
-  // Наклоняется целиком, как одна плоскость
   transform-style: preserve-3d;
   will-change: transform;
 
-  // Режется по скруглению из surfaceClassName
   overflow: hidden;
 }
 
 .glare {
   position: absolute;
-  // left/top задаёт motion, здесь только центрирование по курсору
   transform: translate(-50%, -50%);
 
   width: 90%;

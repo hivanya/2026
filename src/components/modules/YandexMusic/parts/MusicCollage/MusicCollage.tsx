@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -9,9 +9,7 @@ import { Assets } from '@/utils/consts';
 
 import classes from './MusicCollage.module.scss';
 
-// Две колонки: слева главный экран и ноутбук, справа артист и карточка
-// Высота берётся из содержимого
-export const MusicCollage: FC = () => (
+export const MusicCollage: React.FC = () => (
   <div className={classes.collage}>
     <div className={classes.left}>
       <Image

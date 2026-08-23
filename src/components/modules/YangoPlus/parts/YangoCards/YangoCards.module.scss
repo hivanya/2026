@@ -1,11 +1,8 @@
 @use '@/styles/index' as s;
 
-// Высоту блока задаёт самая длинная карточка — она лежит в потоке,
-// остальные накладываются на неё поверх
 .stage {
   position: relative;
 
-  // Заголовок кончается на 7227, карточки начинаются на 7307
   margin-top: 80px;
 }
 
@@ -13,23 +10,19 @@
   position: relative;
   z-index: 2;
 
-  // 230 − 20 от левого края полосы
   width: 400px;
   margin-left: 210px;
 
   border-radius: 40px;
   overflow: hidden;
 
-  // Только сама карточка: аватар лежит поверх и имеет свой размер
   > img:first-child {
     width: 100%;
-    // Пропорция из макета: рендер приходит с полем в пару пикселей
     aspect-ratio: 400 / 1447;
     object-fit: cover;
   }
 }
 
-// Аватар поверх карточки: 301 − 230 и 7329 − 7307
 .avatar {
   position: absolute;
   top: 22px;
@@ -41,12 +34,9 @@
   border-radius: 50%;
 }
 
-// Прямоугольники с заливкой-картинкой: размер из макета, лишнее режем
 .mid {
   position: absolute;
-  // 7407 − 7307
   top: 100px;
-  // 650 − 20 от левого края полосы
   left: 630px;
   z-index: 3;
 
@@ -59,7 +49,6 @@
 
 .square {
   position: absolute;
-  // 7880 − 7307
   top: 573px;
   left: 1005px;
   z-index: 3;
@@ -75,10 +64,8 @@
   .stage {
     display: flex;
     flex-direction: column;
-    // 8393 − 8383 и 8773 − 8763
     gap: 10px;
 
-    // Карточка на 7045, заголовок кончается на 7005
     margin-top: 40px;
   }
 
@@ -100,7 +87,6 @@
     aspect-ratio: 370 / 767;
   }
 
-  // В мобильную версию квадратный блок не вошёл
   .square,
   .avatar {
     display: none;

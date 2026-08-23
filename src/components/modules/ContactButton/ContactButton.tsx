@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 import { Reveal } from '@/components/ui';
@@ -9,9 +9,7 @@ import { ContactCta } from '@/utils/consts';
 
 import classes from './ContactButton.module.scss';
 
-// Кнопка внизу страницы, ведёт в телеграм
-// Одинаковая на десктопе и мобильном
-export const ContactButton: FC = () => {
+export const ContactButton: React.FC = () => {
   const prefersReduced = usePrefersReducedMotion();
 
   return (

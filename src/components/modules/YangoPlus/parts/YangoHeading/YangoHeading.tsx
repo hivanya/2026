@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import { Reveal } from '@/components/ui';
@@ -6,8 +6,7 @@ import { Assets, YangoIntro } from '@/utils/consts';
 
 import classes from './YangoHeading.module.scss';
 
-// Плюс внутри строки, под него в макете оставлен пробел
-export const YangoHeading: FC = () => (
+export const YangoHeading: React.FC = () => (
   <Reveal as="h2" className={classes.heading}>
     {YangoIntro.before}
     <Image

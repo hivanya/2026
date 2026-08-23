@@ -11,8 +11,6 @@
   @include s.box;
 }
 
-// Экран плюс путь ленты: пока страница проходит эту высоту,
-// залипший экран отдаёт скролл ленте
 .pin {
   position: relative;
   height: calc(100vh + var(--travel, 0px));
@@ -29,7 +27,6 @@
   overflow: hidden;
 }
 
-// Окно во всю ширину секции, до краёв экрана
 .viewport {
   width: 100%;
   overflow: hidden;
@@ -37,11 +34,9 @@
 
 .strip {
   display: flex;
-  // 435 − 395
   gap: 40px;
 
   width: max-content;
-  // Первый экран по левому краю полосы контента
   padding-left: max(
     #{s.$gap_side}px,
     calc((100% - #{s.$design_width - s.$gap_side * 2}px) / 2)
@@ -65,11 +60,9 @@
   width: 631px;
   max-width: 100%;
   margin-top: 40px;
-  // 324 − 20 от левого края полосы
   margin-left: 304px;
 }
 
-// Без анимаций залипания нет, лента листается пальцем
 @include s.reduced_motion {
   .pin {
     height: auto;
@@ -91,9 +84,7 @@
 
 @include s.mobile {
   .section {
-    // Лента на 9550, секция начинается на 9545
     padding-top: 5px;
-    // Заголовок Showreel на 10480, упоминание кончается на 10442
     padding-bottom: 28px;
   }
 
@@ -102,13 +93,11 @@
   }
 
   .screen img {
-    // В мобильном макете лента 1965 при пяти кадрах
     width: 355px;
   }
 
   .press {
     width: auto;
-    // Упоминание на 10360, лента кончается на 10340
     margin-top: 20px;
     margin-left: 0;
   }

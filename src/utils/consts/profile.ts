@@ -1,6 +1,7 @@
 export const PersonName = 'Ivan Pokalyuk';
 
-export const PersonBio = 'Product design lead with 12+ years of experience. For the last 7 years \nI have been leading design teams, building products and digital experiences';
+export const PersonBio =
+  'Product design lead with 12+ years of experience. For the last 7 years \nI have been leading design teams, building products and digital experiences';
 
 export const SocialLinks = [
   {
@@ -35,7 +36,6 @@ export const Experience = [
   },
 ] as const;
 
-// Строки разрезаны там, где в макете стоят иконки
 export const MusicIntro = {
   before: 'Yandex',
   middle:

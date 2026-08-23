@@ -6,7 +6,6 @@
 }
 
 .text {
-  // В макете переносы принудительные, U+2028
   white-space: pre-line;
 
   @include s.text_body(s.$medium);
@@ -18,16 +17,12 @@
   display: flex;
   align-items: flex-start;
 
-  // Между низом цитаты и ссылкой в макете 20
   margin-top: 20px;
 }
 
 .icon {
-  // Логотип выше строки ссылки, 32 против 20 — вне потока, иначе
-  // задаёт высоту строки и блок ниже уезжает на 12px
   position: absolute;
   top: -30px;
-  // Просвет между логотипом и подписью
   right: calc(100% + 3px);
 
   width: auto;
@@ -40,7 +35,6 @@
 
   @include s.text_body(s.$regular);
 
-  // В макете это полоска, у text-decoration другая толщина и отбивка
   &::after {
     content: '';
 
@@ -74,7 +68,6 @@
   text-align: right;
 }
 
-// Ссылка справа от текста, а не под ним
 .inline {
   flex-direction: row;
   align-items: flex-start;
@@ -90,7 +83,6 @@
   }
 }
 
-// В мобильном макете логотипа нет
 @include s.mobile {
   .icon {
     display: none;

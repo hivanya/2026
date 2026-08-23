@@ -1,13 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import { Assets, WaveIcons } from '@/utils/consts';
 
 import classes from './MyWave.module.scss';
 
-// Блок 4 — «Моя волна»: слева экран, справа сетка 4×4
-// Гашение соседних иконок на CSS: работает и на клавиатурном фокусе
-export const MyWave: FC = () => (
+export const MyWave: React.FC = () => (
   <section id="wave" className={classes.section}>
     <div className={classes.box}>
       <div className={classes.stage}>
@@ -27,7 +25,6 @@ export const MyWave: FC = () => (
           ))}
         </ul>
 
-        {/* В мобильном макете телефон и сетка сведены в два кадра */}
         <Image
           src={Assets.mobile.waveIcons}
           alt="My Wave icons"

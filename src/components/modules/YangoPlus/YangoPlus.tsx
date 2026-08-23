@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useRef } from 'react';
+import React from 'react';
 import { useScroll, useSpring, useTransform } from 'framer-motion';
 
 import { usePrefersReducedMotion } from '@/lib/hooks';
@@ -11,9 +11,8 @@ import { YangoHeading } from './parts/YangoHeading/YangoHeading';
 import { YangoHero } from './parts/YangoHero/YangoHero';
 import { YangoPrice } from './parts/YangoPrice/YangoPrice';
 
-// Блоки 6-7 — Yango Plus, секция раздаёт прогресс скролла дочерним частям
-export const YangoPlus: FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+export const YangoPlus: React.FC = () => {
+  const sectionRef = React.useRef<HTMLElement>(null);
   const prefersReduced = usePrefersReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -21,7 +20,6 @@ export const YangoPlus: FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Без пружины параллакс шагает кусками по сотне пикселей
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 24,

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 
 import { PressNote } from '@/components/ui';
 import { withBasePath } from '@/lib/helpers';
@@ -9,14 +9,11 @@ import { Assets, PressNotes } from '@/utils/consts';
 
 import classes from './YangoHero.module.scss';
 
-// Верх блока: ролик в рамке телефона, справа цитата, на фоне свечение
-// Ролик стартует в зоне видимости
-export const YangoHero: FC = () => {
+export const YangoHero: React.FC = () => {
   const videoRef = useInViewVideo();
 
   return (
     <React.Fragment>
-      {/* Три пятна с разными периодами: вместе картина не повторяется */}
       <div aria-hidden className={classes.glow}>
         <span className={classes.blobOne} />
         <span className={classes.blobTwo} />
@@ -27,8 +24,6 @@ export const YangoHero: FC = () => {
         <div className={classes.phone}>
           <video
             ref={videoRef}
-            // Без muted и playsInline автоплей блокируется, на iOS
-            // видео уходит в полный экран
             muted
             loop
             playsInline

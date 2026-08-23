@@ -4,7 +4,6 @@
   @include s.section;
 
   padding-top: 20px;
-  // До кадра с роликом: 367 − 286
   padding-bottom: 80px;
 }
 
@@ -12,7 +11,6 @@
   @include s.box;
 }
 
-// Имя от 20, био от 233, контакты по правому краю полосы
 .intro {
   display: grid;
   grid-template-columns: 213px minmax(0, 769px) auto;
@@ -24,20 +22,16 @@
 }
 
 .bio {
-  // От ширины зависят переносы
   width: 607px;
   max-width: 100%;
 
   @include s.text_body(s.$medium);
-  // В макете переносы принудительные, U+2028
   white-space: pre-line;
 }
 
-// На мобильном всё в колонку, плитки контактов уходят под таблицу
 @include s.mobile {
   .section {
     padding-top: 10px;
-    // Кадр с роликом на 622, плитки кончаются на 582
     padding-bottom: 40px;
   }
 
@@ -46,7 +40,6 @@
     flex-direction: column;
   }
 
-  // Раскрываем группу, чтобы порядком управляла сама секция
   .intro {
     display: contents;
   }
@@ -57,10 +50,8 @@
 
   .bio {
     order: 2;
-    // Био на 50, имя кончается на 30
     width: auto;
     margin-top: 20px;
-    // В мобильном макете переносы стоят в других местах
     white-space: normal;
   }
 }

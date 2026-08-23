@@ -2,23 +2,19 @@
 
 .player {
   position: absolute;
-  // 8267 − 7307
   top: 960px;
-  // 650 − 20 от левого края полосы
   left: 630px;
   z-index: 3;
 
   width: 400px;
   aspect-ratio: 1;
 
-  // Без пояска полоска идёт по кадру и пропадает на светлых планах
   padding: 2.5%;
 
   border-radius: 50%;
   background: #0f0f0f;
 }
 
-// В макете это векторный инстанс, картинкой рисовать незачем
 .badge {
   position: absolute;
   inset: 0;
@@ -40,7 +36,6 @@
   }
 }
 
-// Треугольник 88×88 по центру круга: 806…894 при круге 650…1050
 .icon {
   width: 0;
   height: 0;
@@ -59,12 +54,10 @@
   object-fit: cover;
 }
 
-// До запуска видео скрыто за кружком, но остаётся в разметке
 .hidden {
   visibility: hidden;
 }
 
-// Полоска таймлайна по окружности
 .ring {
   position: absolute;
   inset: 0;
@@ -72,16 +65,13 @@
   width: 100%;
   height: 100%;
 
-  // Под кольцом кнопки плеера, клики перехватывать нельзя
   pointer-events: none;
 }
 
 .track,
 .progress {
   fill: none;
-  // 2 из 100 — это 8px при круге 400
   stroke-width: 2;
-  // Круглые торцы
   stroke-linecap: round;
 }
 
@@ -91,13 +81,11 @@
 
 .progress {
   stroke: #ffdb4d;
-  // timeupdate приходит примерно раз в 250мс, переход сглаживает шаг
   transition: stroke-dashoffset 0.25s linear;
 }
 
 @include s.mobile {
   .player {
-    // Не static: от .player считается inset кольца
     position: relative;
     top: auto;
     left: auto;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useRef } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -13,11 +13,8 @@ import { MusicCarousel } from './parts/MusicCarousel/MusicCarousel';
 import { MusicCollage } from './parts/MusicCollage/MusicCollage';
 import { MusicHeading } from './parts/MusicHeading/MusicHeading';
 
-// Блок 3 — Яндекс Музыка, секция раздаёт прогресс скролла дочерним частям
-// Комментарии в макете: фон «увеличивается при скролле», артист
-// «при скроле поднимается»
-export const YandexMusic: FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+export const YandexMusic: React.FC = () => {
+  const sectionRef = React.useRef<HTMLElement>(null);
   const prefersReduced = usePrefersReducedMotion();
 
   const { scrollYProgress } = useScroll({

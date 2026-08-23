@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -9,17 +9,13 @@ interface Props {
   text: string;
   label: string;
   href: string;
-  /** Выравнивание, у пяти упоминаний в макете оно разное */
   align?: 'left' | 'center' | 'right';
-  /** Логотип издания перед ссылкой, есть только у Sostav.ru */
   icon?: { src: string; width: number; height: number };
-  /** Ссылка в строку с текстом, а не под ним: Kod.ru, Timeoutdubai */
   inline?: boolean;
   className?: string;
 }
 
-// Цитата и ссылка на источник, пять вхождений в макете
-export const PressNote: FC<Props> = ({
+export const PressNote: React.FC<Props> = ({
   text,
   label,
   href,
