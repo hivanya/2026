@@ -1,83 +1,50 @@
-// === Gap function ===
+// Все значения сняты с макета Figma (frame «MacBook Pro 14" - 1», 1280×19473).
+// Менять их руками не надо — если поменялся макет, сначала `npm run figma:pull`.
 
-@function gap($size) {
-  @return #{$size * 4}px;
+// === Холст ===
+//
+// Макет нарисован в одну ширину — 1280. Мобильной версии в нём нет.
+// Поэтому вёрстка живёт в масштабной единице --u: на 1280 и шире она
+// равна 1px (пиксель в пиксель), уже — пропорционально ужимается.
+
+$design_width: 1280;
+$design_gap_side: 20;
+$design_content: 1240; // 1280 − 20 × 2
+
+// Размер в единицах макета.
+@function u($value) {
+  @return calc(#{$value} * var(--u));
 }
 
 // === Font weights ===
 
-$light: 300;
 $regular: 400;
 $medium: 500;
-$semibold: 600;
-$bold: 700;
 
 // === Colors ===
-//
-// ВНИМАНИЕ: значения ниже — рабочая заготовка под тёмную тему Яндекс Музыки
-// и Yango Plus. Точные hex-коды берутся из Figma; когда макет будет
-// доступен — правим только этот файл, компоненты трогать не нужно.
 
-$primary: #ffdb4d; // жёлтый Яндекса — основной акцент
-$primary_10: rgba(255, 219, 77, 0.1);
-$accent: #ff4d4d; // красный Yango Plus
-$accent_10: rgba(255, 77, 77, 0.1);
+$background: #0e0e0e;
+$text: #ffffff;
 
-$text-default: #ffffff;
-$text-secondary: rgba(255, 255, 255, 0.6);
-$text-tertiary: rgba(255, 255, 255, 0.35);
-$text-primary: $primary;
-$text-accent: $accent;
-$text-contrast: #0a0a0a;
+// Волосяные линии: разделители строк опыта — белый 8%, подчёркивания
+// ссылок — белый 20%. Толщина в макете 0.5px.
+$hairline_row: rgba(255, 255, 255, 0.08);
+$hairline_link: rgba(255, 255, 255, 0.2);
+$hairline_width: 0.5;
 
-$icon-default: #ffffff;
-$icon-secondary: rgba(255, 255, 255, 0.6);
-$icon-primary: $primary;
-$icon-contrast: #0a0a0a;
+// Подложка карточки иконки в блоке Яндекс Музыки.
+$card_surface: rgba(24, 24, 24, 0.3);
 
-$background-default: #0a0a0a;
-$background-secondary: #141414;
-$background-elevated: #1c1c1c;
-$background-contrast: #ffffff;
-$background-primary: $primary;
-$background-accent: $accent;
+// Насколько гаснут соседние иконки сетки 4×4 при наведении — из
+// комментария в макете: «снижается опасити до 20».
+$dimmed_opacity: 0.2;
 
-$stroke-default: rgba(255, 255, 255, 0.12);
-$stroke-primary: $primary;
-
-$transition-duration: 0.3s;
-$transition-ease: ease;
-$transition: all $transition-duration $transition-ease;
-$box-shadow: 0px 24px 64px 0px rgba(0, 0, 0, 0.45);
-
-// Насколько гаснут соседние иконки в сетке «Моей волны» при наведении
-// на одну из них. Требование заказчика — 20%.
-$dimmed-opacity: 0.2;
-
-// === Widths ===
-
-$width_lg: 1200px;
-$width_md: 768px;
-$width_sm: 425px;
-$width_xs: 320px;
-
-// === Side gaps ===
-
-$gap_side_lg: 32px;
-$gap_side_md: 24px;
-$gap_side_sm: 16px;
-
-// === Gaps ===
-
-$gap_lg: 20px;
-$gap_md: 16px;
-$gap_sm: 12px;
+$transition_duration: 0.3s;
+$transition_ease: ease;
 
 // === Breakpoints ===
+//
+// В макете их нет — это наша граница, ниже которой коллажи
+// перестраиваются в колонку, потому что ужимать их дальше нечитаемо.
 
-$breakpoints: (
-  xs: 320px,
-  sm: 425px,
-  md: 768px,
-  lg: 1200px,
-);
+$breakpoint_mobile: 768px;

@@ -1,0 +1,160 @@
+@use '@/styles/index' as s;
+
+// Координаты — из макета, в единицах холста 1280.
+.section {
+  z-index: 2;
+}
+
+.name {
+  position: absolute;
+  top: s.u(20);
+  left: s.u(20);
+
+  @include s.text_body(s.$medium);
+}
+
+.bio {
+  position: absolute;
+  top: s.u(20);
+  left: s.u(233);
+
+  width: s.u(607);
+
+  @include s.text_body(s.$medium);
+}
+
+.links {
+  position: absolute;
+  top: s.u(20);
+  left: s.u(1022);
+
+  display: flex;
+  // 1117 − 1022 − 65 = 30: расстояние между ссылками в макете.
+  gap: s.u(30);
+}
+
+.linkItem {
+  @include s.text_body(s.$regular);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    // Подчёркивание в макете стоит на 2px ниже базовой строки.
+    bottom: s.u(-2);
+    left: 0;
+
+    @include s.hairline(s.$hairline_link);
+
+    transition: background-color s.$transition_duration s.$transition_ease;
+  }
+
+  &:hover::after {
+    background-color: s.$text;
+  }
+}
+
+// Таблица опыта: пять строк с шагом 53, над каждой — волосяной разделитель.
+.experience {
+  position: absolute;
+  top: s.u(112);
+  left: s.u(230);
+
+  width: s.u(610);
+}
+
+.row {
+  position: relative;
+
+  display: grid;
+  // Колонки из макета: компания 230, роль 378, годы 753.
+  grid-template-columns: s.u(148) s.u(375) auto;
+  align-items: center;
+
+  height: s.u(53);
+
+  @include s.text_body(s.$regular);
+
+  // Разделитель рисуем псевдоэлементом строки: так он всегда едет
+  // вместе с ней и не расходится при смене количества строк.
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    @include s.hairline;
+  }
+
+  // «Показать стейт по ховеру» из комментария к макету.
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: s.u(-20);
+    bottom: 0;
+    left: s.u(-20);
+
+    background: rgba(255, 255, 255, 0.03);
+    opacity: 0;
+    transition: opacity s.$transition_duration s.$transition_ease;
+
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.company {
+  @include s.text_body(s.$medium);
+}
+
+.role,
+.years {
+  @include s.text_body(s.$regular);
+}
+
+.fullCv {
+  position: relative;
+  display: inline-block;
+  justify-self: start;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: s.u(-2);
+    left: 0;
+
+    @include s.hairline(s.$hairline_link);
+
+    transition: background-color s.$transition_duration s.$transition_ease;
+  }
+
+  &:hover::after {
+    background-color: s.$text;
+  }
+}
+
+// Ниже 768 холст распускается в поток (см. Canvas) — здесь остаётся
+// только перестроить саму таблицу опыта.
+@include s.mobile {
+  .row {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: s.u(12) 0;
+    gap: s.u(2);
+  }
+}

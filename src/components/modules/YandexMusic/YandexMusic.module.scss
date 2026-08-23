@@ -1,91 +1,77 @@
 @use '@/styles/index' as s;
 
+// Координаты — из макета, смещения считаны от начала секции (y = 1219).
 .section {
-  padding-bottom: 0;
-}
-
-.stage {
-  position: relative;
-  isolation: isolate;
-
-  padding: var(--section_gap) 0;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .backdrop {
   position: absolute;
-  inset: 0;
+  top: s.u(324);
+  left: s.u(-1906);
   z-index: -1;
 
-  // Фон растёт при скролле — увеличиваем от центра, иначе он «уползает»
-  // в угол и обнажает край.
+  width: s.u(3677);
+  height: s.u(3349);
+
+  // Фон растёт при скролле — от центра, иначе он уползает в угол
+  // и обнажает край.
   transform-origin: center;
   will-change: transform;
 }
 
 .backdropImage {
-  object-fit: cover;
+  object-fit: contain;
 }
 
-.content {
-  @include s.glass(s.$width_lg);
-}
+.heading {
+  position: absolute;
+  top: s.u(128);
+  left: s.u(148);
 
-.header {
+  width: s.u(984);
+
+  @include s.text_display;
   text-align: center;
 }
 
-.title {
-  @include s.text_header_1;
+// Иконки стоят внутри строки заголовка. В макете под них оставлены
+// пробелы, но при другом шрифте текст переносится иначе — поэтому
+// вставляем их в поток, а не абсолютом по координатам.
+.iconFlash,
+.iconPlus {
+  display: inline-block;
+  vertical-align: middle;
+
+  width: auto;
+  margin: 0 s.u(6);
 }
 
-.description {
-  max-width: 520px;
-  margin: s.gap(4) auto 0;
-
-  @include s.text_body_1;
-  color: var(--text_secondary);
+.iconFlash {
+  height: s.u(40);
 }
 
-// Коллаж собран на гриде: так позиции слоёв читаются как в макете
-// и не разъезжаются при смене ширины.
-.collage {
-  position: relative;
-
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto auto;
-  align-items: start;
-
-  margin-top: 96px;
-
-  @include s.media_down(md) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: s.gap(8);
-
-    margin-top: 56px;
-  }
+.iconPlus {
+  height: s.u(34);
 }
 
 .phone {
-  grid-column: 5 / span 4;
-  grid-row: 1;
-  justify-self: center;
+  position: absolute;
+  top: s.u(448);
+  left: s.u(440);
   z-index: 2;
 
-  img {
-    width: 100%;
-    height: auto;
-  }
+  width: s.u(400);
+  height: auto;
 }
 
-// Артист — правее телефона и чуть выше него.
 .artist {
-  grid-column: 9 / span 4;
-  grid-row: 1;
+  position: absolute;
+  top: s.u(713);
+  left: s.u(860);
   z-index: 1;
+
+  width: s.u(400);
 
   will-change: transform;
 
@@ -95,38 +81,146 @@
   }
 }
 
-// Ноутбук — ниже и левее.
 .laptop {
-  grid-column: 1 / span 6;
-  grid-row: 2;
-  margin-top: -80px;
+  position: absolute;
+  top: s.u(1283);
+  left: s.u(20);
   z-index: 1;
 
-  img {
-    width: 100%;
-    height: auto;
-  }
-
-  @include s.media_down(md) {
-    margin-top: 0;
-  }
+  width: s.u(820);
+  height: auto;
 }
 
-// Иконка — ниже и правее, это парящая карточка.
-.icon {
-  grid-column: 9 / span 3;
-  grid-row: 2;
-  justify-self: center;
-  margin-top: s.gap(10);
+// Карточка иконки: 400×400, радиус 80, подложка #181818 на 30%.
+// К ней в макете комментарий «добавить 3d эффект или свечение».
+.iconCard {
+  position: absolute;
+  top: s.u(1533);
+  left: s.u(860);
   z-index: 3;
 
-  img {
-    width: 100%;
-    height: auto;
+  width: s.u(400);
+  height: s.u(400);
+
+  border-radius: s.u(80);
+  background: s.$card_surface;
+}
+
+.iconArt {
+  position: absolute;
+  top: s.u(31);
+  left: s.u(45);
+
+  width: s.u(310);
+  height: auto;
+}
+
+.pressRebrand {
+  position: absolute;
+  top: s.u(2103);
+  left: s.u(530);
+
+  width: s.u(310);
+}
+
+.carousel {
+  position: absolute;
+  top: s.u(2351);
+  left: s.u(20);
+
+  width: s.u(1240);
+  height: s.u(800);
+
+  border-radius: s.u(20);
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+
+  // Пока кадр один; когда приедут остальные — здесь появится
+  // горизонтальная прокрутка по точкам.
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-.wide {
-  width: auto;
-  height: clamp(280px, 42vw, 560px);
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.dots {
+  position: absolute;
+  top: s.u(3170);
+  left: s.u(545);
+
+  display: flex;
+  // 603 − 545 − 48 = 10.
+  gap: s.u(10);
+}
+
+.dot,
+.dotActive {
+  width: s.u(48);
+  height: s.u(4);
+
+  background: #d9d9d9;
+}
+
+.dot {
+  opacity: 0.3;
+}
+
+.pressWeb {
+  position: absolute;
+  top: s.u(3196);
+  left: s.u(256);
+
+  width: s.u(769);
+}
+
+@include s.mobile {
+  .backdrop {
+    display: none;
+  }
+
+  .heading {
+    text-align: left;
+  }
+
+  .carousel {
+    height: auto;
+    aspect-ratio: 1240 / 800;
+  }
+
+  .iconCard {
+    aspect-ratio: 1;
+    height: auto;
+  }
+
+  .iconArt {
+    position: static;
+    width: 78%;
+    margin: 8% auto;
+  }
+}
+
+@include s.reduced_motion {
+  .backdrop,
+  .artist {
+    transform: none !important;
+  }
 }

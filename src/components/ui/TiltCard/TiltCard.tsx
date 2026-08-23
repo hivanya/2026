@@ -14,9 +14,12 @@ interface Props extends PropsWithChildren {
   className?: string;
 }
 
-// Парящая карточка по мотивам примера motion.dev/examples/react-tilt-card.
-// Перспектива живёт на внешнем div: если поставить её на сам motion-элемент,
-// поворот будет плоским — CSS применит perspective к потомкам, а не к себе.
+// Парящая карточка по мотивам motion.dev/examples/react-tilt-card.
+// В макете к иконке приписано «добавить 3d эффект или свечение» — отсюда
+// и наклон под курсором, и блик, который за ним едет.
+//
+// Перспектива живёт на внешнем div: на самом motion-элементе CSS применил
+// бы её к потомкам, а не к нему, и поворот вышел бы плоским.
 export const TiltCard: FC<Props> = ({ maxTilt, className, children }) => {
   const { ref, handlers, style, glare, lift, prefersReduced } = useTilt({
     maxTilt,
@@ -35,7 +38,7 @@ export const TiltCard: FC<Props> = ({ maxTilt, className, children }) => {
         {children}
 
         {!prefersReduced && (
-          // Блик — отдельным слоем поверх содержимого, событий мыши не ловит.
+          // Свечение — отдельным слоем поверх содержимого, мышь не ловит.
           <motion.span
             aria-hidden
             className={classes.glare}

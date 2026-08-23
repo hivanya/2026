@@ -5,8 +5,8 @@
 // Запуск: node tools/figma-pull.mjs
 // Токен берётся из .env.local (см. .env.local.example).
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const OutDir = 'design';

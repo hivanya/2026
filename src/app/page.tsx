@@ -1,30 +1,26 @@
 import React from 'react';
 
 import {
-  About,
-  InterfaceSlider,
+  Header,
+  Interfaces,
   MyWave,
-  Pricing,
   Showreel,
   Watch,
   YandexMusic,
-  YangoPlans,
   YangoPlus,
 } from '@/components/modules';
 
-// Порядок блоков — как в макете, сверху вниз.
+// Порядок и высоты секций — из макета, сверху вниз.
 export default function HomePage() {
   return (
     <>
-      <About />
+      <Header />
       <Showreel />
       <YandexMusic />
       <MyWave />
       <Watch />
       <YangoPlus />
-      <YangoPlans />
-      <Pricing />
-      <InterfaceSlider />
+      <Interfaces />
     </>
   );
 }

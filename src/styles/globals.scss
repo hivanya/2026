@@ -2,54 +2,22 @@
 @use 'mixins' as *;
 
 :root {
-  // backgrounds
-  --background_default: #{$background-default};
-  --background_secondary: #{$background-secondary};
-  --background_elevated: #{$background-elevated};
-  --background_contrast: #{$background-contrast};
-  --background_primary: #{$background-primary};
-  --background_primary_10: #{$primary_10};
-  --background_accent: #{$background-accent};
-  --background_accent_10: #{$accent_10};
+  // Масштабная единица макета. На 1280 и шире — ровно 1px, уже —
+  // пропорционально меньше, чтобы холст ужимался целиком, а не ломался.
+  --u: min(1px, calc(100vw / #{$design_width}));
 
-  // text
-  --text_default: #{$text-default};
-  --text_secondary: #{$text-secondary};
-  --text_tertiary: #{$text-tertiary};
-  --text_primary: #{$text-primary};
-  --text_accent: #{$text-accent};
-  --text_contrast: #{$text-contrast};
+  // В макете Graphik LCG — коммерческий шрифт Commercial Type, свободно
+  // его не отдать. Если лицензия есть, положи woff2 в src/fonts и
+  // подключи в lib/helpers/getFonts.ts — стек подхватит сам.
+  // Пока подставляется Inter: та же гротескная фактура и близкие метрики.
+  --font-graphik: 'Graphik LCG', 'Graphik', var(--font-inter), sans-serif;
+}
 
-  // icons
-  --icon_default: #{$icon-default};
-  --icon_secondary: #{$icon-secondary};
-  --icon_primary: #{$icon-primary};
-  --icon_contrast: #{$icon-contrast};
-
-  // stroke
-  --stroke_default: #{$stroke-default};
-  --stroke_primary: #{$stroke-primary};
-
-  // adaptive sizes
-  @include media_up(lg) {
-    --glass: #{$width_lg};
-    --gap_side: #{$gap_side_lg};
-    --gap: #{$gap_lg};
-    --section_gap: 160px;
-  }
-
-  @include media_only(md) {
-    --glass: #{$width_md};
-    --gap_side: #{$gap_side_md};
-    --gap: #{$gap_md};
-    --section_gap: 112px;
-  }
-
-  @include media_down(md) {
-    --glass: #{$width_sm};
-    --gap_side: #{$gap_side_sm};
-    --gap: #{$gap_sm};
-    --section_gap: 80px;
+@include mobile {
+  :root {
+    // Ужимать десктопный холст до ширины телефона нечитаемо, поэтому
+    // ниже 768 считаем единицу от 768 и перестраиваем коллажи в колонку.
+    --u: calc(100vw / 768);
   }
 }
 
@@ -57,32 +25,25 @@
   box-sizing: border-box;
 }
 
-html {
-  // Скролл-эффекты (парение карточки, параллакс, горизонтальные ленты)
-  // считаются от положения страницы. Плавный скролл делает их дёрганными,
-  // поэтому включаем его только там, где на него явно рассчитывают —
-  // на якорных переходах, а не глобально.
-  scroll-behavior: auto;
-}
-
 body {
   margin: 0;
 
-  background-color: var(--background_default);
-  color: var(--text_default);
+  background-color: $background;
+  color: $text;
 
-  @include text_body_1;
+  @include text_body;
 
-  // Горизонтальные ленты выезжают за края экрана. Без этого страница
-  // получает лишний скролл вбок на мобильных.
+  // Фоновые засветы и ленты выходят за края холста — без этого
+  // страница получает лишний скролл вбок.
   overflow-x: hidden;
 }
 
 h1,
 h2,
 h3,
-h4,
-p {
+p,
+figure,
+blockquote {
   margin: 0;
 }
 

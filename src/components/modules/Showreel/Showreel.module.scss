@@ -1,24 +1,27 @@
 @use '@/styles/index' as s;
 
-.card {
-  position: relative;
-
-  display: block;
-  width: 100%;
-
-  border-radius: 24px;
-  overflow: hidden;
-
-  &:hover .poster {
-    transform: scale(1.03);
-  }
+.section {
+  z-index: 2;
 }
 
+// Кадр из макета: 1240×778 при отступе 20 от края холста.
+.player {
+  position: absolute;
+  top: 0;
+  left: s.u(20);
+
+  width: s.u(1240);
+  height: s.u(778);
+
+  overflow: hidden;
+  background: #000000;
+}
+
+.video,
 .poster {
   width: 100%;
-  height: auto;
-
-  transition: transform s.$transition-duration s.$transition-ease;
+  height: 100%;
+  object-fit: cover;
 }
 
 .play {
@@ -27,24 +30,58 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  gap: s.u(12);
 
-  width: 88px;
-  height: 88px;
+  padding: s.u(18) s.u(28);
 
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(s.u(12));
 
-  font-size: 24px;
-  color: var(--text_default);
+  color: s.$text;
+  cursor: pointer;
+
+  transition:
+    background-color s.$transition_duration s.$transition_ease,
+    transform s.$transition_duration s.$transition_ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: translate(-50%, -50%) scale(1.04);
+  }
 }
 
-.label {
-  position: absolute;
-  bottom: s.gap(6);
-  left: s.gap(6);
+// Треугольник рисуем бордерами: одна иконка не стоит отдельного файла.
+.playIcon {
+  width: 0;
+  height: 0;
 
-  @include s.text_overline;
+  border-top: s.u(9) solid transparent;
+  border-bottom: s.u(9) solid transparent;
+  border-left: s.u(15) solid currentcolor;
+}
+
+.playLabel {
+  @include s.text_body(s.$medium);
+}
+
+@include s.mobile {
+  .player {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1240 / 778;
+  }
+
+  .play {
+    position: absolute;
+  }
+}
+
+@include s.reduced_motion {
+  .play:hover {
+    transform: translate(-50%, -50%);
+  }
 }

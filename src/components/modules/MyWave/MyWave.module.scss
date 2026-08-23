@@ -1,47 +1,37 @@
 @use '@/styles/index' as s;
 
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
-  align-items: center;
-  gap: 96px;
-
-  @include s.media_down(md) {
-    grid-template-columns: 1fr;
-    gap: s.gap(10);
-    justify-items: center;
-  }
+// Смещения от начала секции (y = 4478).
+.section {
+  z-index: 2;
 }
 
-.phone img {
-  width: 100%;
+.phone {
+  position: absolute;
+  top: s.u(60);
+  left: s.u(20);
+
+  width: s.u(400);
   height: auto;
 }
 
-.side {
-  width: 100%;
-}
-
-.title {
-  @include s.text_header_1;
-  margin-bottom: s.gap(8);
-}
-
+// Сетка 600×600: иконки 90×90 с шагом 170, значит просвет 80.
 .grid {
+  position: absolute;
+  top: s.u(168);
+  left: s.u(550);
+
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--gap);
+  grid-template-columns: repeat(4, s.u(90));
+  grid-auto-rows: s.u(90);
+  gap: s.u(80);
 }
 
 .icon {
   display: grid;
   place-items: center;
 
-  border-radius: 20px;
-  overflow: hidden;
-
   opacity: 1;
-  transition: opacity s.$transition-duration s.$transition-ease;
+  transition: opacity s.$transition_duration s.$transition_ease;
 
   img {
     width: 100%;
@@ -49,16 +39,24 @@
   }
 }
 
-// Курсор внутри сетки — гасим всё до 20%, а иконку под курсором
-// возвращаем на место. Правило ниже по каскаду, поэтому оно и выигрывает.
+// Курсор внутри сетки — гасим всё до 20%, иконку под курсором возвращаем.
+// Второе правило ниже по каскаду, поэтому оно и выигрывает.
 .grid:hover .icon,
 .grid:focus-within .icon {
-  opacity: s.$dimmed-opacity;
+  opacity: s.$dimmed_opacity;
 }
 
 .grid .icon:hover,
 .grid .icon:focus-within {
   opacity: 1;
+}
+
+@include s.mobile {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    gap: s.u(40);
+  }
 }
 
 @include s.reduced_motion {

@@ -1,6 +1,25 @@
-.image {
-  width: 100%;
-  height: auto;
+@use '@/styles/index' as s;
 
-  border-radius: 24px;
+// Смещения от начала секции (y = 5421). Кадры выходят за её низ —
+// в макете они заезжают на следующий блок, так и должно быть.
+.section {
+  z-index: 2;
+}
+
+.left {
+  position: absolute;
+  top: s.u(60);
+  left: s.u(20);
+
+  width: s.u(820);
+  height: auto;
+}
+
+.right {
+  position: absolute;
+  top: s.u(60);
+  left: s.u(860);
+
+  width: s.u(400);
+  height: auto;
 }

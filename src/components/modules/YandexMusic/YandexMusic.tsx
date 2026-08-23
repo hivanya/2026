@@ -4,39 +4,41 @@ import React, { FC, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
-import { ScrollRow, Section, TiltCard } from '@/components/ui';
+import { Canvas, PressNote, TiltCard } from '@/components/ui';
 import { usePrefersReducedMotion } from '@/lib/hooks';
-import { Assets } from '@/utils/consts';
+import { Assets, MusicIntro, PressNotes } from '@/utils/consts';
 
 import classes from './YandexMusic.module.scss';
 
-// TODO(figma): текст с макета.
-const Title = 'Yandex Music'; // PLACEHOLDER
-const Description =
-  'Redesign of the main screen, artist pages and the desktop app.'; // PLACEHOLDER
+// В макете карусель нарисована одним кадром, а под ней три деления —
+// комментарий «добавить карусель». Пока кадр один; когда дизайнер отдаст
+// остальные, достаточно дописать сюда — разметка и точки подстроятся.
+const CarouselSlides = [
+  { id: 'web', src: Assets.musicCarousel, label: 'Yandex Music web player' },
+];
 
-// Блок 3 — коллаж Яндекс Музыки. Всё движение считается от одного
-// прогресса скролла по сцене, чтобы слои ехали согласованно.
+// Блок 3 — Яндекс Музыка. Все слои спозиционированы координатами макета;
+// движутся два: фон («увеличивается при скролле») и артист
+// («при скроле поднимается»).
 export const YandexMusic: FC = () => {
-  const stageRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const prefersReduced = usePrefersReducedMotion();
 
   const { scrollYProgress } = useScroll({
-    target: stageRef,
+    target: sectionRef,
     offset: ['start end', 'end start'],
   });
 
-  // Фон разъезжается по мере ухода страницы вниз.
   const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
-  // Артист поднимается навстречу скроллу — он единственный слой,
-  // который обгоняет остальные.
-  const artistY = useTransform(scrollYProgress, [0, 1], ['12%', '-18%']);
+  // Артист обгоняет остальные слои — сдвиг в процентах от своей высоты,
+  // чтобы эффект не зависел от масштаба холста.
+  const artistY = useTransform(scrollYProgress, [0, 1], ['14%', '-14%']);
 
   const motionStyle = (style: object) => (prefersReduced ? undefined : style);
 
   return (
-    <Section id="music" fluid className={classes.section}>
-      <div ref={stageRef} className={classes.stage}>
+    <div ref={sectionRef}>
+      <Canvas id="music" height={3259} className={classes.section}>
         <motion.div
           aria-hidden
           className={classes.backdrop}
@@ -46,73 +48,103 @@ export const YandexMusic: FC = () => {
             src={Assets.musicBackdrop}
             alt=""
             fill
-            sizes="100vw"
+            sizes="3677px"
             className={classes.backdropImage}
           />
         </motion.div>
 
-        <div className={classes.content}>
-          <header className={classes.header}>
-            <h2 className={classes.title}>{Title}</h2>
-            <p className={classes.description}>{Description}</p>
-          </header>
+        <h2 className={classes.heading}>
+          {MusicIntro.before}
+          <Image
+            src={Assets.iconFlash}
+            alt=""
+            width={40}
+            height={40}
+            className={classes.iconFlash}
+          />
+          {MusicIntro.middle}
+          <Image
+            src={Assets.iconPlus}
+            alt=""
+            width={34}
+            height={34}
+            className={classes.iconPlus}
+          />
+          {MusicIntro.after}
+        </h2>
 
-          <div className={classes.collage}>
-            {/* Главный экран — центр композиции, единственный статичный слой. */}
-            <div className={classes.phone}>
-              <Image
-                src={Assets.musicPhone}
-                alt="Yandex Music main screen"
-                width={420}
-                height={860}
-              />
-            </div>
-
-            <motion.div
-              className={classes.artist}
-              style={motionStyle({ y: artistY })}
-            >
-              <Image
-                src={Assets.musicArtist}
-                alt="Artist page"
-                width={380}
-                height={780}
-              />
-            </motion.div>
-
-            <div className={classes.laptop}>
-              <Image
-                src={Assets.musicLaptop}
-                alt="Desktop app"
-                width={720}
-                height={460}
-              />
-            </div>
-
-            <div className={classes.icon}>
-              <TiltCard maxTilt={20}>
-                <Image
-                  src={Assets.musicIcon}
-                  alt="App icon"
-                  width={220}
-                  height={220}
-                />
-              </TiltCard>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Широкая лента интерфейса — уезжает влево, пока блок проходит экран. */}
-      <ScrollRow mode="drift" driftPercent={22}>
+        {/* Главный экран — центр композиции, единственный статичный мокап. */}
         <Image
-          src={Assets.musicInterfaceWide}
-          alt="Yandex Music interface"
-          width={3200}
-          height={900}
-          className={classes.wide}
+          src={Assets.musicPhone}
+          alt="Yandex Music main screen"
+          width={400}
+          height={815}
+          className={classes.phone}
         />
-      </ScrollRow>
-    </Section>
+
+        <motion.div
+          className={classes.artist}
+          style={motionStyle({ y: artistY })}
+        >
+          <Image
+            src={Assets.musicArtist}
+            alt="Artist page"
+            width={400}
+            height={800}
+          />
+        </motion.div>
+
+        <Image
+          src={Assets.musicLaptop}
+          alt="Desktop app"
+          width={820}
+          height={800}
+          className={classes.laptop}
+        />
+
+        <TiltCard maxTilt={18} className={classes.iconCard}>
+          <Image
+            src={Assets.musicIconArt}
+            alt="App icon"
+            width={310}
+            height={338}
+            className={classes.iconArt}
+          />
+        </TiltCard>
+
+        <PressNote
+          {...PressNotes.rebrand}
+          align="right"
+          icon={{ src: Assets.iconSostav, width: 30, height: 32 }}
+          className={classes.pressRebrand}
+        />
+
+        <div className={classes.carousel}>
+          <ul className={classes.slides}>
+            {CarouselSlides.map(({ id, src, label }) => (
+              <li key={id} className={classes.slide}>
+                <Image src={src} alt={label} width={1240} height={800} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul className={classes.dots} aria-hidden>
+          {CarouselSlides.map(({ id }, index) => (
+            <li
+              key={id}
+              className={index === 0 ? classes.dotActive : classes.dot}
+            />
+          ))}
+        </ul>
+
+        <PressNote
+          {...PressNotes.webVersion}
+          align="center"
+          inline
+          className={classes.pressWeb}
+        />
+      </Canvas>
+    </div>
   );
 };

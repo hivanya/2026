@@ -16,6 +16,9 @@ export default tseslint.config(
       '.next/**',
       'out/**',
       '**/*.config.{js,cjs,mjs,ts}',
+      // Скрипты выгрузки макета — node-окружение и разовый запуск руками;
+      // в face этот каталог тоже вне линтера.
+      'tools/**',
     ],
   },
 
@@ -54,6 +57,10 @@ export default tseslint.config(
       'jsx-a11y/no-static-element-interactions': 'warn',
       'jsx-a11y/no-noninteractive-element-interactions': 'warn',
       'jsx-a11y/no-autofocus': 'warn',
+      // Ролики на странице без речи: у фонового в блоке Yango Plus звука
+      // нет вовсе, у шоурила — музыка. Субтитры к ним прикладывать нечего,
+      // но если в шоуриле появится закадровый голос — нужен <track>.
+      'jsx-a11y/media-has-caption': 'warn',
       // Правила React Compiler — пока предупреждения
       'react-hooks/immutability': 'warn',
       'react-hooks/purity': 'warn',

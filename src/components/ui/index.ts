@@ -1,5 +1,3 @@
-export * from './ExternalLink/ExternalLink';
-export * from './PhoneFrame/PhoneFrame';
-export * from './ScrollRow/ScrollRow';
-export * from './Section/Section';
+export * from './Canvas/Canvas';
+export * from './PressNote/PressNote';
 export * from './TiltCard/TiltCard';

@@ -1,0 +1,53 @@
+@use '@/styles/index' as s;
+
+// Смещения от начала секции (y = 10032).
+.section {
+  z-index: 2;
+}
+
+.viewport {
+  position: absolute;
+  top: 0;
+  left: s.u(20);
+
+  width: s.u(1240);
+  height: s.u(812);
+
+  overflow: hidden;
+}
+
+.strip {
+  width: s.u(2035);
+  will-change: transform;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.press {
+  position: absolute;
+  top: s.u(832);
+  left: s.u(324);
+
+  width: s.u(631);
+}
+
+// Без анимаций лента остаётся лентой — её можно пролистать пальцем.
+@include s.reduced_motion {
+  .viewport {
+    overflow-x: auto;
+  }
+
+  .strip {
+    transform: none !important;
+  }
+}
+
+@include s.mobile {
+  .viewport {
+    height: auto;
+    overflow-x: auto;
+  }
+}

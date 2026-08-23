@@ -1,0 +1,77 @@
+@use '@/styles/index' as s;
+
+.note {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  @include s.text_body(s.$medium);
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  gap: s.u(3);
+}
+
+.icon {
+  width: auto;
+  height: s.u(32);
+}
+
+.source {
+  display: inline-block;
+  position: relative;
+
+  @include s.text_body(s.$regular);
+
+  // Подчёркивание в макете — полоска 0.5px под ссылкой, а не
+  // text-decoration: у него другая толщина и отбивка.
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: s.u(-2);
+    left: 0;
+
+    @include s.hairline(s.$text);
+
+    transition: opacity s.$transition_duration s.$transition_ease;
+  }
+
+  &:hover::after {
+    opacity: 0.4;
+  }
+}
+
+.left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+}
+
+.right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+// Ссылка стоит справа от текста, а не под ним.
+.inline {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: s.u(8);
+
+  .text {
+    flex: 1 1 auto;
+  }
+
+  .caption {
+    flex: 0 0 auto;
+  }
+}

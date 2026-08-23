@@ -1,13 +1,15 @@
 import { Inter } from 'next/font/google';
 
-// Контент англоязычный, кириллица нужна только на всякий случай в подписях —
-// сабсет берём оба, вес переменный.
-const interSans = Inter({
+// В макете Graphik LCG — коммерческий шрифт, в репозиторий его не положить.
+// Inter стоит подменой: тот же нейтральный гротеск, близкие метрики,
+// так что размеры с макета не разъезжаются. Стек собран в globals.scss
+// (--font-graphik), сюда достаточно завести переменную Inter.
+const inter = Inter({
   variable: '--font-inter',
-  subsets: ['latin', 'cyrillic'],
+  subsets: ['latin'],
   display: 'swap',
 });
 
 export function getFonts() {
-  return interSans.variable;
+  return inter.variable;
 }

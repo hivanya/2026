@@ -3,33 +3,30 @@ import type { Metadata } from 'next';
 
 import { Layout } from '@/components/units';
 import { getFonts } from '@/lib/helpers';
-import { PersonName, PersonRole } from '@/utils/consts';
+import { PersonBio, PersonName } from '@/utils/consts';
 
 import 'normalize.css';
 import '../styles/globals.scss';
 
 // На project-сайте GitHub Pages всё живёт в /ivan-cv-2026. Пути в metadata
-// Next не префиксует сам (в отличие от Link и next/image), поэтому
-// подставляем вручную — иначе фавикон отдаёт 404.
+// Next не префиксует сам (в отличие от next/image), поэтому подставляем
+// вручную — иначе фавикон отдаёт 404.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
-const description = `Portfolio of ${PersonName} — ${PersonRole}. Yandex Music and Yango Plus case studies.`;
+const title = `${PersonName} — Design Lead`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? 'https://example.com',
   ),
-  title: {
-    default: `${PersonName} — ${PersonRole}`,
-    template: `${PersonName} | %s`,
-  },
-  description,
+  title,
+  description: PersonBio,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     siteName: PersonName,
-    title: `${PersonName} — ${PersonRole}`,
-    description,
+    title,
+    description: PersonBio,
   },
   icons: {
     icon: [{ url: `${basePath}/favicon.svg`, type: 'image/svg+xml' }],
