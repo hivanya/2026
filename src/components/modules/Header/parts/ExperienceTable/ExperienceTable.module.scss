@@ -1,0 +1,133 @@
+@use '@/styles/index' as s;
+
+// Подзаголовок на 92, строка выше кончается на 60
+.title {
+  margin-top: 32px;
+  // 230 − 20 от левого края полосы
+  margin-left: 210px;
+
+  @include s.text_body(s.$regular);
+  opacity: 0.2;
+}
+
+// Первый разделитель на 127, подзаголовок кончается на 112
+.table {
+  position: relative;
+  margin-top: 15px;
+  // Колонки 230…840
+  width: 610px;
+  max-width: 100%;
+  margin-left: 210px;
+
+  // Замыкающий разделитель на 286, псевдоэлементом — рамка добавила бы
+  // строке высоту
+  &::after {
+    content: '';
+
+    display: block;
+    @include s.hairline;
+  }
+}
+
+.row {
+  position: relative;
+
+  display: grid;
+  // Компания 230, роль 378, годы 753
+  grid-template-columns: 148px 375px auto;
+  align-items: center;
+
+  // Шаг строки: 180 − 127
+  height: 53px;
+
+  @include s.text_body(s.$regular);
+
+  // Разделитель псевдоэлементом строки, чтобы ехал вместе с ней
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    @include s.hairline;
+  }
+
+  // Комментарий в макете: «Показать стейт по ховеру»
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: -20px;
+    bottom: 0;
+    left: -20px;
+
+    background: rgba(255, 255, 255, 0.03);
+    opacity: 0;
+    transition: opacity s.$transition_duration s.$transition_ease;
+
+    pointer-events: none;
+  }
+}
+
+.company {
+  @include s.text_body(s.$medium);
+}
+
+.role {
+  @include s.text_body(s.$regular);
+  opacity: 0.2;
+}
+
+.years {
+  @include s.text_body(s.$regular);
+  white-space: nowrap;
+  opacity: 0.2;
+}
+
+// Мобильный: подзаголовок на 170, таблица на 205, шаг строки 71
+// Роль уходит под компанию, годы остаются справа
+@include s.mobile {
+  .title {
+    order: 3;
+    // Подзаголовок на 170, био кончается на 130
+    margin-top: 40px;
+    margin-left: 0;
+  }
+
+  .table {
+    order: 3;
+    width: auto;
+    // Первый разделитель на 205, подзаголовок кончается на 190
+    margin-top: 15px;
+    margin-left: 0;
+  }
+
+  .row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'company years'
+      'role role';
+    // Без явных высот грид добавляет просвет и роль уезжает вниз
+    grid-template-rows: 20px 20px;
+    row-gap: 0;
+    align-items: start;
+
+    height: 71px;
+    padding-top: 16px;
+  }
+
+  .company {
+    grid-area: company;
+  }
+
+  .role {
+    grid-area: role;
+  }
+
+  .years {
+    grid-area: years;
+  }
+}

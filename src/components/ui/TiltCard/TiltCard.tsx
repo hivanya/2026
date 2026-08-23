@@ -9,36 +9,41 @@ import { useTilt } from '@/lib/hooks';
 import classes from './TiltCard.module.scss';
 
 interface Props extends PropsWithChildren {
-  /** Максимальный наклон в градусах у края карточки. */
+  /** Максимальный наклон в градусах у края карточки */
   maxTilt?: number;
+  /** Класс внешнего контейнера: позиция и размер. Он не наклоняется */
   className?: string;
+  /**
+   * Класс самой карточки: фон, скругление, рамка, тень. На внешнем
+   * контейнере они остались бы на месте при наклоне
+   */
+  surfaceClassName?: string;
 }
 
-// Парящая карточка по мотивам motion.dev/examples/react-tilt-card.
-// В макете к иконке приписано «добавить 3d эффект или свечение» — отсюда
-// и наклон под курсором, и блик, который за ним едет.
-//
-// Перспектива живёт на внешнем div: на самом motion-элементе CSS применил
-// бы её к потомкам, а не к нему, и поворот вышел бы плоским.
-export const TiltCard: FC<Props> = ({ maxTilt, className, children }) => {
-  const { ref, handlers, style, glare, lift, prefersReduced } = useTilt({
-    maxTilt,
-  });
+// Наклон и блик под курсором, комментарий в макете: «добавить 3d эффект
+// или свечение»
+// Перспектива на внешнем div: на motion-элементе CSS применил бы её
+// к потомкам, и поворот вышел бы плоским
+export const TiltCard: FC<Props> = ({
+  maxTilt,
+  className,
+  surfaceClassName,
+  children,
+}) => {
+  const { ref, handlers, style, glare, prefersReduced } = useTilt({ maxTilt });
 
   return (
     <div ref={ref} className={clsx(classes.scene, className)} {...handlers}>
       <motion.div
-        className={classes.card}
+        className={clsx(classes.card, surfaceClassName)}
         style={style}
-        // Карточка приподнимается под курсором — вместе с наклоном это
-        // и читается как «парит», а не «крутится на месте».
-        whileHover={prefersReduced ? undefined : { y: -lift, scale: 1.02 }}
-        transition={{ type: 'spring', stiffness: 180, damping: 20 }}
+        // Только наклон: на коллаже карточка стоит вплотную к соседям,
+        // и любой рост габаритов читается как подпрыгивание
       >
         {children}
 
         {!prefersReduced && (
-          // Свечение — отдельным слоем поверх содержимого, мышь не ловит.
+          // Свечение поверх содержимого, событий мыши не ловит
           <motion.span
             aria-hidden
             className={classes.glare}

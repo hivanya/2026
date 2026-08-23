@@ -1,7 +1,8 @@
 @use '@/styles/index' as s;
 
+// Внешний контейнер задаёт перспективу и место, ничего не рисует
 .scene {
-  perspective: s.u(1000);
+  perspective: 1000px;
 }
 
 .card {
@@ -10,20 +11,17 @@
   width: 100%;
   height: 100%;
 
-  // Без этого дочерние слои схлопываются в плоскость и наклон
-  // перестаёт читаться объёмным.
+  // Наклоняется целиком, как одна плоскость
   transform-style: preserve-3d;
   will-change: transform;
 
-  // Скругление задаёт секция — у карточки в макете радиус 80.
-  border-radius: inherit;
+  // Режется по скруглению из surfaceClassName
   overflow: hidden;
 }
 
 .glare {
   position: absolute;
-  // left/top задаёт motion — здесь только смещение, чтобы свечение
-  // центрировалось по курсору, а не начиналось от него.
+  // left/top задаёт motion, здесь только центрирование по курсору
   transform: translate(-50%, -50%);
 
   width: 90%;

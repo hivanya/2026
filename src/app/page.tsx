@@ -1,16 +1,18 @@
 import React from 'react';
 
 import {
+  ContactButton,
   Header,
   Interfaces,
   MyWave,
   Showreel,
+  ShowreelCase,
   Watch,
   YandexMusic,
   YangoPlus,
 } from '@/components/modules';
 
-// Порядок и высоты секций — из макета, сверху вниз.
+// Порядок секций из макета, сверху вниз
 export default function HomePage() {
   return (
     <>
@@ -21,6 +23,8 @@ export default function HomePage() {
       <Watch />
       <YangoPlus />
       <Interfaces />
+      <ShowreelCase />
+      <ContactButton />
     </>
   );
 }

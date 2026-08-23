@@ -1,219 +1,26 @@
 @use '@/styles/index' as s;
 
-// Смещения от начала секции (y = 5910).
 .section {
+  @include s.section;
+
   z-index: 1;
+  // Кадры часов заезжают сверху: блок на 5864, предыдущий кончается на 6035
+  margin-top: -171px;
+  // Рамка с роликом на 6163
+  padding-top: 299px;
+  padding-bottom: 40px;
 }
 
-.backdrop {
-  position: absolute;
-  top: s.u(1);
-  left: s.u(-135);
-  z-index: -1;
-
-  width: s.u(1616);
-  height: auto;
-}
-
-// Рамка с роликом — по центру холста: 440 + 200 = 640.
-.phone {
-  position: absolute;
-  top: s.u(299);
-  left: s.u(440);
-  z-index: 2;
-
-  width: s.u(400);
-  height: s.u(712);
-
-  border-radius: s.u(40);
-  overflow: hidden;
-}
-
-.video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-// Цитата справа снизу от рамки.
-.pressWave {
-  position: absolute;
-  top: s.u(831);
-  left: s.u(860);
-  z-index: 2;
-
-  width: s.u(190);
-}
-
-.heading {
-  position: absolute;
-  top: s.u(1267);
-  left: s.u(296);
-  z-index: 2;
-
-  width: s.u(688);
-
-  @include s.text_display;
-  text-align: center;
-}
-
-.iconPlus {
-  display: inline-block;
-  vertical-align: middle;
-
-  width: auto;
-  height: s.u(34);
-  margin: 0 s.u(6);
-}
-
-.cardTall {
-  position: absolute;
-  top: s.u(1443);
-  left: s.u(230);
-  z-index: 2;
-
-  width: s.u(400);
-
-  border-radius: s.u(40);
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-// Аватар лежит поверх карточки: 301 − 230 = 71, 1465 − 1443 = 22.
-.avatar {
-  position: absolute;
-  top: s.u(22);
-  left: s.u(71);
-
-  width: s.u(36);
-  height: s.u(36);
-
-  border-radius: 50%;
-}
-
-.cardMid {
-  position: absolute;
-  top: s.u(1543);
-  left: s.u(650);
-  z-index: 3;
-
-  width: s.u(400);
-  height: auto;
-
-  border-radius: s.u(40);
-}
-
-.cardSquare {
-  position: absolute;
-  top: s.u(2016);
-  left: s.u(1025);
-  z-index: 3;
-
-  width: s.u(350);
-  height: auto;
-
-  border-radius: s.u(17);
-}
-
-// Синий круг с треугольником — в макете это векторный инстанс,
-// рисовать его картинкой незачем.
-.playBadge {
-  position: absolute;
-  top: s.u(2403);
-  left: s.u(650);
-  z-index: 3;
-
-  display: grid;
-  place-items: center;
-
-  width: s.u(400);
-  height: s.u(400);
-
-  border-radius: 50%;
-  background: #4d74ff;
-}
-
-.playIcon {
-  width: 0;
-  height: 0;
-
-  // Треугольник 88×88 из макета.
-  border-top: s.u(44) solid transparent;
-  border-bottom: s.u(44) solid transparent;
-  border-left: s.u(76) solid #000000;
-
-  // Оптическая компенсация: у равнобедренного треугольника центр масс
-  // левее геометрического центра круга.
-  margin-left: s.u(12);
-}
-
-.pressIsrael {
-  position: absolute;
-  top: s.u(2910);
-  left: s.u(230);
-  z-index: 3;
-
-  width: s.u(400);
-}
-
-.price {
-  position: absolute;
-  top: s.u(2904);
-  left: s.u(777);
-  z-index: 4;
-
-  width: s.u(365);
-
-  will-change: transform;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-.deli {
-  position: absolute;
-  top: s.u(3110);
-  left: s.u(20);
-  z-index: 2;
-
-  width: s.u(1240);
-  height: auto;
-
-  border-radius: s.u(40);
+.box {
+  @include s.box;
 }
 
 @include s.mobile {
-  .backdrop {
-    display: none;
-  }
-
-  .heading {
-    text-align: left;
-  }
-
-  .phone {
-    height: auto;
-    aspect-ratio: 400 / 712;
-  }
-
-  .playBadge {
-    width: s.u(200);
-    height: s.u(200);
-  }
-
-  .avatar {
-    display: none;
-  }
-}
-
-@include s.reduced_motion {
-  .price {
-    transform: none !important;
+  .section {
+    margin-top: 0;
+    // Рамка на 6199, секция начинается на 6190
+    padding-top: 9px;
+    // Лента интерфейсов на 9550, карточка кончается на 9540
+    padding-bottom: 5px;
   }
 }

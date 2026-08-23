@@ -1,13 +1,24 @@
+@use 'sass:math';
 @use 'tokens' as *;
 
-// === Layout ===
+// === Раскладка ===
 
-// Контентная полоса макета: 1240 внутри 1280.
-@mixin container {
-  width: u($design_width);
-  max-width: 100%;
+@mixin section {
+  position: relative;
+  width: 100%;
+}
+
+// Полоса контента: 1240 внутри 1280
+@mixin box {
+  position: relative;
+
+  width: min(100%, #{$design_width}px);
   margin: 0 auto;
-  padding: 0 u($design_gap_side);
+  padding: 0 #{$gap_side}px;
+
+  @include mobile {
+    padding: 0 #{$mobile_gap_side}px;
+  }
 }
 
 // === Media ===
@@ -24,7 +35,6 @@
   }
 }
 
-// Скролл-эффекты и парение карточек вырубаются разом.
 @mixin reduced_motion {
   @media (prefers-reduced-motion: reduce) {
     @content;
@@ -33,28 +43,32 @@
 
 // === Typography ===
 //
-// В макете ровно два стиля текста — 16/20 и 40/48, Graphik LCG 400/500.
+// В макете два стиля текста: 16/20 и 40/48, Graphik LCG 400 и 500
 
 @mixin text_body($weight: $regular) {
   font-family: var(--font-graphik);
   font-weight: $weight;
 
-  font-size: u(16);
-  line-height: u(20);
+  font-size: 16px;
+  line-height: 20px;
 }
 
 @mixin text_display {
   font-family: var(--font-graphik);
   font-weight: $medium;
 
-  font-size: u(40);
-  line-height: u(48);
+  font-size: 40px;
+  line-height: 48px;
+
+  // В мобильном макете свой интерлиньяж
+  @include mobile {
+    font-size: 32px;
+    line-height: 36px;
+  }
 }
 
-// Волосяная линия в 0.5px: как отдельный элемент она пропадает на
-// не-retina экранах, поэтому рисуем фоном с явной высотой.
+// В макете 0.5px — на не-retina такая линия пропадает
 @mixin hairline($color: $hairline_row) {
-  height: u($hairline_width);
-  min-height: 1px;
+  height: 1px;
   background: $color;
 }

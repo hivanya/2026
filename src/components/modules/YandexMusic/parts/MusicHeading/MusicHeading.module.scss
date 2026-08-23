@@ -1,0 +1,52 @@
+@use '@/styles/index' as s;
+
+.heading {
+  // От ширины зависят переносы
+  width: 984px;
+  max-width: 100%;
+  // 148 − 20 от левого края полосы
+  margin-left: 128px;
+
+  @include s.text_display;
+  text-align: center;
+  // В макете переносы принудительные, U+2028
+  white-space: pre-line;
+}
+
+.flash,
+.plus {
+  display: inline-block;
+  position: relative;
+  // vertical-align: middle считает от середины x-высоты и сажает иконку
+  // на 4px ниже, чем в макете
+  top: -4px;
+  vertical-align: middle;
+
+  width: auto;
+  margin: 0 6px;
+}
+
+.flash {
+  height: 40px;
+}
+
+.plus {
+  height: 34px;
+}
+
+@include s.mobile {
+  .heading {
+    order: 1;
+    width: auto;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .flash {
+    height: 34px;
+  }
+
+  .plus {
+    height: 28px;
+  }
+}

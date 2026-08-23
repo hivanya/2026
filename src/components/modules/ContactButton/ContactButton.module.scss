@@ -1,0 +1,87 @@
+@use '@/styles/index' as s;
+
+.section {
+  @include s.section;
+
+  padding-top: 60px;
+  padding-bottom: 120px;
+}
+
+.box {
+  @include s.box;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  width: 100%;
+  padding: 48px 40px;
+
+  border-radius: 999px;
+  background: s.$accent;
+  color: s.$text;
+
+  @include s.text_display;
+
+  will-change: transform;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+// Стрелка нарисована бордерами: отдельный файл ради неё избыточен
+.arrow {
+  position: relative;
+
+  width: 40px;
+  height: 2px;
+
+  background: currentcolor;
+  transition: transform s.$transition_duration s.$transition_ease;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    width: 16px;
+    height: 16px;
+
+    border-top: 2px solid currentcolor;
+    border-right: 2px solid currentcolor;
+    transform: translateY(-50%) rotate(45deg);
+    transform-origin: right center;
+  }
+}
+
+.button:hover .arrow {
+  transform: translateX(10px);
+}
+
+@include s.mobile {
+  .section {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .button {
+    gap: 12px;
+    padding: 28px 24px;
+  }
+
+  .arrow {
+    width: 28px;
+  }
+}
+
+@include s.reduced_motion {
+  .button:hover .arrow {
+    transform: none;
+  }
+}

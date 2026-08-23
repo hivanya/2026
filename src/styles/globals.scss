@@ -2,27 +2,21 @@
 @use 'mixins' as *;
 
 :root {
-  // Масштабная единица макета. На 1280 и шире — ровно 1px, уже —
-  // пропорционально меньше, чтобы холст ужимался целиком, а не ломался.
-  --u: min(1px, calc(100vw / #{$design_width}));
-
-  // В макете Graphik LCG — коммерческий шрифт Commercial Type, свободно
-  // его не отдать. Если лицензия есть, положи woff2 в src/fonts и
-  // подключи в lib/helpers/getFonts.ts — стек подхватит сам.
-  // Пока подставляется Inter: та же гротескная фактура и близкие метрики.
-  --font-graphik: 'Graphik LCG', 'Graphik', var(--font-inter), sans-serif;
-}
-
-@include mobile {
-  :root {
-    // Ужимать десктопный холст до ширины телефона нечитаемо, поэтому
-    // ниже 768 считаем единицу от 768 и перестраиваем коллажи в колонку.
-    --u: calc(100vw / 768);
-  }
+  // Шрифт подключается в lib/helpers/getFonts.ts
+  --font-graphik: var(--font-graphik-local), system-ui, sans-serif;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  // Без резерва полоса прокрутки появляется после подгрузки картинок
+  // и сдвигает всю композицию вбок
+  scrollbar-gutter: stable;
+
+  // clip, а не hidden: не создаёт лишний контейнер прокрутки
+  overflow-x: clip;
 }
 
 body {
@@ -33,9 +27,8 @@ body {
 
   @include text_body;
 
-  // Фоновые засветы и ленты выходят за края холста — без этого
-  // страница получает лишний скролл вбок.
-  overflow-x: hidden;
+  // Засветы и ленты выходят за края холста, режет их html
+  overflow-x: clip;
 }
 
 h1,
@@ -63,4 +56,10 @@ img,
 video {
   display: block;
   max-width: 100%;
+}
+
+img {
+  // Атрибут height у <img> работает как презентационная подсказка
+  // и делает высоту определённой — aspect-ratio тогда игнорируется
+  height: auto;
 }

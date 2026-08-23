@@ -3,23 +3,22 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import classes from './PressNote.module.scss';
+import { Reveal } from '../Reveal/Reveal';
 
 interface Props {
   text: string;
   label: string;
   href: string;
-  /** Выравнивание из макета — у пяти упоминаний оно разное. */
+  /** Выравнивание, у пяти упоминаний в макете оно разное */
   align?: 'left' | 'center' | 'right';
-  /** Логотип издания перед ссылкой (есть только у Sostav.ru). */
+  /** Логотип издания перед ссылкой, есть только у Sostav.ru */
   icon?: { src: string; width: number; height: number };
-  /** Ссылка стоит в строку с текстом, а не под ним (Kod.ru, Timeoutdubai). */
+  /** Ссылка в строку с текстом, а не под ним: Kod.ru, Timeoutdubai */
   inline?: boolean;
   className?: string;
 }
 
-// Упоминание в прессе: цитата и подчёркнутая ссылка на источник.
-// В макете встречается пять раз — меняются только выравнивание,
-// раскладка (в строку или под текстом) и наличие логотипа.
+// Цитата и ссылка на источник, пять вхождений в макете
 export const PressNote: FC<Props> = ({
   text,
   label,
@@ -29,7 +28,8 @@ export const PressNote: FC<Props> = ({
   inline,
   className,
 }) => (
-  <figure
+  <Reveal
+    as="figure"
     className={clsx(
       classes.note,
       classes[align],
@@ -59,5 +59,5 @@ export const PressNote: FC<Props> = ({
         {label}
       </a>
     </figcaption>
-  </figure>
+  </Reveal>
 );

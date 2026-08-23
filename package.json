@@ -9,7 +9,11 @@
     "lint": "eslint .",
     "lint:styles": "stylelint \"src/**/*.scss\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,scss}\"",
-    "figma:pull": "node tools/figma-pull.mjs"
+    "figma:pull": "node tools/figma-pull.mjs",
+    "figma:fills": "node tools/figma-fills.mjs",
+    "figma:icons": "node tools/figma-icons.mjs",
+    "figma:rest": "node tools/figma-rest.mjs",
+    "fonts:build": "node tools/build-fonts.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

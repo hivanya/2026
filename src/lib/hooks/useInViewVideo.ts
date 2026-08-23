@@ -2,9 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-// Видео в рамке айфона должно стартовать ровно тогда, когда до него
-// доскроллили, и вставать на паузу, когда уехало — иначе оно крутится
-// в фоне и жрёт батарею на мобильных.
+// Запускает видео в зоне видимости и ставит на паузу за её пределами
 export function useInViewVideo(threshold = 0.5) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -15,9 +13,8 @@ export function useInViewVideo(threshold = 0.5) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // play() возвращает промис и реджектится, если автоплей
-          // заблокирован политикой браузера. Молча игнорируем: у видео
-          // есть постер, и без звука это не потеря.
+          // play() реджектится, если автоплей заблокирован политикой
+          // браузера — у видео есть постер, показывать нечего
           void video.play().catch(() => {});
         } else {
           video.pause();

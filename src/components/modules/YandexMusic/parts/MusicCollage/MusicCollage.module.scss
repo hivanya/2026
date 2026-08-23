@@ -1,0 +1,135 @@
+@use '@/styles/index' as s;
+
+// В макете просвет везде одинаковый
+$gap: 20px;
+
+.collage {
+  display: grid;
+  // Левая колонка 20…840, правая 860…1260
+  grid-template-columns: 820fr 400fr;
+  gap: $gap;
+  align-items: start;
+
+  // Заголовок кончается на 1465, телефон начинается на 1593
+  margin-top: 128px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  // Телефон по правому краю колонки: 440…840
+  align-items: flex-end;
+  gap: $gap;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  // Артист начинается на 1858 при телефоне на 1593
+  margin-top: 265px;
+}
+
+.phone {
+  // 400 из 820
+  width: 48.78%;
+  // Пропорция из макета: рендер приходит с полем в пару пикселей
+  aspect-ratio: 400 / 815;
+  object-fit: cover;
+}
+
+.laptop {
+  width: 100%;
+  aspect-ratio: 820 / 800;
+  object-fit: cover;
+}
+
+.artist {
+  width: 100%;
+  will-change: transform;
+
+  img {
+    width: 100%;
+    // Пропорция из макета: рендер приходит с полем в пару пикселей
+    aspect-ratio: 400 / 800;
+    object-fit: cover;
+  }
+}
+
+// Внешний слой не рисует ничего: при наклоне подложка осталась бы
+// на месте и слои разъехались
+.card {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+// Наклоняется вместе с иконкой
+.cardSurface {
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 80px;
+  background: rgba(23, 23, 23, 0.3);
+  backdrop-filter: blur(40px);
+}
+
+// 310×338 при карточке 400×400
+.art {
+  position: absolute;
+  top: 7.75%;
+  left: 11.25%;
+
+  width: 77.5%;
+  aspect-ratio: 310 / 338;
+  object-fit: cover;
+}
+
+// На мобильном порядком управляет секция, поэтому обёртки раскрываем
+// На мобильном порядком управляет секция, поэтому обёртки раскрываем
+@include s.mobile {
+  .collage,
+  .left,
+  .right {
+    display: contents;
+  }
+
+  .phone,
+  .laptop,
+  .artist,
+  .card {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .phone {
+    order: 2;
+    // Телефон на 1294, заголовок кончается на 1254
+    margin-top: 40px;
+    aspect-ratio: 370 / 754;
+  }
+
+  .laptop {
+    order: 3;
+    aspect-ratio: 370 / 360;
+  }
+
+  .card {
+    order: 4;
+    aspect-ratio: 1;
+
+    border-radius: 40px;
+  }
+
+  .cardSurface {
+    border-radius: 40px;
+  }
+
+  .artist {
+    order: 9;
+    // Артист на 3616, упоминание кончается на 3576
+    margin-top: 40px;
+
+    img {
+      aspect-ratio: 370 / 754;
+    }
+  }
+}

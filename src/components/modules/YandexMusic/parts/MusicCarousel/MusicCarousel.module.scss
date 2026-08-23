@@ -1,0 +1,102 @@
+@use '@/styles/index' as s;
+
+.frame {
+  // Карусель на 2351, упоминание выше кончается на 2223
+  margin-top: 128px;
+
+  width: 100%;
+  aspect-ratio: 1240 / 800;
+
+  border-radius: 20px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.track {
+  display: flex;
+  gap: 40px;
+  height: 100%;
+
+  // Тачпад, свайп и колесо с шифтом работают на нативной прокрутке
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+
+  // Позицию показывают точки
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Снап на время перетаскивания снимает компонент, здесь только курсор
+.dragging {
+  cursor: grabbing;
+}
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    // Не даём выделять содержимое при перетаскивании
+    user-select: none;
+  }
+}
+
+// Две точки 8×8 на 628 и 644, на 20 ниже карусели
+.dots {
+  display: flex;
+  gap: 8px;
+
+  margin-top: 20px;
+  // 628 − 20 от левого края полосы
+  margin-left: 608px;
+}
+
+.dot {
+  display: block;
+
+  width: 8px;
+  height: 8px;
+  padding: 0;
+
+  border: 0;
+  background: s.$text;
+  opacity: 0.3;
+  cursor: pointer;
+
+  transition: opacity s.$transition_duration s.$transition_ease;
+  border-radius: 100%;
+}
+
+.current {
+  opacity: 1;
+}
+
+// Без плавного перехода при выключенных анимациях
+@include s.reduced_motion {
+  .track {
+    scroll-behavior: auto;
+  }
+}
+
+@include s.mobile {
+  .frame {
+    order: 6;
+    // Карусель на 2978, упоминание кончается на 2938
+    margin-top: 40px;
+    // Пропорция самого кадра: в 370/478 от него осталась бы полоска
+    aspect-ratio: 1240 / 800;
+  }
+
+  .dots {
+    order: 7;
+    margin-left: 0;
+  }
+}

@@ -103,35 +103,47 @@ function rgba({ r, g, b }, opacity = 1) {
 
 const env = await loadEnv();
 const { FIGMA_TOKEN: token, FIGMA_FILE_KEY: key } = env;
-const nodeId = (env.FIGMA_NODE_ID || '').replace('-', ':');
+// В файле два макета — десктопный и мобильный. FIGMA_NODE_ID принимает
+// список «имя=id», чтобы каждый лёг в свой design/nodes-<имя>.json
+const frames = (env.FIGMA_NODE_ID || '')
+  .split(',')
+  .map((pair) => pair.trim())
+  .filter(Boolean)
+  .map((pair) => {
+    const [name, id] = pair.includes('=') ? pair.split('=') : ['desktop', pair];
+    return { name: name.trim(), id: id.trim().replace('-', ':') };
+  });
 
 await mkdir(OutDir, { recursive: true });
 
 const file = await get(`${Api}/files/${key}?geometry=paths`, token);
-await writeFile(path.join(OutDir, 'file.json'), JSON.stringify(file, null, 2));
+// Сырой ответ не сохраняем: он под 400 МБ, а нужны из него только узлы
 console.log(`файл: ${file.name}, обновлён ${file.lastModified}`);
 
-const root = nodeId
-  ? (flattenFind(file.document, nodeId) ?? file.document)
-  : file.document;
-
-function flattenFind(node, id) {
+function findNode(node, id) {
   if (node.id === id) return node;
 
   for (const child of node.children ?? []) {
-    const found = flattenFind(child, id);
+    const found = findNode(child, id);
     if (found) return found;
   }
 
   return null;
 }
 
-const nodes = flatten(root);
-await writeFile(
-  path.join(OutDir, 'nodes.json'),
-  JSON.stringify(nodes, null, 2),
-);
-console.log(`узлов: ${nodes.length} (от «${root.name}»)`);
+for (const { name, id } of frames) {
+  const root = findNode(file.document, id);
+
+  if (!root) {
+    console.log(`${name}: узла ${id} в файле нет`);
+    continue;
+  }
+
+  const nodes = flatten(root);
+  const target = name === 'desktop' ? 'nodes.json' : `nodes-${name}.json`;
+  await writeFile(path.join(OutDir, target), JSON.stringify(nodes, null, 2));
+  console.log(`${name}: ${nodes.length} узлов от «${root.name}» → ${target}`);
+}
 
 const comments = await get(`${Api}/files/${key}/comments`, token);
 await writeFile(
@@ -139,23 +151,5 @@ await writeFile(
   JSON.stringify(comments, null, 2),
 );
 console.log(`комментариев: ${comments.comments?.length ?? 0}`);
-
-// Превью фреймов верхнего уровня — по ним сверяется общая раскладка.
-const frames = (root.children ?? [])
-  .filter((child) => child.type === 'FRAME' || child.type === 'SECTION')
-  .map((child) => child.id);
-
-if (frames.length) {
-  const images = await get(
-    `${Api}/images/${key}?ids=${frames.join(',')}&format=png&scale=2`,
-    token,
-  );
-
-  await writeFile(
-    path.join(OutDir, 'previews.json'),
-    JSON.stringify(images.images, null, 2),
-  );
-  console.log(`превью фреймов: ${Object.keys(images.images).length}`);
-}
 
 console.log(`\nготово — смотри ${OutDir}/`);

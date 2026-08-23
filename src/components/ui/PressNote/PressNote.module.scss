@@ -6,18 +6,32 @@
 }
 
 .text {
+  // В макете переносы принудительные, U+2028
+  white-space: pre-line;
+
   @include s.text_body(s.$medium);
 }
 
 .caption {
+  position: relative;
+
   display: flex;
-  align-items: center;
-  gap: s.u(3);
+  align-items: flex-start;
+
+  // Между низом цитаты и ссылкой в макете 20
+  margin-top: 20px;
 }
 
 .icon {
+  // Логотип выше строки ссылки, 32 против 20 — вне потока, иначе
+  // задаёт высоту строки и блок ниже уезжает на 12px
+  position: absolute;
+  top: -30px;
+  // Просвет между логотипом и подписью
+  right: calc(100% + 3px);
+
   width: auto;
-  height: s.u(32);
+  height: 32px;
 }
 
 .source {
@@ -26,14 +40,13 @@
 
   @include s.text_body(s.$regular);
 
-  // Подчёркивание в макете — полоска 0.5px под ссылкой, а не
-  // text-decoration: у него другая толщина и отбивка.
+  // В макете это полоска, у text-decoration другая толщина и отбивка
   &::after {
     content: '';
 
     position: absolute;
     right: 0;
-    bottom: s.u(-2);
+    bottom: -2px;
     left: 0;
 
     @include s.hairline(s.$text);
@@ -61,11 +74,11 @@
   text-align: right;
 }
 
-// Ссылка стоит справа от текста, а не под ним.
+// Ссылка справа от текста, а не под ним
 .inline {
   flex-direction: row;
   align-items: flex-start;
-  gap: s.u(8);
+  gap: 8px;
 
   .text {
     flex: 1 1 auto;
@@ -73,5 +86,23 @@
 
   .caption {
     flex: 0 0 auto;
+    margin-top: 0;
+  }
+}
+
+// В мобильном макете логотипа нет
+@include s.mobile {
+  .icon {
+    display: none;
+  }
+
+  .inline {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    .caption {
+      margin-top: 20px;
+    }
   }
 }

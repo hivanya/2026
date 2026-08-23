@@ -1,25 +1,59 @@
 @use '@/styles/index' as s;
 
-// Смещения от начала секции (y = 5421). Кадры выходят за её низ —
-// в макете они заезжают на следующий блок, так и должно быть.
 .section {
+  @include s.section;
+
   z-index: 2;
+  padding-top: 60px;
+}
+
+.box {
+  @include s.box;
+}
+
+// Оба кадра от одного верха, просвет 20
+.stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .left {
-  position: absolute;
-  top: s.u(60);
-  left: s.u(20);
-
-  width: s.u(820);
-  height: auto;
+  flex: 1 1 820px;
+  width: 820px;
 }
 
 .right {
-  position: absolute;
-  top: s.u(60);
-  left: s.u(860);
+  flex: 0 0 400px;
+  width: 400px;
+}
 
-  width: s.u(400);
-  height: auto;
+@include s.mobile {
+  .section {
+    // Кадр на 5190, секция начинается на 5180
+    padding-top: 10px;
+    // Рамка Yango на 6199, второй кадр кончается на 6159
+    padding-bottom: 31px;
+  }
+
+  .stage {
+    flex-direction: column;
+    align-items: center;
+    // 5766 − 5746
+    gap: 20px;
+  }
+
+  .left,
+  .right {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 370 / 556;
+  }
+
+  .right {
+    // В макете кадр 350 при полосе 370
+    width: 350px;
+    max-width: 100%;
+    aspect-ratio: 350 / 393;
+  }
 }

@@ -1,20 +1,26 @@
-// Тексты сняты с макета (npm run figma:pull → design/nodes.json).
-// Если правится копирайт — правится здесь, а не в компонентах.
+// Тексты с макета, обновляются через npm run figma:pull
 
 export const PersonName = 'Ivan Pokalyuk';
 
+// Переносы в текстах ниже принудительные, U+2028 — без них строки
+// ложатся иначе; блоки набраны с white-space: pre-line
 export const PersonBio =
-  'Hands-on design lead with 12+ years of experience across different functional roles. For the last 6 years i have been leading design teams, building products, brands and digital experiences';
+  'Product design lead with 12+ years of experience. For the last 7 years \nI have been leading design teams, building products and digital experiences';
 
-// TODO: в макете у ссылок нет адресов — проставить настоящие.
+// Адреса лежат в макете отдельными подписями рядом с фреймами
 export const SocialLinks = [
-  { id: 'linkedin', label: 'Linkedin', href: 'https://www.linkedin.com/' },
-  { id: 'telegram', label: 'Telegram', href: 'https://t.me/' },
-  { id: 'email', label: 'Email', href: 'mailto:hello@example.com' },
+  {
+    id: 'linkedin',
+    label: 'Linkedin',
+    href: 'https://www.linkedin.com/in/ivan-pokalyuk-34535aa3/',
+  },
+  { id: 'telegram', label: 'Telegram', href: 'https://t.me/hivanya' },
+  { id: 'email', label: 'Email', href: 'mailto:ivanpokalyuk@gmail.com' },
 ] as const;
 
-// Таблица опыта: компания — роль — годы. В макете во всех четырёх строках
-// стоит «2023–2026», это явно заготовка — уточнить у Ивана.
+export const ExperienceTitle = 'Experience for last 5 years';
+
+// Компания, роль, годы
 export const Experience = [
   {
     id: 'yandex-music',
@@ -26,45 +32,43 @@ export const Experience = [
     id: 'yandex-plus',
     company: 'Yandex Plus',
     role: 'Product Art Director',
-    years: '2023–2026',
+    years: '2022–2023',
   },
   {
     id: 'skyeng',
     company: 'Skyeng',
     role: 'Head of Design',
-    years: '2023–2026',
-  },
-  {
-    id: 'avito',
-    company: 'Avito',
-    role: 'Senior Product Designer',
-    years: '2023–2026',
+    years: '2019–2022',
   },
 ] as const;
 
-// TODO: в макете нет адреса — проставить ссылку на полное резюме.
-export const FullCvLink = { label: 'Full CV', href: '#' } as const;
-
-// Заголовки блоков. Пробелы внутри — места, куда в макете вставлены
-// иконки (флеш Яндекс Музыки и плюс), поэтому строки разрезаны.
+// Строки разрезаны там, где в макете стоят иконки
 export const MusicIntro = {
   before: 'Yandex',
   middle:
-    'Music — the top music streaming service by number of listeners subscribers in Russia. Part of the Yandex',
+    'Music — the top music streaming service\nby number of listeners subscribers in Russia. \nPart of the Yandex',
   after:
-    'Plus subscription. The total number of Plus subscribers is over 40 million',
+    'Plus subscription. The total\nnumber of Plus subscribers is over 40 million',
 } as const;
 
 export const YangoIntro = {
   before: 'Yango',
-  after: 'Plus — unified subscription to Yango services',
+  after: 'Plus — unified subscription\nto Yango services',
 } as const;
 
-// Пять упоминаний в прессе. TODO: в макете кликабельных адресов нет,
-// проставлены найденные — сверить с Иваном.
+export const ShowreelTitle = 'Showreel';
+
+// Кнопка внизу страницы
+// TODO: сверить подпись и цвет с макетом, узел 310:18274
+export const ContactCta = {
+  label: 'Say hi',
+  href: 'https://t.me/hivanya',
+} as const;
+
+// TODO: адресов в макете нет, проставлены найденные — сверить с Иваном
 export const PressNotes = {
   rebrand: {
-    text: 'Yandex Music has rebranded for the first time in 9 years. The service unveiled an updated brand platform, logo, visual style, and a number of product changes',
+    text: 'Yandex Music has rebranded for the first\ntime in 9 years. The service unveiled\nan updated brand platform, logo, visual\nstyle, and a number of product changes',
     label: 'Sostav.ru',
     href: 'https://www.sostav.ru/publication/yandeks-muzyka-64744.html',
   },
@@ -79,7 +83,7 @@ export const PressNotes = {
     href: 'https://dtf.ru/',
   },
   israel: {
-    text: 'Testing Yango Plus in Israel. Yango Plus in Israel is a paid membership club for users of the Yango ride-hailing and delivery app',
+    text: 'Testing Yango Plus in Israel. \nYango Plus in Israel is a paid membership\nclub for users of the Yango ride-hailing\nand delivery app',
     label: 'pro.yango.com',
     href: 'https://pro.yango.com/',
   },
