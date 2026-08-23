@@ -1,0 +1,54 @@
+name: CI
+
+# Проверка на пул-реквестах. Без неё автомерж сливал бы что угодно:
+# ветка зелёная не потому, что код рабочий, а потому что никто не смотрел.
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Линтеры
+        run: |
+          npm run lint
+          npm run lint:styles
+          npx prettier --check "src/**/*.{ts,tsx,scss}"
+
+      - name: Сборка
+        # next build прогоняет и TypeScript — отдельного шага не нужно.
+        # Ошибка типов здесь означает, что на прод она бы не уехала.
+        run: npm run build
+
+      - name: Экспорт не пустой
+        # Молча сломанный экспорт выглядит как успешная сборка: out/ есть,
+        # а страниц в нём нет.
+        run: |
+          test -f out/index.html || { echo "out/index.html не собрался"; exit 1; }
+          echo "экспорт на месте"
+
+      - name: Картинки на месте
+        # Ассеты вшиты в вёрстку по именам из src/utils/consts/assets.ts.
+        # Классический провал: экспорт из Figma переименовали, ссылка
+        # осталась — и блок уехал в прод с битой картинкой.
+        run: |
+          missing=0
+          for src in $(grep -o '/images/[A-Za-z0-9_./-]*\.webp' out/index.html | sort -u); do
+            if [ ! -f "out$src" ]; then
+              echo "ссылка есть, файла нет: $src"
+              missing=1
+            fi
+          done
+          test "$missing" -eq 0 || exit 1
+          echo "все картинки на месте"

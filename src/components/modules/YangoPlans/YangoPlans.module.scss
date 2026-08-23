@@ -1,0 +1,44 @@
+@use '@/styles/index' as s;
+
+.title {
+  max-width: 900px;
+
+  @include s.text_header_1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+
+  margin-top: 64px;
+
+  @include s.media_only(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include s.media_down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: s.gap(3);
+
+  padding: s.gap(8);
+
+  border: 1px solid var(--stroke_default);
+  border-radius: 24px;
+  background: var(--background_secondary);
+}
+
+.cardTitle {
+  @include s.text_header_3;
+}
+
+.cardText {
+  @include s.text_body_2;
+  color: var(--text_secondary);
+}

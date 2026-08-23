@@ -1,0 +1,105 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+:root {
+  // backgrounds
+  --background_default: #{$background-default};
+  --background_secondary: #{$background-secondary};
+  --background_elevated: #{$background-elevated};
+  --background_contrast: #{$background-contrast};
+  --background_primary: #{$background-primary};
+  --background_primary_10: #{$primary_10};
+  --background_accent: #{$background-accent};
+  --background_accent_10: #{$accent_10};
+
+  // text
+  --text_default: #{$text-default};
+  --text_secondary: #{$text-secondary};
+  --text_tertiary: #{$text-tertiary};
+  --text_primary: #{$text-primary};
+  --text_accent: #{$text-accent};
+  --text_contrast: #{$text-contrast};
+
+  // icons
+  --icon_default: #{$icon-default};
+  --icon_secondary: #{$icon-secondary};
+  --icon_primary: #{$icon-primary};
+  --icon_contrast: #{$icon-contrast};
+
+  // stroke
+  --stroke_default: #{$stroke-default};
+  --stroke_primary: #{$stroke-primary};
+
+  // adaptive sizes
+  @include media_up(lg) {
+    --glass: #{$width_lg};
+    --gap_side: #{$gap_side_lg};
+    --gap: #{$gap_lg};
+    --section_gap: 160px;
+  }
+
+  @include media_only(md) {
+    --glass: #{$width_md};
+    --gap_side: #{$gap_side_md};
+    --gap: #{$gap_md};
+    --section_gap: 112px;
+  }
+
+  @include media_down(md) {
+    --glass: #{$width_sm};
+    --gap_side: #{$gap_side_sm};
+    --gap: #{$gap_sm};
+    --section_gap: 80px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  // Скролл-эффекты (парение карточки, параллакс, горизонтальные ленты)
+  // считаются от положения страницы. Плавный скролл делает их дёрганными,
+  // поэтому включаем его только там, где на него явно рассчитывают —
+  // на якорных переходах, а не глобально.
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+
+  background-color: var(--background_default);
+  color: var(--text_default);
+
+  @include text_body_1;
+
+  // Горизонтальные ленты выезжают за края экрана. Без этого страница
+  // получает лишний скролл вбок на мобильных.
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}

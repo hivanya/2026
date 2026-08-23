@@ -1,0 +1,68 @@
+@use '@/styles/index' as s;
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  align-items: center;
+  gap: 96px;
+
+  @include s.media_down(md) {
+    grid-template-columns: 1fr;
+    gap: s.gap(10);
+    justify-items: center;
+  }
+}
+
+.phone img {
+  width: 100%;
+  height: auto;
+}
+
+.side {
+  width: 100%;
+}
+
+.title {
+  @include s.text_header_1;
+  margin-bottom: s.gap(8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  opacity: 1;
+  transition: opacity s.$transition-duration s.$transition-ease;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// Курсор внутри сетки — гасим всё до 20%, а иконку под курсором
+// возвращаем на место. Правило ниже по каскаду, поэтому оно и выигрывает.
+.grid:hover .icon,
+.grid:focus-within .icon {
+  opacity: s.$dimmed-opacity;
+}
+
+.grid .icon:hover,
+.grid .icon:focus-within {
+  opacity: 1;
+}
+
+@include s.reduced_motion {
+  .icon {
+    transition: none;
+  }
+}

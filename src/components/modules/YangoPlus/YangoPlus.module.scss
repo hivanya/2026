@@ -1,0 +1,65 @@
+@use '@/styles/index' as s;
+
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.backdrop {
+  z-index: -1;
+  object-fit: cover;
+}
+
+.content {
+  @include s.glass(s.$width_lg);
+
+  display: grid;
+  // Рамка ровно по центру полосы: пустая колонка слева зеркалит колонку
+  // с цитатой справа, иначе телефон уезжает влево.
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: var(--gap);
+
+  @include s.media_down(md) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: s.gap(8);
+  }
+}
+
+.phone {
+  grid-column: 2;
+}
+
+// Цитата прижата к низу правой колонки — «справа снизу» от рамки.
+.quote {
+  grid-column: 3;
+  align-self: end;
+
+  max-width: 320px;
+  margin: 0;
+  padding-bottom: s.gap(6);
+
+  @include s.media_down(md) {
+    grid-column: 1;
+    max-width: none;
+    padding-bottom: 0;
+    text-align: center;
+  }
+}
+
+.quoteText {
+  margin: 0;
+
+  @include s.text_body_1;
+  color: var(--text_default);
+}
+
+.source {
+  margin-top: s.gap(3);
+
+  @include s.text_body_2;
+  color: var(--text_secondary);
+  text-decoration: underline;
+}

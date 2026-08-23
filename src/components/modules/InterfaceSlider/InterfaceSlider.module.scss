@@ -1,0 +1,17 @@
+@use '@/styles/index' as s;
+
+.section {
+  padding-bottom: var(--section_gap);
+}
+
+.slide {
+  flex: 0 0 auto;
+  margin: 0;
+
+  img {
+    width: auto;
+    height: clamp(420px, 62vh, 780px);
+
+    border-radius: 32px;
+  }
+}

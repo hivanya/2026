@@ -1,0 +1,83 @@
+@use '@/styles/index' as s;
+
+.section {
+  padding-top: 120px;
+
+  @include s.media_down(md) {
+    padding-top: 72px;
+  }
+}
+
+.name {
+  @include s.text_display;
+}
+
+.role {
+  margin-top: s.gap(3);
+
+  @include s.text_header_3;
+  color: var(--text_primary);
+}
+
+.bio {
+  max-width: 640px;
+  margin-top: s.gap(5);
+
+  @include s.text_body_1;
+  color: var(--text_secondary);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: s.gap(6);
+
+  margin-top: s.gap(8);
+}
+
+.link {
+  @include s.text_body_1;
+
+  // Подчёркивание растёт из-под ссылки, а не появляется скачком.
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+
+    height: 1px;
+
+    background: currentcolor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform s.$transition-duration s.$transition-ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+// Места работы — по центру под контактами, отдельной строкой.
+.workplaces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: s.gap(10);
+
+  margin-top: 96px;
+
+  @include s.media_down(md) {
+    gap: s.gap(6);
+    margin-top: 56px;
+  }
+}
+
+.workplace {
+  @include s.text_overline;
+  color: var(--text_tertiary);
+}

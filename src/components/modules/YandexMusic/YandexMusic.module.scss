@@ -1,0 +1,132 @@
+@use '@/styles/index' as s;
+
+.section {
+  padding-bottom: 0;
+}
+
+.stage {
+  position: relative;
+  isolation: isolate;
+
+  padding: var(--section_gap) 0;
+  overflow: hidden;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  // Фон растёт при скролле — увеличиваем от центра, иначе он «уползает»
+  // в угол и обнажает край.
+  transform-origin: center;
+  will-change: transform;
+}
+
+.backdropImage {
+  object-fit: cover;
+}
+
+.content {
+  @include s.glass(s.$width_lg);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  @include s.text_header_1;
+}
+
+.description {
+  max-width: 520px;
+  margin: s.gap(4) auto 0;
+
+  @include s.text_body_1;
+  color: var(--text_secondary);
+}
+
+// Коллаж собран на гриде: так позиции слоёв читаются как в макете
+// и не разъезжаются при смене ширины.
+.collage {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+
+  margin-top: 96px;
+
+  @include s.media_down(md) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: s.gap(8);
+
+    margin-top: 56px;
+  }
+}
+
+.phone {
+  grid-column: 5 / span 4;
+  grid-row: 1;
+  justify-self: center;
+  z-index: 2;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// Артист — правее телефона и чуть выше него.
+.artist {
+  grid-column: 9 / span 4;
+  grid-row: 1;
+  z-index: 1;
+
+  will-change: transform;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// Ноутбук — ниже и левее.
+.laptop {
+  grid-column: 1 / span 6;
+  grid-row: 2;
+  margin-top: -80px;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @include s.media_down(md) {
+    margin-top: 0;
+  }
+}
+
+// Иконка — ниже и правее, это парящая карточка.
+.icon {
+  grid-column: 9 / span 3;
+  grid-row: 2;
+  justify-self: center;
+  margin-top: s.gap(10);
+  z-index: 3;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.wide {
+  width: auto;
+  height: clamp(280px, 42vw, 560px);
+}

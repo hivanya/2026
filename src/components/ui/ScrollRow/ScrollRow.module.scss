@@ -1,0 +1,51 @@
+@use '@/styles/index' as s;
+
+.pinned {
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+
+  height: 100vh;
+  overflow: hidden;
+}
+
+.drift {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+
+  // Лента шире экрана — иначе flex сожмёт кадры до ширины вьюпорта.
+  width: max-content;
+  padding: 0 var(--gap_side);
+
+  will-change: transform;
+}
+
+// Если анимации выключены, лента остаётся лентой — её можно пролистать
+// пальцем или трекпадом вбок.
+@include s.reduced_motion {
+  .pinned {
+    // Высота из inline-стиля здесь не нужна: залипания больше нет.
+    height: auto !important;
+  }
+
+  .sticky {
+    position: static;
+    height: auto;
+    overflow-x: auto;
+  }
+
+  .drift {
+    overflow-x: auto;
+  }
+}

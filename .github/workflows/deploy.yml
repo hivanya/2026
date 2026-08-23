@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Деплой при сливе в main.
+  push:
+    branches: [main]
+  # И кнопкой из вкладки Actions, если нужно перевыкатить без коммита.
+  workflow_dispatch:
+
+# Пушу в Pages нужны эти права; GITHUB_TOKEN по умолчанию их не даёт.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Параллельные выкатки затирают друг друга — держим одну очередь.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: actions/configure-pages@v5
+
+      - run: npm ci
+
+      - name: Сборка
+        # Пока сайт живёт на project-домене Pages, все ссылки должны быть
+        # с префиксом /<repo>. Появится свой домен — убрать переменную.
+        env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

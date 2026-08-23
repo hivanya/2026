@@ -1,0 +1,36 @@
+@use '@/styles/index' as s;
+
+.scene {
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+
+  // Без этого дочерние слои схлопываются в плоскость и наклон
+  // перестаёт читаться объёмным.
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: s.$box-shadow;
+}
+
+.glare {
+  position: absolute;
+  // left/top задаёт motion — здесь только смещение, чтобы блик
+  // центрировался по курсору, а не начинался от него.
+  transform: translate(-50%, -50%);
+
+  width: 60%;
+  aspect-ratio: 1;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  pointer-events: none;
+}

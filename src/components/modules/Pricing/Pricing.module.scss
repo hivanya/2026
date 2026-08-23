@@ -1,0 +1,54 @@
+@use '@/styles/index' as s;
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  align-items: center;
+  gap: 96px;
+
+  @include s.media_down(md) {
+    grid-template-columns: 1fr;
+    gap: s.gap(10);
+  }
+}
+
+.title {
+  @include s.text_header_1;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: s.gap(3);
+
+  margin-top: s.gap(8);
+}
+
+.feature {
+  @include s.text_body_1;
+  color: var(--text_secondary);
+}
+
+.card {
+  padding: s.gap(10);
+
+  border: 1px solid var(--stroke_default);
+  border-radius: 32px;
+  background: var(--background_elevated);
+  box-shadow: s.$box-shadow;
+
+  text-align: center;
+  will-change: transform;
+}
+
+.price {
+  @include s.text_display;
+  color: var(--text_primary);
+}
+
+.period {
+  margin-top: s.gap(2);
+
+  @include s.text_body_2;
+  color: var(--text_secondary);
+}
