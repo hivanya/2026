@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { usePrefersReducedMotion } from '@/lib/hooks';
-import { Chapters, Experience, PersonName, SocialLinks } from '@/utils/consts';
+import { PersonName, SocialLinks } from '@/utils/consts';
 
 import classes from './SiteHeader.module.scss';
 
@@ -13,18 +13,26 @@ import classes from './SiteHeader.module.scss';
 // сейчас под ней проходит
 const HeaderBand = 60;
 
-const Swap = { duration: 0.22, ease: 'easeOut' } as const;
-const Shift = 6;
-
-type Place = (typeof Experience)[number];
-
-const PlaceById = new Map(Experience.map((place) => [place.id, place]));
+// Подпись главы (компания, должность, годы) временно выключена. Чтобы
+// вернуть — раскомментировать четыре блока [подпись главы] и дописать
+// Chapters, Experience в импорт из '@/utils/consts'. Карта Chapters
+// в profile.ts и стили .chapter/.place/... в модуле остались на месте
+//
+// [подпись главы] 1/4 — анимация смены и справочник мест работы
+// const Swap = { duration: 0.22, ease: 'easeOut' } as const;
+// const Shift = 6;
+//
+// type Place = (typeof Experience)[number];
+//
+// const PlaceById = new Map(Experience.map((place) => [place.id, place]));
 
 export const SiteHeader: React.FC = () => {
   const prefersReduced = usePrefersReducedMotion();
   const [visible, setVisible] = React.useState(false);
   const [onLight, setOnLight] = React.useState(false);
-  const [place, setPlace] = React.useState<Place | null>(null);
+
+  // [подпись главы] 2/4 — текущая глава
+  // const [place, setPlace] = React.useState<Place | null>(null);
 
   React.useEffect(() => {
     const intro = document.getElementById('about');
@@ -80,66 +88,68 @@ export const SiteHeader: React.FC = () => {
     };
   }, []);
 
+  // [подпись главы] 3/4 — какая секция сейчас под шапкой.
   // Секции идут стык в стык, поэтому текущая глава — последняя из тех,
   // что уже ушли под шапку
-  React.useEffect(() => {
-    const sections = Chapters.map(({ section, experience }) => ({
-      node: document.getElementById(section),
-      experience,
-    })).filter(
-      (item): item is { node: HTMLElement; experience: Place['id'] | null } =>
-        Boolean(item.node),
-    );
-
-    if (!sections.length) return;
-
-    let frame = 0;
-
-    const pick = () => {
-      frame = 0;
-
-      const view = window.innerHeight;
-      const left = Math.max(
-        0,
-        document.documentElement.scrollHeight - (window.scrollY + view),
-      );
-
-      // Последние секции короче экрана — страница кончается раньше, чем они
-      // успевают уехать под шапку. У самого низа линию отсчёта плавно
-      // спускаем к нижнему краю экрана, чтобы финальный блок тоже засчитался
-      const probe = HeaderBand + Math.max(0, view - HeaderBand - left);
-
-      let current: Place['id'] | null = null;
-
-      for (const section of sections) {
-        const rect = section.node.getBoundingClientRect();
-
-        // Скрытые секции (на мобилке часть блоков display: none) отдают
-        // нулевой прямоугольник и иначе считались бы уже пройденными
-        if (!rect.height) continue;
-        if (rect.top > probe) continue;
-
-        current = section.experience;
-      }
-
-      setPlace(current ? (PlaceById.get(current) ?? null) : null);
-    };
-
-    const schedule = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(pick);
-    };
-
-    pick();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-
-    return () => {
-      if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-    };
-  }, []);
+  //
+  // React.useEffect(() => {
+  //   const sections = Chapters.map(({ section, experience }) => ({
+  //     node: document.getElementById(section),
+  //     experience,
+  //   })).filter(
+  //     (item): item is { node: HTMLElement; experience: Place['id'] | null } =>
+  //       Boolean(item.node),
+  //   );
+  //
+  //   if (!sections.length) return;
+  //
+  //   let frame = 0;
+  //
+  //   const pick = () => {
+  //     frame = 0;
+  //
+  //     const view = window.innerHeight;
+  //     const left = Math.max(
+  //       0,
+  //       document.documentElement.scrollHeight - (window.scrollY + view),
+  //     );
+  //
+  //     // Последние секции короче экрана — страница кончается раньше, чем они
+  //     // успевают уехать под шапку. У самого низа линию отсчёта плавно
+  //     // спускаем к нижнему краю экрана, чтобы финальный блок тоже засчитался
+  //     const probe = HeaderBand + Math.max(0, view - HeaderBand - left);
+  //
+  //     let current: Place['id'] | null = null;
+  //
+  //     for (const section of sections) {
+  //       const rect = section.node.getBoundingClientRect();
+  //
+  //       // Скрытые секции (на мобилке часть блоков display: none) отдают
+  //       // нулевой прямоугольник и иначе считались бы уже пройденными
+  //       if (!rect.height) continue;
+  //       if (rect.top > probe) continue;
+  //
+  //       current = section.experience;
+  //     }
+  //
+  //     setPlace(current ? (PlaceById.get(current) ?? null) : null);
+  //   };
+  //
+  //   const schedule = () => {
+  //     if (frame) return;
+  //     frame = requestAnimationFrame(pick);
+  //   };
+  //
+  //   pick();
+  //   window.addEventListener('scroll', schedule, { passive: true });
+  //   window.addEventListener('resize', schedule);
+  //
+  //   return () => {
+  //     if (frame) cancelAnimationFrame(frame);
+  //     window.removeEventListener('scroll', schedule);
+  //     window.removeEventListener('resize', schedule);
+  //   };
+  // }, []);
 
   return (
     <AnimatePresence>
@@ -154,6 +164,7 @@ export const SiteHeader: React.FC = () => {
           <div className={classes.box}>
             <span className={classes.name}>{PersonName}</span>
 
+            {/* [подпись главы] 4/4 — сама строка между именем и ссылками
             <div className={classes.chapter}>
               <AnimatePresence mode="wait" initial={false}>
                 {place && (
@@ -178,6 +189,7 @@ export const SiteHeader: React.FC = () => {
                 )}
               </AnimatePresence>
             </div>
+            */}
 
             <ul className={classes.links}>
               {SocialLinks.map(({ id, label, href }) => (
