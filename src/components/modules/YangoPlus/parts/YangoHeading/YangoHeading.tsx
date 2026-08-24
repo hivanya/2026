@@ -9,6 +9,7 @@ import classes from './YangoHeading.module.scss';
 export const YangoHeading: React.FC = () => (
   <Reveal as="h2" className={classes.heading}>
     {YangoIntro.before}
+
     <Image
       src={Assets.iconPlus}
       alt=""
@@ -16,6 +17,7 @@ export const YangoHeading: React.FC = () => (
       height={34}
       className={classes.plus}
     />
+
     {YangoIntro.after}
   </Reveal>
 );

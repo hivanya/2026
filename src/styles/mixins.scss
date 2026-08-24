@@ -30,6 +30,13 @@
   }
 }
 
+// Всё, что уже не десктоп: планшет и телефон разом
+@mixin below_desktop {
+  @media (max-width: $breakpoint_tablet) {
+    @content;
+  }
+}
+
 @mixin reduced_motion {
   @media (prefers-reduced-motion: reduce) {
     @content;

@@ -18,6 +18,10 @@ $accent: #27a6e6;
 $panel: #efefef;
 $card: #ffffff;
 
+// Шторка: поверхность и декоративный ползунок на её кромке
+$sheet: #ededed;
+$grabber: #d9d9d9;
+
 $hairline_row: rgba(255, 255, 255, 0.08);
 $hairline_link: rgba(255, 255, 255, 0.2);
 
@@ -27,3 +31,6 @@ $transition_duration: 0.3s;
 $transition_ease: ease;
 
 $breakpoint_mobile: 768px;
+// Композиции макета собраны на сетке 1240px. Ниже этого порога ряды из
+// нескольких колонок уже не читаются — раскладываем их в колонку
+$breakpoint_tablet: 1024px;

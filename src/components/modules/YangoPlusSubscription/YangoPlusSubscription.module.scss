@@ -1,0 +1,31 @@
+@use '@/styles/index' as s;
+
+.section {
+  @include s.section;
+  padding-bottom: 155px;
+}
+
+.box {
+  @include s.box;
+}
+
+.stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.widget {
+  position: absolute;
+  bottom: -27px;
+  left: 205px;
+
+  width: 396px;
+  height: 316px;
+}
+
+@include s.mobile {
+  .section {
+    display: none;
+  }
+}

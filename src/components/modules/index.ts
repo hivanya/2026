@@ -10,3 +10,4 @@ export * from './SkyengPackages/SkyengPackages';
 export * from './Watch/Watch';
 export * from './YandexMusic/YandexMusic';
 export * from './YangoPlus/YangoPlus';
+export * from './YangoPlusSubscription/YangoPlusSubscription';

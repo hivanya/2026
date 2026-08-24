@@ -13,6 +13,7 @@ import {
   Watch,
   YandexMusic,
   YangoPlus,
+  YangoPlusSubscription
 } from '@/components/modules';
 
 export default function HomePage() {
@@ -30,6 +31,7 @@ export default function HomePage() {
       <YangoPlus />
       <Interfaces />
       <ShowreelCase />
+      <YangoPlusSubscription />
 
       {/* Skyeng */}
       <SkyengInterfaces />

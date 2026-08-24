@@ -1,4 +1,5 @@
 import { withBasePath } from '@/lib/helpers';
+import { YangoPlusSubscription } from '@/components/modules';
 
 const media = withBasePath;
 
@@ -30,6 +31,11 @@ export const Assets = {
   yangoPhone: media('/images/yango-phone.webp'),
   yangoCardTall: media('/images/yango-card-tall.webp'),
   yangoCardMid: media('/images/yango-card-mid.webp'),
+
+  yangoPlusSubscriptionLeft: media('/images/yango-plus-subscription-1.webp'),
+  yangoPlusSubscriptionRight: media('/images/yango-plus-subscription-2.webp'),
+  yangoPlusSubscriptionWidget: media('/images/yango-plus-subscription-3.webp'),
+
   // Нижний блок в yango-card-mid пустой — слайдер выкладываем живыми
   // карточками, они уезжают за правый край экрана, как в приложении
   yangoCardSquares: [
