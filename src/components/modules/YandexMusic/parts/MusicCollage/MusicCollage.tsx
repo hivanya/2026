@@ -45,11 +45,11 @@ export const MusicCollage: React.FC = () => {
         />
       </div>
 
-      <div className={classes.right}>
-        <motion.div
-          className={classes.artist}
-          style={prefersReduced ? undefined : { y: artistY }}
-        >
+      <motion.div
+        className={classes.right}
+        style={prefersReduced ? undefined : { y: artistY }}
+      >
+        <motion.div className={classes.artist}>
           <Image
             src={Assets.musicArtist}
             alt="Artist page"
@@ -58,10 +58,7 @@ export const MusicCollage: React.FC = () => {
           />
         </motion.div>
 
-        <motion.div
-          className={classes.artHolder}
-          style={prefersReduced ? undefined : { y: artY }}
-        >
+        <motion.div className={classes.artHolder}>
           <TiltCard
             maxTilt={18}
             className={classes.card}
@@ -76,7 +73,7 @@ export const MusicCollage: React.FC = () => {
             />
           </TiltCard>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };

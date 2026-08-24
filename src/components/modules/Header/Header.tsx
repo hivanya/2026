@@ -11,7 +11,9 @@ export const Header: React.FC = () => (
     <div className={classes.box}>
       <div className={classes.intro}>
         <h1 className={classes.name}>{PersonName}</h1>
+
         <p className={classes.bio}>{PersonBio}</p>
+
         <SocialLinks />
       </div>
 

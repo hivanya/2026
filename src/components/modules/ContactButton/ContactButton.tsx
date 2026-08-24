@@ -17,7 +17,7 @@ export const ContactButton: React.FC = () => {
   const prefersReduced = usePrefersReducedMotion();
 
   return (
-    <section id="say-hi" className={classes.section}>
+    <section id="say-hi" data-surface="light" className={classes.section}>
       <div className={classes.box}>
         <Reveal>
           <motion.a

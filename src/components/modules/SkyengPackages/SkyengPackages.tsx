@@ -10,7 +10,11 @@ const ShotWidth = 926;
 const ShotHeight = 944;
 
 export const SkyengPackages: React.FC = () => (
-  <section id="skyeng-packages" className={classes.section}>
+  <section
+    id="skyeng-packages"
+    data-surface="light"
+    className={classes.section}
+  >
     <div className={classes.box}>
       <Reveal className={classes.card}>
         <Image

@@ -10,7 +10,7 @@ const Gap = 20;
 const StartsAt = '25%' as const;
 
 export const SkyengInterfaces: React.FC = () => (
-  <section id="skyeng" className={classes.section}>
+  <section id="skyeng" data-surface="light" className={classes.section}>
     <InterfaceStrip
       screens={Assets.skyengScreens}
       alt="Skyeng interface screen"

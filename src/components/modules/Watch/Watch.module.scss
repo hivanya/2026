@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -17,14 +18,27 @@
   gap: 20px;
 }
 
-.left {
-  flex: 1 1 820px;
-  width: 820px;
+// Три равные колонки макета: 400 + 20 + 400 + 20 + 400 = 1240
+.left,
+.center,
+.right {
+  flex: 1 1 0;
+  min-width: 0;
+
+  img {
+    width: 100%;
+  }
 }
 
+// Левый кадр в макете опущен на 120 и стоит по низу центрального.
+// Проценты, а не пиксели: отступ считается от ширины сцены и едет с ней
+.left {
+  margin-top: math.percentage(math.div(120, 1240));
+}
+
+.left,
 .right {
-  flex: 0 0 400px;
-  width: 400px;
+  will-change: transform;
 }
 
 @include s.mobile {
@@ -35,24 +49,5 @@
   .section {
     padding-top: 10px;
     padding-bottom: 31px;
-  }
-
-  .stage {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .left,
-  .right {
-    flex: 0 0 auto;
-    width: 100%;
-    aspect-ratio: 370 / 556;
-  }
-
-  .right {
-    width: 350px;
-    max-width: 100%;
-    aspect-ratio: 350 / 393;
   }
 }

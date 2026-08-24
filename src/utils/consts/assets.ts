@@ -18,8 +18,11 @@ export const Assets = {
 
   wavePhone: media('/images/wave-phone.webp'),
 
-  watchLeft: media('/images/watch-left.webp'),
-  watchRight: media('/images/watch-right.webp'),
+  // Часы разложены на три кадра: в макете это колонки 400×480, 400×600
+  // и 400×449, левая опущена и выровнена по низу центральной
+  watchLeft: media('/images/watch-left-new.webp'),
+  watchCenter: media('/images/watch-center-new.webp'),
+  watchRight: media('/images/watch-right-new.webp'),
 
   yangoBackdrop: media('/images/yango-backdrop.webp'),
   // Свечение на чистом чёрном — ложится на фон страницы без швов

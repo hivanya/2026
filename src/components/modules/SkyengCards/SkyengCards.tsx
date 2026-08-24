@@ -12,7 +12,7 @@ const RowsWidth = 520;
 const RowsHeight = 404;
 
 export const SkyengCards: React.FC = () => (
-  <section id="skyeng-cards" className={classes.section}>
+  <section id="skyeng-cards" data-surface="light" className={classes.section}>
     <div className={classes.box}>
       <div className={classes.grid}>
         <Reveal className={classes.narrow}>

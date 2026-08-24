@@ -9,9 +9,14 @@
 
   padding: 20px 0;
 
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid s.$hairline_row;
+  --ink: #{s.$text};
+  --ink_dim: #{s.$dimmed_text};
+}
+
+// Светлые блоки внизу страницы: без подложки белые надписи на них пропадают
+.onLight {
+  --ink: #000000;
+  --ink_dim: rgba(0, 0, 0, 0.2);
 }
 
 .box {
@@ -24,6 +29,9 @@
 }
 
 .name {
+  color: var(--ink);
+  transition: color s.$transition_duration s.$transition_ease;
+
   @include s.text_body(s.$medium);
 }
 
@@ -33,27 +41,13 @@
 }
 
 .link {
-  position: relative;
-  display: inline-block;
-
-  color: s.$dimmed_text;
+  color: var(--ink_dim);
   transition: color s.$transition_duration s.$transition_ease;
 
   @include s.text_body(s.$regular);
 
-  &::after {
-    content: '';
-
-    position: absolute;
-    right: 0;
-    bottom: -2px;
-    left: 0;
-
-    @include s.hairline(currentcolor);
-  }
-
   &:hover {
-    color: s.$text;
+    color: var(--ink);
   }
 }
 

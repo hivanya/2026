@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+
 import { Assets } from '@/utils/consts';
 
 import classes from './ShowreelCase.module.scss';
