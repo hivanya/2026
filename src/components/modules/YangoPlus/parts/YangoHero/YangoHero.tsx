@@ -17,17 +17,17 @@ export const YangoHero: React.FC = () => {
       <div aria-hidden className={classes.backdrop}>
         <SoftAurora
           speed={0.6}
-          scale={1.5}
-          brightness={1}
-          color1="#D9D9D9"
+          scale={1.3}
+          brightness={1.1}
+          color1="#505050"
           color2="#000000"
-          noiseFrequency={2.5}
-          noiseAmplitude={1}
+          noiseFrequency={2}
+          noiseAmplitude={7.5}
           bandHeight={0.5}
           bandSpread={1}
-          octaveDecay={0.1}
-          layerOffset={0}
-          colorSpeed={1}
+          octaveDecay={0.22}
+          layerOffset={0.4}
+          colorSpeed={0.7}
           enableMouseInteraction={false}
           // mouseInfluence={0.25}
           paused={prefersReduced}

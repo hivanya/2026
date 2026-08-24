@@ -32,24 +32,28 @@ export const YangoPlayer: React.FC = () => {
         onEnded={() => setPlaying(false)}
         onTimeUpdate={(event) => {
           const video = event.currentTarget;
+
           setProgress(video.duration ? video.currentTime / video.duration : 0);
         }}
+        muted
       >
         <source src={Assets.yangoPlayVideo} type="video/mp4" />
       </video>
 
-      {!playing && (
-        <button
-          type="button"
-          aria-label="Play the Yango Plus video"
-          className={classes.badge}
-          onClick={start}
-        >
-          <span aria-hidden className={classes.icon} />
-        </button>
-      )}
+      {/* Бейдж и кольцо не размонтируем: снятый с дерева узел возвращается
+          мгновенно и съедает обратный переход. Пока идёт видео, кнопку
+          выключает inert — она уходит и из фокуса, и из дерева доступности */}
+      <button
+        type="button"
+        aria-label="Play the Yango Plus video"
+        className={classes.badge}
+        inert={playing}
+        onClick={start}
+      >
+        <span aria-hidden className={classes.icon} />
+      </button>
 
-      {!playing && progress > 0 && (
+      {progress > 0 && (
         <svg
           aria-hidden
           viewBox="0 0 100 100"
