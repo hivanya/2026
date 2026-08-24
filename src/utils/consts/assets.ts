@@ -15,6 +15,7 @@ export const Assets = {
   iconFlash: media('/images/icon-flash.svg'),
   iconPlus: media('/images/icon-plus.svg'),
   iconSostav: media('/images/icon-sostav.webp'),
+  iconTelegram: media('/images/icon-telegram.svg'),
 
   wavePhone: media('/images/wave-phone.webp'),
 
@@ -30,12 +31,24 @@ export const Assets = {
   yangoDeli: media('/images/yango-deli.webp'),
   priceCard: media('/images/price-card.webp'),
 
+  // Ширина и высота — в пикселях макета: по ним лента считает масштаб
   interfaceScreens: [
-    media('/images/interfaces-strip-1.webp'),
-    media('/images/interfaces-strip-2.webp'),
-    media('/images/interfaces-strip-3.webp'),
-    media('/images/interfaces-strip-4.webp'),
-    media('/images/interfaces-strip-5.webp'),
+    { src: media('/images/interfaces-strip-1.webp'), width: 375, height: 812 },
+    { src: media('/images/interfaces-strip-2.webp'), width: 375, height: 812 },
+    { src: media('/images/interfaces-strip-3.webp'), width: 375, height: 812 },
+    { src: media('/images/interfaces-strip-4.webp'), width: 375, height: 812 },
+    { src: media('/images/interfaces-strip-5.webp'), width: 375, height: 812 },
+  ],
+
+  skyengPackages: media('/images/skyeng-packages.webp'),
+  skyengGrammar: media('/images/skyeng-grammar.webp'),
+  skyengRows: media('/images/skyeng-rows.webp'),
+
+  skyengScreens: [
+    { src: media('/images/skyeng-strip-1.webp'), width: 818, height: 1090 },
+    { src: media('/images/skyeng-strip-2.webp'), width: 400, height: 866 },
+    { src: media('/images/skyeng-strip-3.webp'), width: 1030, height: 827 },
+    { src: media('/images/skyeng-strip-4.webp'), width: 400, height: 866 },
   ],
 
   caseStalo: media('/images/case-stalo.webp'),

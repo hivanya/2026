@@ -3,8 +3,10 @@
 .section {
   @include s.section;
 
-  padding-top: 60px;
-  padding-bottom: 120px;
+  padding-top: 128px;
+  padding-bottom: 128px;
+
+  background: s.$panel;
 }
 
 .box {
@@ -14,17 +16,24 @@
 .button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
 
-  width: 100%;
-  padding: 48px 40px;
+  width: 820px;
+  max-width: 100%;
+  height: 280px;
+  margin: 0 auto;
+  // Слева отступ больше: текст должен выйти из-под круглого торца пилюли
+  padding: 20px 20px 20px 132px;
 
   border-radius: 999px;
   background: s.$accent;
   color: s.$text;
 
-  @include s.text_display;
+  font-family: var(--font-graphik);
+  font-weight: s.$medium;
+  font-size: 120px;
+  line-height: 120px;
+  letter-spacing: -2.4px;
 
   will-change: transform;
 }
@@ -33,54 +42,51 @@
   white-space: nowrap;
 }
 
-.arrow {
-  position: relative;
+.badge {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
 
-  width: 40px;
-  height: 2px;
+  width: 240px;
+  height: 240px;
 
-  background: currentcolor;
-  transition: transform s.$transition_duration s.$transition_ease;
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    top: 50%;
-    right: 0;
-
-    width: 16px;
-    height: 16px;
-
-    border-top: 2px solid currentcolor;
-    border-right: 2px solid currentcolor;
-    transform: translateY(-50%) rotate(45deg);
-    transform-origin: right center;
-  }
+  border-radius: 50%;
+  background: s.$text;
 }
 
-.button:hover .arrow {
-  transform: translateX(10px);
+.icon {
+  width: 130px;
+  height: 108px;
+  // Оптический центр самолётика правее геометрического — в макете
+  // он сдвинут влево на 7 пикселей
+  translate: -7px 0;
 }
 
 @include s.mobile {
   .section {
-    padding-top: 40px;
+    padding-top: 60px;
     padding-bottom: 60px;
   }
 
   .button {
-    gap: 12px;
-    padding: 28px 24px;
+    width: 100%;
+    height: 120px;
+    padding: 12px 12px 12px 40px;
+
+    font-size: 48px;
+    line-height: 48px;
+    letter-spacing: -1px;
   }
 
-  .arrow {
-    width: 28px;
+  .badge {
+    width: 96px;
+    height: 96px;
   }
-}
 
-@include s.reduced_motion {
-  .button:hover .arrow {
-    transform: none;
+  .icon {
+    width: 52px;
+    height: 44px;
+    translate: -3px 0;
   }
 }

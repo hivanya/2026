@@ -7,6 +7,9 @@ import {
   MyWave,
   Showreel,
   ShowreelCase,
+  SkyengCards,
+  SkyengInterfaces,
+  SkyengPackages,
   Watch,
   YandexMusic,
   YangoPlus,
@@ -23,6 +26,9 @@ export default function HomePage() {
       <YangoPlus />
       <Interfaces />
       <ShowreelCase />
+      <SkyengInterfaces />
+      <SkyengPackages />
+      <SkyengCards />
       <ContactButton />
     </>
   );

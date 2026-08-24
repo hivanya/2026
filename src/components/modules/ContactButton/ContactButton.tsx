@@ -2,12 +2,16 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 import { Reveal } from '@/components/ui';
 import { usePrefersReducedMotion } from '@/lib/hooks';
-import { ContactCta } from '@/utils/consts';
+import { Assets, ContactCta } from '@/utils/consts';
 
 import classes from './ContactButton.module.scss';
+
+const IconWidth = 130;
+const IconHeight = 108;
 
 export const ContactButton: React.FC = () => {
   const prefersReduced = usePrefersReducedMotion();
@@ -26,6 +30,16 @@ export const ContactButton: React.FC = () => {
             transition={{ type: 'spring', stiffness: 320, damping: 26 }}
           >
             <span className={classes.label}>{ContactCta.label}</span>
+
+            <span aria-hidden className={classes.badge}>
+              <Image
+                src={Assets.iconTelegram}
+                alt=""
+                width={IconWidth}
+                height={IconHeight}
+                className={classes.icon}
+              />
+            </span>
           </motion.a>
         </Reveal>
       </div>

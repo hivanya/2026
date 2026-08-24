@@ -11,51 +11,6 @@
   @include s.box;
 }
 
-.pin {
-  position: relative;
-  height: calc(100vh + var(--travel, 0px));
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-
-  display: flex;
-  align-items: center;
-
-  height: 100vh;
-  overflow: hidden;
-}
-
-.viewport {
-  width: 100%;
-  overflow: hidden;
-}
-
-.strip {
-  display: flex;
-  gap: 40px;
-
-  width: max-content;
-  padding-left: max(
-    #{s.$gap_side}px,
-    calc((100% - #{s.$design_width - s.$gap_side * 2}px) / 2)
-  );
-
-  will-change: transform;
-}
-
-.screen {
-  flex: 0 0 auto;
-
-  img {
-    display: block;
-    width: 375px;
-    aspect-ratio: 375 / 812;
-    object-fit: cover;
-  }
-}
-
 .press {
   width: 631px;
   max-width: 100%;
@@ -63,37 +18,10 @@
   margin-left: 304px;
 }
 
-@include s.reduced_motion {
-  .pin {
-    height: auto;
-  }
-
-  .sticky {
-    position: static;
-    height: auto;
-  }
-
-  .viewport {
-    overflow-x: auto;
-  }
-
-  .strip {
-    transform: none !important;
-  }
-}
-
 @include s.mobile {
   .section {
     padding-top: 5px;
     padding-bottom: 28px;
-  }
-
-  .strip {
-    padding-left: #{s.$mobile_gap_side}px;
-  }
-
-  .screen img {
-    width: 355px;
   }
 
   .press {

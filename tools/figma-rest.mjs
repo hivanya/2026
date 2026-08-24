@@ -48,6 +48,18 @@ const Batches = [
     items: [['132:10979', 'yango-card-square'], ['133:11087', 'price-card']],
   },
   { scale: 1, dir: ImgDir, items: [['136:11330', 'yango-deli']] },
+  // Блок 1 Skyeng: три кадра — растры, а третий собран из слоёв
+  { scale: 2, dir: ImgDir, items: [['333:18328', 'skyeng-strip-3']] },
+  // Блок 2 — снимок тарифов, блок 3 — начинка двух карточек
+  { scale: 2, dir: ImgDir, items: [['333:18329', 'skyeng-packages']] },
+  {
+    scale: 2,
+    dir: ImgDir,
+    items: [
+      ['333:18492', 'skyeng-grammar'],
+      ['333:18538', 'skyeng-rows'],
+    ],
+  },
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

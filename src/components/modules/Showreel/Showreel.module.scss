@@ -10,12 +10,35 @@
   @include s.box;
 }
 
-.video {
+.frame {
+  position: relative;
+
   width: 100%;
   aspect-ratio: 1240 / 778;
+  overflow: hidden;
 
   background: #000000;
+}
+
+.poster,
+.video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
+}
+
+.poster {
+  // Клики должны доходить до штатных контролов видео под постером
+  pointer-events: none;
+  transition: opacity s.$transition_duration s.$transition_ease;
+}
+
+.posterGone {
+  opacity: 0;
 }
 
 @include s.mobile {
@@ -23,7 +46,13 @@
     padding-bottom: 40px;
   }
 
-  .video {
+  .frame {
     aspect-ratio: 370 / 232;
+  }
+}
+
+@include s.reduced_motion {
+  .poster {
+    transition: none;
   }
 }

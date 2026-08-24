@@ -1,0 +1,75 @@
+@use '@/styles/index' as s;
+
+.pin {
+  position: relative;
+  height: calc(100vh + var(--travel, 0px));
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+
+  height: 100vh;
+  overflow: hidden;
+}
+
+.viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.strip {
+  // Пиксель макета в пикселях экрана. На больших окнах — один к одному,
+  // на низких и узких лента ужимается, а не обрезается
+  --unit: min(1px, calc(92vh / var(--tallest)), calc(92vw / var(--widest)));
+
+  display: flex;
+  gap: calc(var(--gap) * var(--unit));
+  align-items: flex-start;
+
+  width: max-content;
+  padding-left: max(
+    #{s.$gap_side}px,
+    calc((100% - #{s.$design_width - s.$gap_side * 2}px) / 2)
+  );
+
+  will-change: transform;
+}
+
+.screen {
+  flex: 0 0 auto;
+
+  img {
+    display: block;
+    width: calc(var(--width) * var(--unit));
+    height: auto;
+  }
+}
+
+@include s.reduced_motion {
+  .pin {
+    height: auto;
+  }
+
+  .sticky {
+    position: static;
+    height: auto;
+  }
+
+  .viewport {
+    overflow-x: auto;
+  }
+
+  .strip {
+    transform: none !important;
+  }
+}
+
+@include s.mobile {
+  .strip {
+    padding-left: #{s.$mobile_gap_side}px;
+  }
+}

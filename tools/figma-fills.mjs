@@ -38,6 +38,9 @@ const Targets = [
   ['245:29393', 'case-carousel'],
   ['198:20085', 'm-wave-icons'],
   ['271:41241', 'm-wave-extra'],
+  ['333:18279', 'skyeng-strip-1'],
+  ['333:18278', 'skyeng-strip-2'],
+  ['333:18280', 'skyeng-strip-4'],
 ];
 
 const env = {};

@@ -7,10 +7,14 @@ $mobile_gap_side: 10;
 $regular: 400;
 $medium: 500;
 
-$background: #171717;
+$background: #000000;
 $text: #ffffff;
 
 $accent: #27a6e6;
+
+// Светлая нижняя часть страницы: панель и карточки на ней
+$panel: #efefef;
+$card: #ffffff;
 
 $hairline_row: rgba(255, 255, 255, 0.08);
 $hairline_link: rgba(255, 255, 255, 0.2);
