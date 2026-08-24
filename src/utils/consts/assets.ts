@@ -56,9 +56,9 @@ export const Assets = {
   skyengRows: media('/images/skyeng-rows.webp'),
 
   skyengScreens: [
-    { src: media('/images/skyeng-strip-1.webp'), width: 818, height: 1090 },
+    { src: media('/images/skyeng-strip-1.webp'), width: 1635, height: 866 },
     { src: media('/images/skyeng-strip-2.webp'), width: 400, height: 866 },
-    { src: media('/images/skyeng-strip-3.webp'), width: 1030, height: 827 },
+    { src: media('/images/skyeng-strip-3.webp'), width: 818, height: 1090 },
     { src: media('/images/skyeng-strip-4.webp'), width: 400, height: 866 },
   ],
 

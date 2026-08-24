@@ -37,8 +37,6 @@ export const SkyengCards: React.FC = () => (
       </div>
     </div>
 
-    {/* В макете низ блока перекрыт размытым светлым прямоугольником —
-        им карточки уходят в фон перед кнопкой Say hi */}
     <span aria-hidden className={classes.fade} />
   </section>
 );
