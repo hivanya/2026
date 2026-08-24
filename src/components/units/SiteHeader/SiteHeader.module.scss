@@ -36,6 +36,9 @@
   position: relative;
   display: inline-block;
 
+  color: s.$dimmed_text;
+  transition: color s.$transition_duration s.$transition_ease;
+
   @include s.text_body(s.$regular);
 
   &::after {
@@ -46,13 +49,11 @@
     bottom: -2px;
     left: 0;
 
-    @include s.hairline(s.$hairline_link);
-
-    transition: background-color s.$transition_duration s.$transition_ease;
+    @include s.hairline(currentcolor);
   }
 
-  &:hover::after {
-    background-color: s.$text;
+  &:hover {
+    color: s.$text;
   }
 }
 

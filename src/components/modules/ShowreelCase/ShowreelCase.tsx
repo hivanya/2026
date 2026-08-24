@@ -1,18 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
-
-import { Reveal } from '@/components/ui';
-import { Assets, ShowreelTitle } from '@/utils/consts';
+import { Assets } from '@/utils/consts';
 
 import classes from './ShowreelCase.module.scss';
 
 export const ShowreelCase: React.FC = () => (
   <section id="showreel-case" className={classes.section}>
     <div className={classes.box}>
-      <Reveal as="h2" className={classes.title}>
-        {ShowreelTitle}
-      </Reveal>
-
       <div className={classes.stage}>
         <div className={classes.left}>
           <Image

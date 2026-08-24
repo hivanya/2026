@@ -9,13 +9,21 @@
 
 .box {
   @include s.box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  text-align: center;
 }
 
 .press {
-  width: 631px;
-  max-width: 100%;
-  margin-top: 40px;
-  margin-left: 304px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  width: fit-content;
 }
 
 @include s.mobile {

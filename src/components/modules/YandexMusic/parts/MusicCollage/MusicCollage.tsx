@@ -1,57 +1,82 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 import { TiltCard } from '@/components/ui';
+import { usePrefersReducedMotion } from '@/lib/hooks';
 import { Assets } from '@/utils/consts';
 
 import classes from './MusicCollage.module.scss';
 
-export const MusicCollage: React.FC = () => (
-  <div className={classes.collage}>
-    <div className={classes.left}>
-      <Image
-        src={Assets.musicPhone}
-        alt="Yandex Music main screen"
-        width={400}
-        height={815}
-        className={classes.phone}
-      />
+export const MusicCollage: React.FC = () => {
+  const collageRef = React.useRef<HTMLDivElement>(null);
+  const prefersReduced = usePrefersReducedMotion();
 
-      <Image
-        src={Assets.musicLaptop}
-        alt="Desktop app"
-        width={820}
-        height={800}
-        className={classes.laptop}
-      />
-    </div>
+  const { scrollYProgress } = useScroll({
+    target: collageRef,
+    offset: ['start end', 'end start'],
+  });
 
-    <div className={classes.right}>
-      <motion.div className={classes.artist}>
+  // Правая колонка едет вверх быстрее страницы, женщина — быстрее иконки.
+  // Наоборот нельзя: иконка стоит под ней, и обгоняя, она бы к концу
+  // прокрутки наехала на фотографию. В этом порядке зазор только растёт
+  const artistY = useTransform(scrollYProgress, [0, 1], [90, -240]);
+  const artY = useTransform(scrollYProgress, [0, 1], [100, -180]);
+
+  return (
+    <div ref={collageRef} className={classes.collage}>
+      <div className={classes.left}>
         <Image
-          src={Assets.musicArtist}
-          alt="Artist page"
+          src={Assets.musicPhone}
+          alt="Yandex Music main screen"
           width={400}
-          height={800}
+          height={815}
+          className={classes.phone}
         />
-      </motion.div>
 
-      <TiltCard
-        maxTilt={18}
-        className={classes.card}
-        surfaceClassName={classes.cardSurface}
-      >
         <Image
-          src={Assets.musicIconArt}
-          alt="App icon"
-          width={310}
-          height={338}
-          className={classes.art}
+          src={Assets.musicLaptop}
+          alt="Desktop app"
+          width={820}
+          height={800}
+          className={classes.laptop}
         />
-      </TiltCard>
+      </div>
+
+      <div className={classes.right}>
+        <motion.div
+          className={classes.artist}
+          style={prefersReduced ? undefined : { y: artistY }}
+        >
+          <Image
+            src={Assets.musicArtist}
+            alt="Artist page"
+            width={400}
+            height={800}
+          />
+        </motion.div>
+
+        <motion.div
+          className={classes.artHolder}
+          style={prefersReduced ? undefined : { y: artY }}
+        >
+          <TiltCard
+            maxTilt={18}
+            className={classes.card}
+            surfaceClassName={classes.cardSurface}
+          >
+            <Image
+              src={Assets.musicIconArt}
+              alt="App icon"
+              width={310}
+              height={338}
+              className={classes.art}
+            />
+          </TiltCard>
+        </motion.div>
+      </div>
     </div>
-  </div>
-);
+  );
+};

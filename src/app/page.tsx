@@ -25,7 +25,7 @@ export default function HomePage() {
       <Watch />
       <YangoPlus />
       <Interfaces />
-      <ShowreelCase />
+       <ShowreelCase />
       <SkyengInterfaces />
       <SkyengPackages />
       <SkyengCards />

@@ -19,18 +19,21 @@ export const Experience = [
   {
     id: 'yandex-music',
     company: 'Yandex Music',
+    href: 'https://music.yandex.ru',
     role: 'Head of Product Design',
     years: '2023–2026',
   },
   {
     id: 'yandex-plus',
     company: 'Yandex Plus',
+    href: 'https://plus.yandex.ru',
     role: 'Product Art Director',
     years: '2022–2023',
   },
   {
     id: 'skyeng',
     company: 'Skyeng',
+    href: 'https://skyeng.ru',
     role: 'Head of Design',
     years: '2019–2022',
   },
@@ -65,21 +68,21 @@ export const PressNotes = {
   webVersion: {
     text: 'New web version with new features: trailers, concert recommendations and ticket purchases',
     label: 'Kod.ru',
-    href: 'https://kod.ru/',
+    href: 'https://kod.ru/yandex-music-new-web-version',
   },
   myWave: {
     text: 'Yandex Music has updated My Wave, making its design more responsive to listeners’ preferences',
     label: 'DTF.ru',
-    href: 'https://dtf.ru/',
+    href: 'https://dtf.ru/music/2607432-v-yandeks-muzyke-obnovili-moyu-volnu-ee-dizain-stal-podstraivatsya-pod-predpochteniya-slushatelei',
   },
   israel: {
     text: 'Testing Yango Plus in Israel. \nYango Plus in Israel is a paid membership\nclub for users of the Yango ride-hailing\nand delivery app',
     label: 'pro.yango.com',
-    href: 'https://pro.yango.com/',
+    href: 'https://pro.yango.com/il-en/haifa/knowledge-base/taxi/news/yango-plus',
   },
   mena: {
     text: 'Yango Launches AI-Driven Entertainment Super App for MENA',
     label: 'Timeoutdubai.com',
-    href: 'https://www.timeoutdubai.com/',
+    href: 'https://www.timeoutdubai.com/news/yango-play-app-now-in-uae',
   },
 } as const;

@@ -12,13 +12,6 @@
   @include s.box;
 }
 
-.title {
-  width: 181px;
-  margin-left: 530px;
-
-  @include s.text_display;
-}
-
 .stage {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -114,11 +107,6 @@
   .section {
     padding-top: 10px;
     padding-bottom: 40px;
-  }
-
-  .title {
-    width: auto;
-    margin-left: 0;
   }
 
   .stage,

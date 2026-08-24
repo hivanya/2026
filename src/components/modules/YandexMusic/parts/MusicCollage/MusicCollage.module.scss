@@ -38,6 +38,11 @@ $gap: 20px;
   object-fit: cover;
 }
 
+.artHolder {
+  width: 100%;
+  will-change: transform;
+}
+
 .artist {
   width: 100%;
   will-change: transform;
@@ -75,6 +80,10 @@ $gap: 20px;
   .collage,
   .left,
   .right {
+    display: contents;
+  }
+
+  .artHolder {
     display: contents;
   }
 

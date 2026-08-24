@@ -14,7 +14,6 @@ export const Assets = {
   musicCarouselTwo: media('/images/music-carousel-2.webp'),
   iconFlash: media('/images/icon-flash.svg'),
   iconPlus: media('/images/icon-plus.svg'),
-  iconSostav: media('/images/icon-sostav.webp'),
   iconTelegram: media('/images/icon-telegram.svg'),
 
   wavePhone: media('/images/wave-phone.webp'),
@@ -23,6 +22,8 @@ export const Assets = {
   watchRight: media('/images/watch-right.webp'),
 
   yangoBackdrop: media('/images/yango-backdrop.webp'),
+  // Свечение на чистом чёрном — ложится на фон страницы без швов
+  yangoHeroBackdrop: media('/images/yandex-music-backdrop-image.webp'),
   yangoPhone: media('/images/yango-phone.webp'),
   yangoCardTall: media('/images/yango-card-tall.webp'),
   yangoCardMid: media('/images/yango-card-mid.webp'),
@@ -69,6 +70,6 @@ export const Assets = {
 
 export const WaveIcons = Array.from({ length: 16 }, (_, index) => ({
   id: `wave-${index + 1}`,
-  src: media(`/images/wave/icon-${index + 1}.png`),
+  src: media(`/images/wave/icon-${index + 1}.webp`),
   label: `My Wave icon ${index + 1}`,
 }));

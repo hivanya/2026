@@ -63,6 +63,8 @@
 }
 
 .company {
+  justify-self: start;
+
   @include s.text_body(s.$medium);
 }
 

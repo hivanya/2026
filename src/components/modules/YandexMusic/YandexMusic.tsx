@@ -22,7 +22,7 @@ export const YandexMusic: React.FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 2.1]);
+  const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 3.6]);
 
   return (
     <section id="music" ref={sectionRef} className={classes.section}>
@@ -42,12 +42,12 @@ export const YandexMusic: React.FC = () => {
 
       <div className={classes.box}>
         <MusicHeading />
+
         <MusicCollage />
 
         <PressNote
           {...PressNotes.rebrand}
           align="right"
-          icon={{ src: Assets.iconSostav, width: 30, height: 32 }}
           className={classes.pressRebrand}
         />
 

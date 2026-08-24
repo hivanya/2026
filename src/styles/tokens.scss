@@ -9,6 +9,8 @@ $medium: 500;
 
 $background: #000000;
 $text: #ffffff;
+// Приглушённый текст — тот же белый, только на 20%
+$dimmed_text: rgba(255, 255, 255, 0.2);
 
 $accent: #27a6e6;
 

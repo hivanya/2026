@@ -9,9 +9,17 @@ export const ExperienceTable: React.FC = () => (
     <p className={classes.title}>{ExperienceTitle}</p>
 
     <ul className={classes.table}>
-      {Experience.map(({ id, company, role, years }) => (
+      {Experience.map(({ id, company, href, role, years }) => (
         <li key={id} className={classes.row}>
-          <span className={classes.company}>{company}</span>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={classes.company}
+          >
+            {company}
+          </a>
+
           <span className={classes.role}>{role}</span>
           <span className={classes.years}>{years}</span>
         </li>

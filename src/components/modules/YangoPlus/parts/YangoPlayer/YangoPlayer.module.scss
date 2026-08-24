@@ -13,6 +13,13 @@
 
   border-radius: 50%;
   background: #0f0f0f;
+
+  transition: border-radius s.$transition_duration s.$transition_ease;
+}
+
+// Пошло видео — кругляш разжимается в квадрат со скруглением
+.expanded {
+  border-radius: 40px;
 }
 
 .badge {
@@ -42,7 +49,11 @@
 
   border-top: 44px solid transparent;
   border-bottom: 44px solid transparent;
-  border-left: 88px solid #000000;
+  border-left: 88px solid #ffffff;
+
+  // Оптический центр треугольника левее геометрического — в круге он
+  // без сдвига заваливается влево. Сдвиг на четверть ширины
+  translate: 22px 0;
 }
 
 .video {
@@ -52,6 +63,12 @@
   border-radius: 50%;
   background: #000000;
   object-fit: cover;
+
+  transition: border-radius s.$transition_duration s.$transition_ease;
+}
+
+.expanded .video {
+  border-radius: 24px;
 }
 
 .hidden {
@@ -80,7 +97,7 @@
 }
 
 .progress {
-  stroke: #ffdb4d;
+  stroke: #ffffff;
   transition: stroke-dashoffset 0.25s linear;
 }
 
@@ -98,12 +115,19 @@
     border-top-width: 40px;
     border-bottom-width: 40px;
     border-left-width: 80px;
+
+    translate: 20px 0;
   }
 }
 
 @include s.reduced_motion {
   .badge:hover {
     transform: none;
+  }
+
+  .player,
+  .video {
+    transition: none;
   }
 
   .progress {

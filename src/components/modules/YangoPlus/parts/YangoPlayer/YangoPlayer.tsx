@@ -12,22 +12,24 @@ const Circumference = 2 * Math.PI * Radius;
 
 export const YangoPlayer: React.FC = () => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [started, setStarted] = React.useState(false);
+  const [playing, setPlaying] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
 
   const start = () => {
-    void videoRef.current?.play().catch(() => setStarted(false));
-    setStarted(true);
+    void videoRef.current?.play().catch(() => setPlaying(false));
   };
 
   return (
-    <div className={classes.player}>
+    <div className={clsx(classes.player, playing && classes.expanded)}>
       <video
         ref={videoRef}
-        className={clsx(classes.video, !started && classes.hidden)}
-        controls={started}
+        className={clsx(classes.video, !playing && classes.hidden)}
+        controls={playing}
         playsInline
         preload="none"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
         onTimeUpdate={(event) => {
           const video = event.currentTarget;
           setProgress(video.duration ? video.currentTime / video.duration : 0);
@@ -36,7 +38,21 @@ export const YangoPlayer: React.FC = () => {
         <source src={Assets.yangoPlayVideo} type="video/mp4" />
       </video>
 
-      {started ? (
+      {/* Пока не играет — синий кругляш с треугольником. Досмотрели или
+          поставили на паузу — возвращаемся к нему же, но с кольцом
+          прогресса, чтобы было видно, где остановились */}
+      {!playing && (
+        <button
+          type="button"
+          aria-label="Play the Yango Plus video"
+          className={classes.badge}
+          onClick={start}
+        >
+          <span aria-hidden className={classes.icon} />
+        </button>
+      )}
+
+      {!playing && progress > 0 && (
         <svg
           aria-hidden
           viewBox="0 0 100 100"
@@ -53,15 +69,6 @@ export const YangoPlayer: React.FC = () => {
             strokeDashoffset={Circumference * (1 - progress)}
           />
         </svg>
-      ) : (
-        <button
-          type="button"
-          aria-label="Play the Yango Plus video"
-          className={classes.badge}
-          onClick={start}
-        >
-          <span aria-hidden className={classes.icon} />
-        </button>
       )}
     </div>
   );

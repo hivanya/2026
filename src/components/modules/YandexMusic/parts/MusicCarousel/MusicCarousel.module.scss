@@ -1,20 +1,24 @@
 @use '@/styles/index' as s;
 
+// Половина слайда — на неё же считаются поля дорожки, чтобы крайние
+// слайды вставали по центру экрана, а соседние были видны по бокам
+$half_slide: 620px;
+
 .frame {
   margin-top: 128px;
 
-  width: 100%;
-  aspect-ratio: 1240 / 800;
-
-  border-radius: 20px;
-  overflow: hidden;
-  background: transparent;
+  // Выходим из контейнера на всю ширину экрана: слайды им не режутся
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 .track {
   display: flex;
   gap: 40px;
-  height: 100%;
+
+  // Проценты, а не vw: 100vw шире контента на ширину скроллбара,
+  // и от этого крайние слайды вставали бы мимо центра
+  padding-inline: max(#{s.$gap_side}px, calc(50% - #{$half_slide}));
 
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -32,44 +36,17 @@
 }
 
 .slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+  flex: 0 0 min(#{$half_slide * 2}, calc(100vw - #{s.$gap_side * 2}px));
+  scroll-snap-align: center;
 
   img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1240 / 800;
     object-fit: cover;
 
     user-select: none;
   }
-}
-
-.dots {
-  display: flex;
-  gap: 8px;
-
-  margin-top: 20px;
-  margin-left: 608px;
-}
-
-.dot {
-  display: block;
-
-  width: 8px;
-  height: 8px;
-  padding: 0;
-
-  border: 0;
-  background: s.$text;
-  opacity: 0.3;
-  cursor: pointer;
-
-  transition: opacity s.$transition_duration s.$transition_ease;
-  border-radius: 100%;
-}
-
-.current {
-  opacity: 1;
 }
 
 @include s.reduced_motion {
@@ -82,11 +59,14 @@
   .frame {
     order: 6;
     margin-top: 40px;
-    aspect-ratio: 1240 / 800;
   }
 
-  .dots {
-    order: 7;
-    margin-left: 0;
+  .track {
+    gap: 10px;
+    padding-inline: #{s.$mobile_gap_side}px;
+  }
+
+  .slide {
+    flex: 0 0 calc(100vw - #{s.$mobile_gap_side * 2}px);
   }
 }

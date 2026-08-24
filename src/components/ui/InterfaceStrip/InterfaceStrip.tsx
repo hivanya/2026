@@ -8,6 +8,11 @@ import { usePrefersReducedMotion } from '@/lib/hooks';
 
 import classes from './InterfaceStrip.module.scss';
 
+// framer-motion свои типы кромок наружу не отдаёт, повторяем их здесь:
+// иначе шаблонная строка расширяется до string и offset не типизируется
+type EdgeUnit = `${number}${'px' | 'vw' | 'vh' | '%'}`;
+type ViewportEdge = 'start' | 'end' | 'center' | EdgeUnit;
+
 export interface StripScreen {
   src: string;
   width: number;
@@ -18,9 +23,13 @@ interface Props {
   screens: readonly StripScreen[];
   alt: string;
   gap?: number;
+  /** Где во вьюпорте лента трогается с места: 'start' — когда блок
+      встал в распор, '25%' — на четверти экрана, то есть заметно раньше */
+  startsAt?: ViewportEdge;
 }
 
 const DefaultGap = 40;
+const DefaultStart: ViewportEdge = 'start';
 
 // Липкая лента скриншотов: секция выше экрана ровно на длину проезда,
 // внутри неё лента едет влево по прогрессу скролла и останавливается,
@@ -33,6 +42,7 @@ export const InterfaceStrip: React.FC<Props> = ({
   screens,
   alt,
   gap = DefaultGap,
+  startsAt = DefaultStart,
 }) => {
   const pinRef = React.useRef<HTMLDivElement>(null);
   const viewportRef = React.useRef<HTMLDivElement>(null);
@@ -50,11 +60,13 @@ export const InterfaceStrip: React.FC<Props> = ({
       const last = strip.lastElementChild;
       if (!last) return;
 
-      const offset =
-        last.getBoundingClientRect().left - strip.getBoundingClientRect().left;
-      const centre = offset + last.getBoundingClientRect().width / 2;
+      // Лента останавливается, когда правый край последнего кадра встал
+      // на правый край контейнера — те же поля, что и слева у ленты
+      const gutter = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+      const lastRight =
+        last.getBoundingClientRect().right - strip.getBoundingClientRect().left;
 
-      setTravel(Math.max(0, centre - viewport.clientWidth / 2));
+      setTravel(Math.max(0, lastRight - (viewport.clientWidth - gutter)));
     });
 
     observer.observe(viewport);
@@ -65,7 +77,7 @@ export const InterfaceStrip: React.FC<Props> = ({
 
   const { scrollYProgress } = useScroll({
     target: pinRef,
-    offset: ['start start', 'end end'],
+    offset: [`start ${startsAt}`, 'end end'],
   });
 
   const x = useTransform(scrollYProgress, [0, 1], [0, -travel]);
