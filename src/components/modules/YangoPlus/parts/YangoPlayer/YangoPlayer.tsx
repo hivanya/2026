@@ -38,9 +38,6 @@ export const YangoPlayer: React.FC = () => {
         <source src={Assets.yangoPlayVideo} type="video/mp4" />
       </video>
 
-      {/* Пока не играет — синий кругляш с треугольником. Досмотрели или
-          поставили на паузу — возвращаемся к нему же, но с кольцом
-          прогресса, чтобы было видно, где остановились */}
       {!playing && (
         <button
           type="button"

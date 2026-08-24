@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 
-import { PressNote } from '@/components/ui';
+import { PressNote, SoftAurora } from '@/components/ui';
 import { useInViewVideo, usePrefersReducedMotion } from '@/lib/hooks';
 import { Assets, PressNotes } from '@/utils/consts';
 
@@ -12,31 +10,29 @@ import classes from './YangoHero.module.scss';
 
 export const YangoHero: React.FC = () => {
   const videoRef = useInViewVideo();
-  const stageRef = React.useRef<HTMLDivElement>(null);
   const prefersReduced = usePrefersReducedMotion();
 
-  const { scrollYProgress } = useScroll({
-    target: stageRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const backdropScale = useTransform(scrollYProgress, [0, 1], [1, 1.9]);
-
   return (
-    <div ref={stageRef} className={classes.stage}>
-      <motion.div
-        aria-hidden
-        className={classes.backdrop}
-        style={prefersReduced ? undefined : { scale: backdropScale }}
-      >
-        <Image
-          src={Assets.yangoHeroBackdrop}
-          alt=""
-          fill
-          sizes="160vw"
-          className={classes.backdropImage}
+    <div className={classes.stage}>
+      <div aria-hidden className={classes.backdrop}>
+        <SoftAurora
+          speed={0.6}
+          scale={1.5}
+          brightness={1}
+          color1="#D9D9D9"
+          color2="#000000"
+          noiseFrequency={2.5}
+          noiseAmplitude={1}
+          bandHeight={0.5}
+          bandSpread={1}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={1}
+          enableMouseInteraction={false}
+          // mouseInfluence={0.25}
+          paused={prefersReduced}
         />
-      </motion.div>
+      </div>
 
       <div className={classes.phone}>
         <video
