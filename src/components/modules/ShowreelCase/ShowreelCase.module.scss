@@ -36,6 +36,8 @@
 .five {
   width: 100%;
   object-fit: cover;
+  border: 5px solid #000000;
+  border-radius: 64px;
 }
 
 .stalo {
@@ -44,8 +46,6 @@
 
 .five {
   aspect-ratio: 610 / 1316;
-  border: 5px solid #000000;
-  border-radius: 64px;
 }
 
 .thirtyTwo {
