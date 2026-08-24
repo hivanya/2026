@@ -19,16 +19,23 @@ export default function HomePage() {
   return (
     <>
       <Header />
+
+      {/* Yandex Music */}
       <Showreel />
       <YandexMusic />
       <MyWave />
       <Watch />
+
+      {/* Yandex Plus */}
       <YangoPlus />
       <Interfaces />
       <ShowreelCase />
+
+      {/* Skyeng */}
       <SkyengInterfaces />
       <SkyengPackages />
       <SkyengCards />
+
       <ContactButton />
     </>
   );

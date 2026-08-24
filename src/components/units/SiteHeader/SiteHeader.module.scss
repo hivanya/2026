@@ -19,13 +19,14 @@
   --ink_dim: rgba(0, 0, 0, 0.2);
 }
 
+// Колонка имени шириной 210px — на этой же вертикали начинается
+// таблица опыта в интро, подпись главы встаёт с ней в один столбец
 .box {
   @include s.box;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
 }
 
 .name {
@@ -33,6 +34,35 @@
   transition: color s.$transition_duration s.$transition_ease;
 
   @include s.text_body(s.$medium);
+}
+
+// Держим строку, даже когда главы нет, — шапка не дёргается по высоте
+.chapter {
+  height: 20px;
+}
+
+.place {
+  display: flex;
+  gap: 20px;
+
+  margin: 0;
+
+  white-space: nowrap;
+}
+
+.company {
+  color: var(--ink);
+  transition: color s.$transition_duration s.$transition_ease;
+
+  @include s.text_body(s.$medium);
+}
+
+.role,
+.years {
+  color: var(--ink_dim);
+  transition: color s.$transition_duration s.$transition_ease;
+
+  @include s.text_body(s.$regular);
 }
 
 .links {
@@ -56,7 +86,36 @@
     padding: 12px 0;
   }
 
+  // В 370px «Yandex Music Head of Product Design 2023–2026» рядом с именем
+  // и ссылками не помещается: имя и ссылки остаются первой строкой, подпись
+  // уходит во вторую и целиком укладывается в неё
+  .box {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 8px;
+  }
+
+  .name {
+    grid-area: 1 / 1;
+  }
+
   .links {
+    grid-area: 1 / 2;
     gap: 16px;
+  }
+
+  .chapter {
+    grid-area: 2 / 1 / 2 / -1;
+    height: 16px;
+  }
+
+  .place {
+    gap: 12px;
+  }
+
+  .company,
+  .role,
+  .years {
+    font-size: 13px;
+    line-height: 16px;
   }
 }

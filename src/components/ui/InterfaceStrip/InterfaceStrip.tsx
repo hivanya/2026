@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import clsx from 'clsx';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -26,6 +27,9 @@ interface Props {
   /** Где во вьюпорте лента трогается с места: 'start' — когда блок
       встал в распор, '25%' — на четверти экрана, то есть заметно раньше */
   startsAt?: ViewportEdge;
+  /** Сколько пикселей оставить под лентой до следующего блока. Без него
+      зазор равен пустому полю экрана и на высоких окнах разъезжается */
+  tail?: number;
 }
 
 const DefaultGap = 40;
@@ -43,6 +47,7 @@ export const InterfaceStrip: React.FC<Props> = ({
   alt,
   gap = DefaultGap,
   startsAt = DefaultStart,
+  tail,
 }) => {
   const pinRef = React.useRef<HTMLDivElement>(null);
   const viewportRef = React.useRef<HTMLDivElement>(null);
@@ -88,22 +93,23 @@ export const InterfaceStrip: React.FC<Props> = ({
   return (
     <div
       ref={pinRef}
-      className={classes.pin}
-      style={{ '--travel': `${travel}px` } as React.CSSProperties}
+      className={clsx(classes.pin, tail !== undefined && classes.tailed)}
+      style={
+        {
+          '--travel': `${travel}px`,
+          '--tallest': tallest,
+          '--widest': widest,
+          '--gap': gap,
+          ...(tail === undefined ? {} : { '--tail': `${tail}px` }),
+        } as React.CSSProperties
+      }
     >
       <div className={classes.sticky}>
         <div ref={viewportRef} className={classes.viewport}>
           <motion.ul
             ref={stripRef}
             className={classes.strip}
-            style={
-              {
-                '--tallest': tallest,
-                '--widest': widest,
-                '--gap': gap,
-                ...(prefersReduced ? {} : { x }),
-              } as React.CSSProperties
-            }
+            style={(prefersReduced ? {} : { x }) as React.CSSProperties}
           >
             {screens.map((screen, index) => (
               <li

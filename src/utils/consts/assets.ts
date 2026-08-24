@@ -30,7 +30,14 @@ export const Assets = {
   yangoPhone: media('/images/yango-phone.webp'),
   yangoCardTall: media('/images/yango-card-tall.webp'),
   yangoCardMid: media('/images/yango-card-mid.webp'),
-  yangoCardSquare: media('/images/yango-card-square.webp'),
+  // Нижний блок в yango-card-mid пустой — слайдер выкладываем живыми
+  // карточками, они уезжают за правый край экрана, как в приложении
+  yangoCardSquares: [
+    media('/images/yango-card-square-1.webp'),
+    media('/images/yango-card-square-2.webp'),
+    media('/images/yango-card-square-3.webp'),
+    media('/images/yango-card-square-4.webp'),
+  ],
   yangoAvatar: media('/images/yango-avatar.webp'),
   yangoDeli: media('/images/yango-deli.webp'),
   priceCard: media('/images/price-card.webp'),

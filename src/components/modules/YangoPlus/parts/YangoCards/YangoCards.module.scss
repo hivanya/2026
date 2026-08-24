@@ -47,17 +47,45 @@
   border-radius: 40px;
 }
 
-.square {
+// Слайдер промо-карточек лежит в пустом белом блоке внизу yango-card-mid.
+// Влево лента обрезается по полю блока — как будто уезжает под экран,
+// вправо свободно уходит за край страницы
+.squares {
   position: absolute;
-  top: 573px;
-  left: 1005px;
+  top: 574px;
+  left: 642px;
   z-index: 3;
 
-  width: 350px;
-  aspect-ratio: 1;
-  object-fit: cover;
+  width: 100vw;
+  height: 350px;
+  overflow: hidden;
+}
 
-  border-radius: 17px;
+.strip {
+  display: flex;
+  gap: 10px;
+
+  // Абсолютный блок ужимается по месту — фиксируем ширину по содержимому,
+  // иначе карточки сплющиваются, чтобы влезть в остаток стейджа
+  width: max-content;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  will-change: transform;
+
+  li {
+    flex: none;
+  }
+
+  img {
+    width: 350px;
+    aspect-ratio: 1;
+    object-fit: cover;
+
+    border-radius: 20px;
+  }
 }
 
 @include s.mobile {
@@ -87,7 +115,7 @@
     aspect-ratio: 370 / 767;
   }
 
-  .square,
+  .squares,
   .avatar {
     display: none;
   }

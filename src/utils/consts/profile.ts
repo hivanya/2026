@@ -39,6 +39,28 @@ export const Experience = [
   },
 ] as const;
 
+// Лендинг разбит на главы по местам работы — по этой карте шапка
+// подписывает, в чьём кейсе мы сейчас. Порядок такой же, как в page.tsx:
+// текущей считается последняя секция, уже прошедшая под шапкой.
+// null — блоки без главы: интро и финальный экран
+export const Chapters = [
+  { section: 'about', experience: null },
+  { section: 'showreel', experience: 'yandex-plus' },
+  { section: 'music', experience: 'yandex-music' },
+  { section: 'wave', experience: 'yandex-music' },
+  { section: 'watch', experience: 'yandex-music' },
+  { section: 'yango-plus', experience: 'yandex-plus' },
+  { section: 'interfaces', experience: 'yandex-plus' },
+  { section: 'showreel-case', experience: 'yandex-plus' },
+  { section: 'skyeng', experience: 'skyeng' },
+  { section: 'skyeng-packages', experience: 'skyeng' },
+  { section: 'skyeng-cards', experience: 'skyeng' },
+  { section: 'say-hi', experience: null },
+] as const satisfies readonly {
+  section: string;
+  experience: (typeof Experience)[number]['id'] | null;
+}[];
+
 export const MusicIntro = {
   before: 'Yandex',
   middle:

@@ -38,17 +38,6 @@
 
   @include s.text_body(s.$regular);
 
-  &::after {
-    content: '';
-
-    position: absolute;
-    right: 0;
-    bottom: -2px;
-    left: 0;
-
-    @include s.hairline(currentcolor);
-  }
-
   &:hover {
     color: s.$text;
   }
