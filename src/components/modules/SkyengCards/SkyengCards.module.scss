@@ -6,8 +6,6 @@
 
   z-index: 2;
   padding-bottom: 20px;
-
-  background: s.$panel;
 }
 
 .box {
@@ -29,8 +27,6 @@
   background: s.$card;
 }
 
-// Отступы в процентах от ширины карточки — так поля из макета
-// держатся на любом размере
 .narrow {
   aspect-ratio: 400 / 626;
   padding: math.percentage(math.div(60, 400));
@@ -38,8 +34,7 @@
 
 .wide {
   aspect-ratio: 820 / 626;
-  padding: math.percentage(math.div(111, 820))
-    math.percentage(math.div(151, 820));
+  padding: math.percentage(math.div(111, 820)) math.percentage(math.div(151, 820));
 }
 
 .shot {
@@ -55,7 +50,6 @@
 
   height: 200px;
 
-  background: linear-gradient(to bottom, rgba(239, 239, 239, 0), s.$panel);
   pointer-events: none;
 }
 

@@ -9,12 +9,14 @@ import {
   ShowreelCase,
   SkyengCards,
   SkyengInterfaces,
+  SkyengLessons,
   SkyengPackages,
   Watch,
   YandexMusic,
   YangoPlus,
-  YangoPlusSubscription
+  YangoPlusSubscription,
 } from '@/components/modules';
+import { Sheet } from '@/components/ui';
 
 export default function HomePage() {
   return (
@@ -34,9 +36,12 @@ export default function HomePage() {
       <YangoPlusSubscription />
 
       {/* Skyeng */}
-      <SkyengInterfaces />
-      <SkyengPackages />
-      <SkyengCards />
+      <Sheet>
+        <SkyengInterfaces />
+        <SkyengPackages />
+        <SkyengCards />
+        <SkyengLessons />
+      </Sheet>
 
       <ContactButton />
     </>

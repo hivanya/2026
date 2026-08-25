@@ -6,6 +6,7 @@ export * from './Showreel/Showreel';
 export * from './ShowreelCase/ShowreelCase';
 export * from './SkyengCards/SkyengCards';
 export * from './SkyengInterfaces/SkyengInterfaces';
+export * from './SkyengLessons/SkyengLessons';
 export * from './SkyengPackages/SkyengPackages';
 export * from './Watch/Watch';
 export * from './YandexMusic/YandexMusic';

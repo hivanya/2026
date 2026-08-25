@@ -1,18 +1,16 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
-// Кругляш ↔ квадрат разводим по времени: бейдж уходит первым и без задержки,
-// а возвращается последним — чтобы форма успела домофиться и синий круг не
-// всплывал внутри ещё квадратной коробки
 $badge_duration: s.$transition_duration * 0.6;
 $badge_delay: s.$transition_duration * 0.4;
 
 .player {
   position: absolute;
-  top: 960px;
-  left: 630px;
+  top: math.div(960, 1240) * 100cqw;
+  left: math.percentage(math.div(630, 1240));
   z-index: 3;
 
-  width: 400px;
+  width: math.percentage(math.div(400, 1240));
   aspect-ratio: 1;
 
   border-radius: 50%;
@@ -21,7 +19,6 @@ $badge_delay: s.$transition_duration * 0.4;
   transition: border-radius s.$transition_duration s.$transition_ease;
 }
 
-// Пошло видео — кругляш разжимается в квадрат со скруглением
 .expanded {
   border-radius: 40px;
 }
@@ -43,9 +40,6 @@ $badge_delay: s.$transition_duration * 0.4;
   opacity: 1;
   scale: 1;
 
-  // Ховер держим на transform, а состояние плеера — на отдельном scale:
-  // индивидуальные свойства применяются до transform, поэтому они не
-  // перетирают друг друга и оба перехода живут независимо
   transition:
     transform s.$transition_duration s.$transition_ease,
     opacity $badge_duration s.$transition_ease $badge_delay,
@@ -65,10 +59,6 @@ $badge_delay: s.$transition_duration * 0.4;
     scale $badge_duration s.$transition_ease;
 }
 
-// Треугольник вырезаем из квадрата 75x75, а не собираем на бордерах:
-// половина высоты — дробная, а ширину бордера браузер округляет до целых
-// пикселей и габарит уезжает на пиксель. Коробку центрирует place-items
-// у .badge, своего сдвига у иконки нет
 .icon {
   width: 75px;
   height: 75px;
@@ -76,9 +66,6 @@ $badge_delay: s.$transition_duration * 0.4;
   background: #000000;
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 
-  // Центр тяжести треугольника на трети ширины от основания, то есть левее
-  // середины коробки на шестую часть — на неё и сдвигаем, чтобы в круге он
-  // не заваливался влево. 12px вместо 12.5px, иначе левый край размывается
   translate: 12px 0;
 }
 
@@ -103,9 +90,6 @@ $badge_delay: s.$transition_duration * 0.4;
   border-radius: 24px;
 }
 
-// На паузе гасим кадр плавно, а visibility снимаем только в самом конце:
-// переход читает свойства целевого состояния, поэтому задержка стоит здесь
-// и работает лишь на уход. Обратно видео проявляется сразу, без задержки
 .hidden {
   visibility: hidden;
   opacity: 0;
@@ -129,8 +113,6 @@ $badge_delay: s.$transition_duration * 0.4;
   transition: opacity $badge_duration s.$transition_ease $badge_delay;
 }
 
-// Кольцо живёт в одном такте с бейджем: пока играет видео, оно продолжает
-// считать прогресс невидимым, а на паузе всплывает уже на нужной отметке
 .expanded .ring {
   opacity: 0;
 

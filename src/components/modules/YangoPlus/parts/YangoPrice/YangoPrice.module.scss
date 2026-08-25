@@ -1,28 +1,30 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .stage {
   position: relative;
+  container-type: inline-size;
 
   margin-top: 14px;
-  padding-top: 206px;
+  padding-top: math.percentage(math.div(206, 1240));
 }
 
 .press {
   position: absolute;
-  top: 6px;
-  left: 210px;
+  top: math.div(6, 1240) * 100cqw;
+  left: math.percentage(math.div(210, 1240));
   z-index: 3;
 
-  width: 400px;
+  width: math.percentage(math.div(400, 1240));
 }
 
 .card {
   position: absolute;
   top: 0;
-  left: 757px;
+  left: math.percentage(math.div(757, 1240));
   z-index: 4;
 
-  width: 365px;
+  width: math.percentage(math.div(365, 1240));
   aspect-ratio: 1;
 
   will-change: transform;

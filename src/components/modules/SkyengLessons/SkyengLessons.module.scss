@@ -1,0 +1,53 @@
+@use 'sass:math';
+@use '@/styles/index' as s;
+
+.section {
+  @include s.section;
+
+  z-index: 2;
+  padding-bottom: 20px;
+}
+
+.box {
+  @include s.box;
+}
+
+.stage {
+  display: flex;
+  gap: math.percentage(math.div(38, 1240));
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: math.percentage(math.div(366, 1240));
+}
+
+.shotHolder {
+  flex: 0 0 auto;
+  width: math.percentage(math.div(820, 1240));
+}
+
+.card .shot {
+  aspect-ratio: math.div(366, 280);
+  object-fit: contain;
+}
+
+.shot {
+  width: 100%;
+  height: auto;
+}
+
+@include s.mobile {
+  .stage {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .card,
+  .shotHolder {
+    width: 100%;
+  }
+}

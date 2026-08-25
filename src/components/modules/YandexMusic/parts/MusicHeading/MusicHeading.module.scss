@@ -3,7 +3,7 @@
 .heading {
   width: 984px;
   max-width: 100%;
-  margin-left: 128px;
+  margin: 0 auto;
 
   @include s.text_display;
   text-align: center;
@@ -33,7 +33,7 @@
   .heading {
     order: 1;
     width: auto;
-    margin-left: 0;
+    margin: 0;
     text-align: left;
   }
 

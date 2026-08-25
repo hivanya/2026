@@ -18,26 +18,29 @@ export const YangoPlusSubscription: React.FC = () => {
     >
       <div className={classes.box}>
         <div className={classes.stage}>
-          <Image
-            src={Assets.yangoPlusSubscriptionLeft}
-            alt="Yango Plus subscription screen 1"
-            width={400}
-            height={827}
-          />
+          <div className={classes.left}>
+            <Image
+              src={Assets.yangoPlusSubscriptionLeft}
+              alt="Yango Plus subscription screen 1"
+              width={400}
+              height={827}
+            />
+
+            <Image
+              src={Assets.yangoPlusSubscriptionWidget}
+              alt=""
+              width={396}
+              height={316}
+              className={classes.widget}
+            />
+          </div>
 
           <Image
             src={Assets.yangoPlusSubscriptionRight}
             alt="Yango Plus subscription screen 2"
             width={820}
             height={1182}
-          />
-
-          <Image
-            src={Assets.yangoPlusSubscriptionWidget}
-            alt="Yango Plus subscription widget"
-            width={396}
-            height={316}
-            className={classes.widget}
+            className={classes.right}
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -13,7 +14,10 @@
 
 .intro {
   display: grid;
-  grid-template-columns: 213px minmax(0, 769px) auto;
+  grid-template-columns:
+    math.percentage(math.div(213, 1240))
+    minmax(0, math.percentage(math.div(769, 1240)))
+    auto;
   align-items: start;
 }
 

@@ -1,8 +1,9 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .title {
   margin-top: 32px;
-  margin-left: 210px;
+  margin-left: math.percentage(math.div(210, 1240));
 
   @include s.text_body(s.$regular);
   opacity: 0.2;
@@ -13,7 +14,7 @@
   margin-top: 15px;
   width: 610px;
   max-width: 100%;
-  margin-left: 210px;
+  margin-left: math.percentage(math.div(210, 1240));
 
   &::after {
     content: '';

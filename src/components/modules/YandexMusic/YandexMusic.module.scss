@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -34,14 +35,14 @@
   width: 310px;
   max-width: 100%;
   margin-top: 20px;
-  margin-left: 510px;
+  margin-left: math.percentage(math.div(510, 1240));
 }
 
 .pressWeb {
   width: 769px;
   max-width: 100%;
   margin-top: 20px;
-  margin-left: 236px;
+  margin-left: math.percentage(math.div(236, 1240));
 }
 
 @include s.mobile {

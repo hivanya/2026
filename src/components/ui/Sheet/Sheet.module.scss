@@ -1,0 +1,38 @@
+@use '@/styles/index' as s;
+
+.sheet {
+  position: relative;
+  z-index: 2;
+
+  padding-top: 100px;
+  padding-bottom: 60px;
+
+  border-radius: 40px;
+  background: s.$sheet;
+}
+
+.grabber {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+
+  width: 48px;
+  height: 4px;
+
+  border-radius: 100px;
+  background: s.$grabber;
+
+  translate: -50% 0;
+}
+
+@include s.mobile {
+  .sheet {
+    padding-top: 48px;
+
+    border-radius: 20px 20px 0 0;
+  }
+
+  .grabber {
+    top: 12px;
+  }
+}

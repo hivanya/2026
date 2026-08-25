@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -15,12 +16,12 @@
 .stage {
   display: flex;
   align-items: flex-start;
-  gap: 130px;
+  gap: math.percentage(math.div(130, 1240));
 }
 
 .phone {
   flex: 0 0 auto;
-  width: 400px;
+  width: math.percentage(math.div(400, 1240));
   aspect-ratio: 400 / 815;
   object-fit: cover;
 }
@@ -29,10 +30,11 @@
   flex: 0 0 auto;
 
   display: grid;
-  grid-template-columns: repeat(4, 90px);
-  gap: 80px;
+  grid-template-columns: repeat(4, math.percentage(math.div(90, 600)));
+  gap: math.percentage(math.div(80, 600));
 
-  margin-top: 108px;
+  width: math.percentage(math.div(600, 1240));
+  margin-top: math.percentage(math.div(108, 1240));
 }
 
 .icon {

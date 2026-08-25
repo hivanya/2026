@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -12,20 +13,57 @@
 .stage {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: math.percentage(math.div(20, 1240));
+}
+
+.left {
+  position: relative;
+  container-type: inline-size;
+
+  flex: 0 0 auto;
+  width: math.percentage(math.div(400, 1240));
+
+  > img:first-child {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.right {
+  flex: 0 0 auto;
+  width: math.percentage(math.div(820, 1240));
+  height: auto;
 }
 
 .widget {
   position: absolute;
-  bottom: -27px;
-  left: 205px;
+  top: 223.25cqw;
+  left: 46.25cqw;
 
-  width: 396px;
-  height: 316px;
+  width: 99cqw;
+  height: auto;
+  aspect-ratio: 396 / 316;
 }
 
-@include s.mobile {
+@include s.below_desktop {
   .section {
-    display: none;
+    padding-bottom: 60px;
+  }
+
+  .stage {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+  }
+
+  .widget {
+    top: 183cqw;
+    left: 20cqw;
+
+    width: 60cqw;
   }
 }

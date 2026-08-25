@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@/styles/index' as s;
 
 .section {
@@ -23,6 +24,7 @@
 
 .left {
   position: relative;
+  container-type: inline-size;
 }
 
 .right {
@@ -61,15 +63,15 @@
 }
 
 .five {
-  margin-top: 200px;
+  margin-top: math.percentage(math.div(200, 610));
 }
 
 .ticket {
   position: absolute;
-  top: 1566px;
-  left: 76px;
+  top: math.div(1566, 610) * 100cqw;
+  left: math.percentage(math.div(76, 610));
 
-  width: 459px;
+  width: math.percentage(math.div(459, 610));
   aspect-ratio: 459 / 484;
   object-fit: cover;
 
@@ -78,15 +80,16 @@
 
 .plateHolder {
   position: relative;
+  container-type: inline-size;
 }
 
 .plate {
   position: absolute;
-  top: 24px;
-  left: 47px;
+  top: math.div(24, 610) * 100cqw;
+  left: math.percentage(math.div(47, 610));
 
-  width: 538px;
-  height: 28px;
+  width: math.percentage(math.div(538, 610));
+  height: math.div(28, 610) * 100cqw;
 
   background: #000000;
 }
@@ -100,10 +103,8 @@
 }
 
 .carousel {
-  width: 1030px;
-  max-width: 100%;
-  margin-top: 128px;
-  margin-left: 105px;
+  width: math.percentage(math.div(1030, 1240));
+  margin: 128px auto 0;
 
   aspect-ratio: 1030 / 280;
   object-fit: cover;

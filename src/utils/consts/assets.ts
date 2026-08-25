@@ -1,5 +1,4 @@
 import { withBasePath } from '@/lib/helpers';
-import { YangoPlusSubscription } from '@/components/modules';
 
 const media = withBasePath;
 
@@ -19,14 +18,11 @@ export const Assets = {
 
   wavePhone: media('/images/wave-phone.webp'),
 
-  // Часы разложены на три кадра: в макете это колонки 400×480, 400×600
-  // и 400×449, левая опущена и выровнена по низу центральной
   watchLeft: media('/images/watch-left-new.webp'),
   watchCenter: media('/images/watch-center-new.webp'),
   watchRight: media('/images/watch-right-new.webp'),
 
   yangoBackdrop: media('/images/yango-backdrop.webp'),
-  // Свечение на чистом чёрном — ложится на фон страницы без швов
   yangoHeroBackdrop: media('/images/yandex-music-backdrop-image.webp'),
   yangoPhone: media('/images/yango-phone.webp'),
   yangoCardTall: media('/images/yango-card-tall.webp'),
@@ -36,8 +32,6 @@ export const Assets = {
   yangoPlusSubscriptionRight: media('/images/yango-plus-subscription-2.webp'),
   yangoPlusSubscriptionWidget: media('/images/yango-plus-subscription-3.webp'),
 
-  // Нижний блок в yango-card-mid пустой — слайдер выкладываем живыми
-  // карточками, они уезжают за правый край экрана, как в приложении
   yangoCardSquares: [
     media('/images/yango-card-square-1.webp'),
     media('/images/yango-card-square-2.webp'),
@@ -48,7 +42,6 @@ export const Assets = {
   yangoDeli: media('/images/yango-deli.webp'),
   priceCard: media('/images/price-card.webp'),
 
-  // Ширина и высота — в пикселях макета: по ним лента считает масштаб
   interfaceScreens: [
     { src: media('/images/interfaces-strip-1.webp'), width: 375, height: 812 },
     { src: media('/images/interfaces-strip-2.webp'), width: 375, height: 812 },
@@ -59,6 +52,8 @@ export const Assets = {
 
   skyengPackages: media('/images/skyeng-packages.webp'),
   skyengGrammar: media('/images/skyeng-grammar.webp'),
+  skyengLessonsShot: media('/images/skyeng-last-block-1.webp'),
+  skyengLessonsCard: media('/images/skyeng-last-block-2.webp'),
   skyengRows: media('/images/skyeng-rows.webp'),
 
   skyengScreens: [
