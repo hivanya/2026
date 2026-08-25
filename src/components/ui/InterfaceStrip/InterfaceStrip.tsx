@@ -9,8 +9,6 @@ import { usePrefersReducedMotion } from '@/lib/hooks';
 
 import classes from './InterfaceStrip.module.scss';
 
-// framer-motion свои типы кромок наружу не отдаёт, повторяем их здесь:
-// иначе шаблонная строка расширяется до string и offset не типизируется
 type EdgeUnit = `${number}${'px' | 'vw' | 'vh' | '%'}`;
 type ViewportEdge = 'start' | 'end' | 'center' | EdgeUnit;
 
@@ -24,24 +22,13 @@ interface Props {
   screens: readonly StripScreen[];
   alt: string;
   gap?: number;
-  /** Где во вьюпорте лента трогается с места: 'start' — когда блок
-      встал в распор, '25%' — на четверти экрана, то есть заметно раньше */
   startsAt?: ViewportEdge;
-  /** Сколько пикселей оставить под лентой до следующего блока. Без него
-      зазор равен пустому полю экрана и на высоких окнах разъезжается */
   tail?: number;
 }
 
 const DefaultGap = 40;
 const DefaultStart: ViewportEdge = 'start';
 
-// Липкая лента скриншотов: секция выше экрана ровно на длину проезда,
-// внутри неё лента едет влево по прогрессу скролла и останавливается,
-// когда последний кадр встаёт по центру.
-//
-// Размеры кадров приходят в пикселях макета, а на экран переводятся
-// через --unit: он ужимает ленту, если самый высокий кадр не влезает
-// в окно или самый широкий шире экрана телефона
 export const InterfaceStrip: React.FC<Props> = ({
   screens,
   alt,
@@ -65,8 +52,6 @@ export const InterfaceStrip: React.FC<Props> = ({
       const last = strip.lastElementChild;
       if (!last) return;
 
-      // Лента останавливается, когда правый край последнего кадра встал
-      // на правый край контейнера — те же поля, что и слева у ленты
       const gutter = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
       const lastRight =
         last.getBoundingClientRect().right - strip.getBoundingClientRect().left;

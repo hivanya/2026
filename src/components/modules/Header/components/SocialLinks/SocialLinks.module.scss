@@ -1,0 +1,52 @@
+@use '@/styles/index' as s;
+
+.links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+}
+
+.item {
+  @include s.text_body(s.$regular);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+
+  color: s.$dimmed_text;
+  transition: color s.$transition_duration s.$transition_ease;
+
+  &:hover {
+    color: s.$text;
+  }
+}
+
+@include s.mobile {
+  .links {
+    order: 4;
+    justify-content: stretch;
+    gap: 0;
+
+    margin-top: 41px;
+    aspect-ratio: 370 / 123;
+  }
+
+  .item {
+    display: grid;
+    place-items: center;
+
+    flex: 1 1 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100%;
+  }
+
+  .link {
+    color: s.$text;
+  }
+
+  .link::after {
+    content: none;
+  }
+}

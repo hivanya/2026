@@ -1,10 +1,3 @@
-// Забирает макет из Figma REST API в design/: дерево узлов, комментарии
-// и превью фреймов. Нужен, потому что по публичной ссылке файл не читается —
-// страница рисуется на клиенте, а API без токена отдаёт 403.
-//
-// Запуск: node tools/figma-pull.mjs
-// Токен берётся из .env.local (см. .env.local.example).
-
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -37,17 +30,12 @@ async function get(url, token) {
   const response = await fetch(url, { headers: { 'X-Figma-Token': token } });
 
   if (!response.ok) {
-    // 403 почти всегда значит «токен без нужного скоупа», а не «файла нет» —
-    // сообщение важнее кода, поэтому тащим тело.
     throw new Error(`${response.status} ${url}\n${await response.text()}`);
   }
 
   return response.json();
 }
 
-// Дерево из API — сотни килобайт JSON. Для вёрстки нужны координаты,
-// размеры, заливки, шрифты и текст, поэтому схлопываем узлы в плоский
-// список: его можно читать глазами и грепать.
 function flatten(node, depth = 0, acc = []) {
   const box = node.absoluteBoundingBox;
 
@@ -103,8 +91,6 @@ function rgba({ r, g, b }, opacity = 1) {
 
 const env = await loadEnv();
 const { FIGMA_TOKEN: token, FIGMA_FILE_KEY: key } = env;
-// В файле два макета — десктопный и мобильный. FIGMA_NODE_ID принимает
-// список «имя=id», чтобы каждый лёг в свой design/nodes-<имя>.json
 const frames = (env.FIGMA_NODE_ID || '')
   .split(',')
   .map((pair) => pair.trim())
@@ -117,7 +103,6 @@ const frames = (env.FIGMA_NODE_ID || '')
 await mkdir(OutDir, { recursive: true });
 
 const file = await get(`${Api}/files/${key}?geometry=paths`, token);
-// Сырой ответ не сохраняем: он под 400 МБ, а нужны из него только узлы
 console.log(`файл: ${file.name}, обновлён ${file.lastModified}`);
 
 function findNode(node, id) {

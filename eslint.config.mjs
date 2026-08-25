@@ -6,9 +6,6 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
-// Конфиг перенесён с face. Отличие одно: там монорепа (client/ + server/),
-// здесь только фронт в src/ — поэтому серверной секции нет, а браузерное
-// окружение и a11y висят на src/**.
 export default tseslint.config(
   {
     ignores: [
@@ -16,8 +13,6 @@ export default tseslint.config(
       '.next/**',
       'out/**',
       '**/*.config.{js,cjs,mjs,ts}',
-      // Скрипты выгрузки макета — node-окружение и разовый запуск руками;
-      // в face этот каталог тоже вне линтера.
       'tools/**',
     ],
   },
@@ -25,10 +20,8 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
 
-  // React + hooks + правила React Compiler
   ...reactHooks.configs['recommended-latest'],
 
-  // Клиентский код — браузерное окружение, jsx и a11y
   {
     files: ['src/**/*.{ts,tsx}'],
     plugins: { 'jsx-a11y': jsxA11y },
@@ -41,7 +34,6 @@ export default tseslint.config(
     },
   },
 
-  // Смягчения для первичного внедрения
   {
     plugins: { 'jsx-a11y': jsxA11y },
     rules: {
@@ -52,16 +44,11 @@ export default tseslint.config(
       ],
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
-      // jsx-a11y — пока советующие предупреждения, не блокеры
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/no-static-element-interactions': 'warn',
       'jsx-a11y/no-noninteractive-element-interactions': 'warn',
       'jsx-a11y/no-autofocus': 'warn',
-      // Ролики на странице без речи: у фонового в блоке Yango Plus звука
-      // нет вовсе, у шоурила — музыка. Субтитры к ним прикладывать нечего,
-      // но если в шоуриле появится закадровый голос — нужен <track>.
       'jsx-a11y/media-has-caption': 'warn',
-      // Правила React Compiler — пока предупреждения
       'react-hooks/immutability': 'warn',
       'react-hooks/purity': 'warn',
       'react-hooks/preserve-manual-memoization': 'warn',
@@ -85,13 +72,8 @@ export default tseslint.config(
         'warn',
         {
           groups: [
-            // react первым, затем остальные внешние пакеты
             ['^react', '^@?\\w'],
-            // внутренний алиас @/ (см. paths в tsconfig.json):
-            // сначала с подпутём (@/lib/hooks), затем голый алиас
             ['^@/', '^@$'],
-            // относительные импорты одной группой (без пустых строк между)
-            // внутри ./ стили (./foo.module.scss) выше компонентов
             [
               '^\\./.*\\.s?css$',
               '^\\./',
@@ -107,6 +89,5 @@ export default tseslint.config(
     },
   },
 
-  // Отключаем стилевые правила, конфликтующие с Prettier
   prettier,
 );

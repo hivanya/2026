@@ -39,10 +39,6 @@ export const Experience = [
   },
 ] as const;
 
-// Лендинг разбит на главы по местам работы — по этой карте шапка
-// подписывает, в чьём кейсе мы сейчас. Порядок такой же, как в page.tsx:
-// текущей считается последняя секция, уже прошедшая под шапкой.
-// null — блоки без главы: интро и финальный экран
 export const Chapters = [
   { section: 'about', experience: null },
   { section: 'showreel', experience: 'yandex-plus' },

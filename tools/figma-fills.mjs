@@ -1,16 +1,3 @@
-// Качает растры-заливки из макета и режет их так, как их режет Figma
-//
-// Рендер-эндпоинт живёт на часовом бюджете, а /v1/files/:key/images
-// отдаёт карту imageRef → ссылка на S3 одним дешёвым запросом
-//
-// Но взять исходник «как есть» нельзя, у заливки есть режим:
-//   CROP (в API он называется STRETCH) — у заливки матрица
-//     imageTransform, видна только вырезанная ею часть картинки
-//   FILL — картинка масштабируется «по большей стороне» и центрируется
-//   FIT — влезает целиком, резать нечего
-//
-// Запуск: npm run figma:fills
-
 import { execFile } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
@@ -21,7 +8,6 @@ const Api = 'https://api.figma.com/v1';
 const OutDir = 'public/images';
 const TmpDir = 'design/fill-src';
 
-// id узла в макете → имя файла в public/images
 const Targets = [
   ['6:23', 'showreel-poster'],
   ['26:170', 'music-icon-art'],
@@ -49,25 +35,24 @@ for (const line of (await readFile('.env.local', 'utf8')).split('\n')) {
   if (match) env[match[1]] = match[2].trim();
 }
 
-// Карту заливок тянем каждый раз: дизайнер добавляет картинки,
-// и сохранённая карта устаревает
 const fillsResponse = await fetch(`${Api}/files/${env.FIGMA_FILE_KEY}/images`, {
   headers: { 'X-Figma-Token': env.FIGMA_TOKEN },
 });
-if (!fillsResponse.ok) throw new Error(`${fillsResponse.status} при запросе карты заливок`);
+if (!fillsResponse.ok)
+  throw new Error(`${fillsResponse.status} при запросе карты заливок`);
 const urls = (await fillsResponse.json()).meta.images;
 
 const nodesResponse = await fetch(
   `${Api}/files/${env.FIGMA_FILE_KEY}/nodes?ids=${encodeURIComponent(Targets.map(([id]) => id).join(','))}`,
   { headers: { 'X-Figma-Token': env.FIGMA_TOKEN } },
 );
-if (!nodesResponse.ok) throw new Error(`${nodesResponse.status} ${await nodesResponse.text()}`);
+if (!nodesResponse.ok)
+  throw new Error(`${nodesResponse.status} ${await nodesResponse.text()}`);
 const { nodes } = await nodesResponse.json();
 
 await mkdir(TmpDir, { recursive: true });
 await mkdir(OutDir, { recursive: true });
 
-// Какая часть исходника видна, в долях от него
 function visibleRegion(fill, rect, pixelWidth, pixelHeight) {
   if (fill.scaleMode === 'STRETCH' && fill.imageTransform) {
     const [[du, , u0], [, dv, v0]] = fill.imageTransform;
@@ -78,7 +63,6 @@ function visibleRegion(fill, rect, pixelWidth, pixelHeight) {
     const rectRatio = rect.width / rect.height;
     const imageRatio = pixelWidth / pixelHeight;
 
-    // Шире, чем нужно — режем по бокам; уже — сверху и снизу
     const width = imageRatio > rectRatio ? rectRatio / imageRatio : 1;
     const height = imageRatio > rectRatio ? 1 : imageRatio / rectRatio;
 
@@ -90,7 +74,9 @@ function visibleRegion(fill, rect, pixelWidth, pixelHeight) {
 
 for (const [id, name] of Targets) {
   const node = nodes[id]?.document;
-  const fill = (node?.fills ?? []).find((f) => f.type === 'IMAGE' && f.visible !== false);
+  const fill = (node?.fills ?? []).find(
+    (f) => f.type === 'IMAGE' && f.visible !== false,
+  );
 
   if (!fill) {
     console.log(`${name}: у узла ${id} нет видимой картинки-заливки`);
@@ -100,7 +86,9 @@ for (const [id, name] of Targets) {
   const href = urls[fill.imageRef];
 
   if (!href) {
-    console.log(`${name}: imageRef ${fill.imageRef} не нашёлся в карте заливок`);
+    console.log(
+      `${name}: imageRef ${fill.imageRef} не нашёлся в карте заливок`,
+    );
     continue;
   }
 
@@ -108,7 +96,13 @@ for (const [id, name] of Targets) {
   const src = path.join(TmpDir, `${name}.src`);
   await writeFile(src, Buffer.from(await response.arrayBuffer()));
 
-  const info = await run('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', src]);
+  const info = await run('sips', [
+    '-g',
+    'pixelWidth',
+    '-g',
+    'pixelHeight',
+    src,
+  ]);
   const pixelWidth = Number(info.stdout.match(/pixelWidth:\s*(\d+)/)[1]);
   const pixelHeight = Number(info.stdout.match(/pixelHeight:\s*(\d+)/)[1]);
 
@@ -123,13 +117,22 @@ for (const [id, name] of Targets) {
 
   const args = ['-quiet', '-q', '82'];
   const cropped = left || top || width !== pixelWidth || height !== pixelHeight;
-  if (cropped) args.push('-crop', String(left), String(top), String(width), String(height));
+  if (cropped)
+    args.push(
+      '-crop',
+      String(left),
+      String(top),
+      String(width),
+      String(height),
+    );
 
   await run('cwebp', [...args, src, '-o', path.join(OutDir, `${name}.webp`)]);
 
   console.log(
     `${name}.webp  ${fill.scaleMode}  исходник ${pixelWidth}×${pixelHeight}` +
-      (cropped ? ` → вырез ${width}×${height} от (${left}, ${top})` : ' → без обрезки'),
+      (cropped
+        ? ` → вырез ${width}×${height} от (${left}, ${top})`
+        : ' → без обрезки'),
   );
 }
 

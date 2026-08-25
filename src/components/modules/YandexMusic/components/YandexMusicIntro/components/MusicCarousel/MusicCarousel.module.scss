@@ -1,0 +1,64 @@
+@use '@/styles/index' as s;
+$half_slide: 620px;
+
+.frame {
+  margin-top: 128px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.track {
+  display: flex;
+  gap: 40px;
+  padding-inline: max(#{s.$gap_side}px, calc(50% - #{$half_slide}));
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.slide {
+  flex: 0 0 min(#{$half_slide * 2}, calc(100vw - #{s.$gap_side * 2}px));
+  scroll-snap-align: center;
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1240 / 800;
+    object-fit: cover;
+
+    user-select: none;
+  }
+}
+
+@include s.reduced_motion {
+  .track {
+    scroll-behavior: auto;
+  }
+}
+
+@include s.mobile {
+  .frame {
+    order: 6;
+    margin-top: 40px;
+  }
+
+  .track {
+    gap: 10px;
+    padding-inline: #{s.$mobile_gap_side}px;
+  }
+
+  .slide {
+    flex: 0 0 calc(100vw - #{s.$mobile_gap_side * 2}px);
+  }
+}

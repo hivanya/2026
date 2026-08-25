@@ -1,0 +1,83 @@
+@use 'sass:math';
+@use '@/styles/index' as s;
+
+.section {
+  @include s.section;
+
+  z-index: 2;
+  padding-bottom: 20px;
+}
+
+.box {
+  @include s.box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 400fr) minmax(0, 820fr);
+  gap: 20px;
+}
+
+.narrow,
+.wide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  background: s.$card;
+}
+
+.narrow {
+  aspect-ratio: 400 / 626;
+  padding-top: math.percentage(math.div(60, 400));
+}
+
+.wide {
+  aspect-ratio: 820 / 626;
+  padding-top: math.percentage(math.div(111, 820));
+}
+
+.narrow .shot {
+  width: math.percentage(math.div(277, 400));
+}
+
+.wide .shot {
+  width: math.percentage(math.div(520, 820));
+}
+
+.shot {
+  height: auto;
+}
+
+.fade {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 200px;
+
+  pointer-events: none;
+}
+
+@include s.mobile {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .narrow,
+  .wide {
+    aspect-ratio: auto;
+    padding: 20px;
+  }
+
+  .narrow .shot,
+  .wide .shot {
+    width: 100%;
+  }
+
+  .fade {
+    height: 120px;
+  }
+}

@@ -1,9 +1,3 @@
-// Выводит спеку узла: размеры, отступы, цвета, типографику
-// Рендер-эндпоинт живёт на часовом бюджете, /nodes делит его с ним,
-// поэтому скрипт ждёт и повторяет
-//
-// Запуск: node tools/figma-node.mjs <node-id>
-
 import { readFile } from 'node:fs/promises';
 
 const id = process.argv[2];
@@ -22,7 +16,9 @@ const url =
 let body = null;
 
 for (let attempt = 1; attempt <= 12; attempt += 1) {
-  const response = await fetch(url, { headers: { 'X-Figma-Token': env.FIGMA_TOKEN } });
+  const response = await fetch(url, {
+    headers: { 'X-Figma-Token': env.FIGMA_TOKEN },
+  });
 
   if (response.ok) {
     body = await response.json();
@@ -38,7 +34,13 @@ if (!body) throw new Error('не дождались');
 const colour = (paint) => {
   const c = paint?.color;
   if (!c) return paint?.type;
-  const hex = ['r', 'g', 'b'].map((k) => Math.round(c[k] * 255).toString(16).padStart(2, '0')).join('');
+  const hex = ['r', 'g', 'b']
+    .map((k) =>
+      Math.round(c[k] * 255)
+        .toString(16)
+        .padStart(2, '0'),
+    )
+    .join('');
   const alpha = (c.a ?? 1) * (paint.opacity ?? 1);
   return `#${hex}${alpha < 1 ? ` @${alpha.toFixed(2)}` : ''}`;
 };

@@ -1,0 +1,121 @@
+@use 'sass:math';
+@use '@/styles/index' as s;
+
+.title {
+  margin-top: 32px;
+  margin-left: math.percentage(math.div(210, 1240));
+
+  @include s.text_body(s.$regular);
+  opacity: 0.2;
+}
+
+.table {
+  position: relative;
+  margin-top: 15px;
+  width: 610px;
+  max-width: 100%;
+  margin-left: math.percentage(math.div(210, 1240));
+
+  &::after {
+    content: '';
+
+    display: block;
+    @include s.hairline;
+  }
+}
+
+.row {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 148px 375px auto;
+  align-items: center;
+
+  height: 53px;
+
+  @include s.text_body(s.$regular);
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    @include s.hairline;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: -20px;
+    bottom: 0;
+    left: -20px;
+
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transition: opacity s.$transition_duration s.$transition_ease;
+
+    pointer-events: none;
+  }
+}
+
+.company {
+  justify-self: start;
+
+  @include s.text_body(s.$medium);
+}
+
+.role {
+  @include s.text_body(s.$regular);
+  opacity: 0.2;
+}
+
+.years {
+  @include s.text_body(s.$regular);
+  white-space: nowrap;
+  opacity: 0.2;
+}
+
+@include s.mobile {
+  .title {
+    order: 3;
+    margin-top: 40px;
+    margin-left: 0;
+  }
+
+  .table {
+    order: 3;
+    width: auto;
+    margin-top: 15px;
+    margin-left: 0;
+  }
+
+  .row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'company years'
+      'role role';
+    grid-template-rows: 20px 20px;
+    row-gap: 0;
+    align-items: start;
+
+    height: 71px;
+    padding-top: 16px;
+  }
+
+  .company {
+    grid-area: company;
+  }
+
+  .role {
+    grid-area: role;
+  }
+
+  .years {
+    grid-area: years;
+  }
+}

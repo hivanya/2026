@@ -6,35 +6,20 @@ import { Mesh, Program, Renderer, Triangle } from 'ogl';
 import classes from './SoftAurora.module.scss';
 
 export interface SoftAuroraProps {
-  /** Общий множитель скорости анимации */
   speed?: number;
-  /** Масштаб шумового рисунка */
   scale?: number;
-  /** Общий множитель яркости */
   brightness?: number;
-  /** Оттенок первого слоя сияния */
   color1?: string;
-  /** Оттенок второго слоя сияния */
   color2?: string;
-  /** Базовая частота шума Перлина */
   noiseFrequency?: number;
-  /** Базовая амплитуда шума Перлина */
   noiseAmplitude?: number;
-  /** Положение полосы сияния по вертикали, 0–1 */
   bandHeight?: number;
-  /** Вертикальный разброс свечения */
   bandSpread?: number;
-  /** Затухание амплитуды на каждой октаве шума */
   octaveDecay?: number;
-  /** Сдвиг по времени между двумя слоями */
   layerOffset?: number;
-  /** Скорость перебора палитры */
   colorSpeed?: number;
-  /** Реакция на курсор */
   enableMouseInteraction?: boolean;
-  /** Сила сдвига по курсору */
   mouseInfluence?: number;
-  /** Остановить анимацию: один кадр и никакого rAF */
   paused?: boolean;
 }
 
@@ -55,7 +40,6 @@ const Defaults = {
   mouseInfluence: 0.25,
 } as const;
 
-// Курсор догоняет цель с этим шагом за кадр — сдвиг тянется, а не прыгает
 const MouseEasing = 0.05;
 
 const hexToVec3 = (hex: string): [number, number, number] => {
@@ -201,12 +185,6 @@ void main() {
 }
 `;
 
-// Полноэкранный шейдер северного сияния на прозрачном холсте: фон страницы
-// просвечивает сам, подложку под него подкладывать не нужно.
-//
-// Отличия от исходника с reactbits: кадры не крутятся, пока блок за экраном
-// или вкладка неактивна, а курсор слушаем на window — холст лежит в фоне
-// с pointer-events: none и своих событий не получает
 export const SoftAurora: React.FC<SoftAuroraProps> = ({
   speed = Defaults.speed,
   scale = Defaults.scale,
@@ -322,7 +300,6 @@ export const SoftAurora: React.FC<SoftAuroraProps> = ({
       frame = requestAnimationFrame(loop);
     };
 
-    // Шейдер на весь экран стоит дорого: крутим его, только пока блок виден
     let onScreen = false;
 
     const visibility = new IntersectionObserver(([entry]) => {
@@ -341,7 +318,6 @@ export const SoftAurora: React.FC<SoftAuroraProps> = ({
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Один кадр рисуем всегда — иначе на выключенной анимации холст пустой
     draw(0);
 
     return () => {

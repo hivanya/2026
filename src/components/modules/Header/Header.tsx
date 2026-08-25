@@ -3,8 +3,8 @@ import React from 'react';
 import { PersonBio, PersonName } from '@/utils/consts';
 
 import classes from './Header.module.scss';
-import { ExperienceTable } from './parts/ExperienceTable/ExperienceTable';
-import { SocialLinks } from './parts/SocialLinks/SocialLinks';
+import { ExperienceTable } from './components/ExperienceTable/ExperienceTable';
+import { SocialLinks } from './components/SocialLinks/SocialLinks';
 
 export const Header: React.FC = () => (
   <section id="about" className={classes.section}>

@@ -1,0 +1,48 @@
+@use 'sass:math';
+@use '@/styles/index' as s;
+
+.section {
+  @include s.section;
+
+  z-index: 2;
+  padding-top: 60px;
+}
+
+.box {
+  @include s.box;
+}
+
+.stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.left,
+.center,
+.right {
+  flex: 1 1 0;
+  min-width: 0;
+
+  img {
+    width: 100%;
+  }
+}
+.left {
+  margin-top: math.percentage(math.div(120, 1240));
+}
+
+.left,
+.right {
+  will-change: transform;
+}
+
+@include s.mobile {
+  .box {
+    display: none;
+  }
+
+  .section {
+    padding-top: 10px;
+    padding-bottom: 31px;
+  }
+}

@@ -1,15 +1,3 @@
-// Рендерит составные кадры макета через Figma Images API
-//
-// Заливкой их не взять: внутри от десятков до тысяч слоёв. Дизайнер
-// разложил исходники по группам «Исходнные картинки для блок N»,
-// их id и стоят ниже
-//
-// Рендер-эндпоинт живёт на часовом бюджете и после серии запросов
-// уходит в 429 надолго, поэтому: несколько id за запрос, пауза между
-// пачками и пропуск уже выгруженного
-//
-// Запуск: npm run figma:rest
-
 import { execFile } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -22,7 +10,6 @@ const ImgDir = 'public/images';
 const TmpDir = 'design/rest-src';
 
 const Batches = [
-  // Блок 3 — коллаж Яндекс Музыки
   {
     scale: 2,
     dir: ImgDir,
@@ -33,24 +20,33 @@ const Batches = [
       ['274:12569', 'music-icon-art'],
     ],
   },
-  // Два кадра карусели: в макете под ней две точки
   {
     scale: 1,
     dir: ImgDir,
-    items: [['224:22283', 'music-carousel-1'], ['224:22282', 'music-carousel-2']],
+    items: [
+      ['224:22283', 'music-carousel-1'],
+      ['224:22282', 'music-carousel-2'],
+    ],
   },
   { scale: 2, dir: ImgDir, items: [['274:12573', 'wave-phone']] },
-  { scale: 2, dir: ImgDir, items: [['80:68', 'watch-left'], ['100:118', 'watch-right']] },
-  // У квадратного блока и карточки цены поверх картинки свои слои
   {
     scale: 2,
     dir: ImgDir,
-    items: [['132:10979', 'yango-card-square'], ['133:11087', 'price-card']],
+    items: [
+      ['80:68', 'watch-left'],
+      ['100:118', 'watch-right'],
+    ],
+  },
+  {
+    scale: 2,
+    dir: ImgDir,
+    items: [
+      ['132:10979', 'yango-card-square'],
+      ['133:11087', 'price-card'],
+    ],
   },
   { scale: 1, dir: ImgDir, items: [['136:11330', 'yango-deli']] },
-  // Блок 1 Skyeng: три кадра — растры, а третий собран из слоёв
   { scale: 2, dir: ImgDir, items: [['333:18328', 'skyeng-strip-3']] },
-  // Блок 2 — снимок тарифов, блок 3 — начинка двух карточек
   { scale: 2, dir: ImgDir, items: [['333:18329', 'skyeng-packages']] },
   {
     scale: 2,
@@ -74,7 +70,9 @@ await mkdir(TmpDir, { recursive: true });
 await mkdir(ImgDir, { recursive: true });
 
 for (const [index, { scale, dir, items }] of Batches.entries()) {
-  const todo = items.filter(([, name]) => !existsSync(path.join(dir, `${name}.webp`)));
+  const todo = items.filter(
+    ([, name]) => !existsSync(path.join(dir, `${name}.webp`)),
+  );
 
   if (!todo.length) {
     console.log(`пачка ${index + 1}: всё на месте`);
@@ -87,16 +85,19 @@ for (const [index, { scale, dir, items }] of Batches.entries()) {
   let images = null;
 
   for (let attempt = 1; attempt <= 8; attempt += 1) {
-    const response = await fetch(url, { headers: { 'X-Figma-Token': env.FIGMA_TOKEN } });
+    const response = await fetch(url, {
+      headers: { 'X-Figma-Token': env.FIGMA_TOKEN },
+    });
 
     if (response.ok) {
       images = (await response.json()).images;
       break;
     }
 
-    // Бюджет рендера часовой: частые повторы держат окно занятым
     const pause = response.status === 429 ? 600000 : attempt * 8000;
-    console.log(`  пачка ${index + 1}: HTTP ${response.status}, жду ${pause / 1000}с (${attempt}/8)`);
+    console.log(
+      `  пачка ${index + 1}: HTTP ${response.status}, жду ${pause / 1000}с (${attempt}/8)`,
+    );
     await sleep(pause);
   }
 
@@ -123,12 +124,17 @@ for (const [index, { scale, dir, items }] of Batches.entries()) {
     const png = path.join(TmpDir, `${name}.png`);
     await writeFile(png, Buffer.from(await response.arrayBuffer()));
 
-    // -q 82: ниже на скриншотах интерфейса заметна каша на мелком тексте
-    await run('cwebp', ['-quiet', '-q', '82', png, '-o', path.join(dir, `${name}.webp`)]);
+    await run('cwebp', [
+      '-quiet',
+      '-q',
+      '82',
+      png,
+      '-o',
+      path.join(dir, `${name}.webp`),
+    ]);
     console.log(`${name}.webp`);
   }
 
-  // Пауза между пачками: лимит считается по частоте запросов
   await sleep(6000);
 }
 
