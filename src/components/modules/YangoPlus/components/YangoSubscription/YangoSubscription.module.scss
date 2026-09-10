@@ -4,6 +4,10 @@
 .section {
   @include s.section;
   padding-bottom: 155px;
+
+  @include s.mobile {
+    display: none;
+  }
 }
 
 .box {
