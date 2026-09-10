@@ -6,21 +6,12 @@
   width: 100%;
 }
 
-@mixin box {
+@mixin box($width: $design_width) {
   position: relative;
 
-  width: min(100%, #{$design_width}px);
+  width: min(100%, #{$width}px);
   margin: 0 auto;
   padding: 0 #{$gap_side}px;
-
-  @include mobile {
-    padding: 0 #{$mobile_gap_side}px;
-  }
-}
-
-@mixin sheet_box {
-  position: relative;
-  width: 100%;
 
   @include mobile {
     padding: 0 #{$mobile_gap_side}px;

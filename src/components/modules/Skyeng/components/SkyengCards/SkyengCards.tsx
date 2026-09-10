@@ -35,8 +35,8 @@ export const SkyengCards: React.FC = () => {
     mass: 0.4,
   });
 
-  const pointerY = useTransform(progress, [0, 1], ['26%', '-26%']);
-  const pointerRotate = useTransform(progress, [0, 1], [14, -8]);
+  const pointerY = useTransform(progress, [0, 1], ['50%', '-50%']);
+  const pointerRotate = useTransform(progress, [0, 1], [20, -12]);
 
   return (
     <section id="skyeng-cards" className={classes.section}>

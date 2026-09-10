@@ -1,7 +1,7 @@
 @use '@/styles/index' as s;
 
 .holder {
-  @include s.box;
+  @include s.box(s.$design_width + s.$sheet_bleed * 2);
 }
 
 .sheet {
