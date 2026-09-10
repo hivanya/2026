@@ -37,12 +37,24 @@
 }
 
 @include s.mobile {
-  .box {
-    display: none;
-  }
-
   .section {
     padding-top: 10px;
     padding-bottom: 31px;
+  }
+
+  .stage {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .left,
+  .center,
+  .right {
+    width: 100%;
+    transform: none !important;
+  }
+
+  .left {
+    margin-top: 0;
   }
 }

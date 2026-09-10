@@ -32,7 +32,15 @@
     padding-bottom: 28px;
   }
 
+  .box {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
   .press {
+    flex-direction: column;
+    align-items: flex-start;
+
     width: auto;
     margin-top: 20px;
     margin-left: 0;

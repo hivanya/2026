@@ -56,9 +56,16 @@ $half_slide: 620px;
   .track {
     gap: 10px;
     padding-inline: #{s.$mobile_gap_side}px;
+    scroll-padding-inline: #{s.$mobile_gap_side}px;
   }
 
   .slide {
-    flex: 0 0 calc(100vw - #{s.$mobile_gap_side * 2}px);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+
+    img {
+      width: 740px;
+      aspect-ratio: 1240 / 800;
+    }
   }
 }

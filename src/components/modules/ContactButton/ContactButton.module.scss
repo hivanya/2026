@@ -62,6 +62,8 @@
 
 @include s.mobile {
   .section {
+    order: 2;
+
     padding-top: 60px;
     padding-bottom: 60px;
   }

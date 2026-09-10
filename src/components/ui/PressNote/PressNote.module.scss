@@ -74,6 +74,15 @@
 }
 
 @include s.mobile {
+  .note {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .text {
+    white-space: normal;
+  }
+
   .icon {
     display: none;
   }

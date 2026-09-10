@@ -49,6 +49,12 @@
   }
 }
 
+@include s.mobile {
+  .right {
+    display: none;
+  }
+}
+
 @include s.below_desktop {
   .section {
     padding-bottom: 60px;

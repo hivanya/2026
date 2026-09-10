@@ -60,8 +60,7 @@
   opacity: 1;
 }
 
-.mobileIcons,
-.mobileExtra {
+.mobileIcons {
   display: none;
 }
 
@@ -77,25 +76,21 @@
     gap: 48px;
   }
 
-  .phone,
   .grid {
     display: none;
   }
 
-  .mobileIcons,
-  .mobileExtra {
+  .phone {
+    width: 100%;
+    aspect-ratio: 370 / 754;
+  }
+
+  .mobileIcons {
     display: block;
 
     width: 320px;
     max-width: 100%;
-  }
-
-  .mobileIcons {
     aspect-ratio: 1;
-  }
-
-  .mobileExtra {
-    aspect-ratio: 320 / 384;
   }
 }
 

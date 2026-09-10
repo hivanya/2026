@@ -112,13 +112,63 @@
 
 @include s.mobile {
   .section {
+    order: 1;
+
     padding-top: 10px;
     padding-bottom: 40px;
   }
 
+  .box {
+    display: flex;
+    flex-direction: column;
+  }
+
   .stage,
-  .divider,
+  .left,
+  .right {
+    display: contents;
+  }
+
   .carousel {
     display: none;
+  }
+
+  .stalo {
+    order: 1;
+  }
+
+  .five {
+    order: 2;
+    margin-top: 10px;
+  }
+
+  .ticket {
+    order: 3;
+    position: static;
+
+    width: math.percentage(math.div(330, 370));
+    margin: 30px auto 0;
+
+    border-radius: 30px;
+  }
+
+  .plateHolder {
+    order: 4;
+
+    width: math.percentage(math.div(330, 370));
+    margin: 30px auto 0;
+  }
+
+  .divider {
+    order: 5;
+  }
+
+  .stalo,
+  .five {
+    border-radius: 40px;
+  }
+
+  .thirtyTwo {
+    border-radius: 40px 40px 0 0;
   }
 }

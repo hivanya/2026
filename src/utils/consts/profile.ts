@@ -67,7 +67,8 @@ export const MusicIntro = {
 
 export const YangoIntro = {
   before: 'Yango',
-  after: 'Plus — unified subscription\nto Yango services',
+  middle: 'Plus —',
+  after: 'unified subscription\nto Yango services',
 } as const;
 
 export const ShowreelTitle = 'Showreel';

@@ -1,0 +1,7 @@
+@use '@/styles/index' as s;
+
+@include s.mobile {
+  .sheet {
+    display: none;
+  }
+}

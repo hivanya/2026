@@ -32,14 +32,6 @@ export const YandexMyWave: React.FC = () => (
           height={320}
           className={classes.mobileIcons}
         />
-
-        <Image
-          src={Assets.mobile.waveExtra}
-          alt="My Wave settings"
-          width={320}
-          height={384}
-          className={classes.mobileExtra}
-        />
       </div>
     </div>
   </section>
