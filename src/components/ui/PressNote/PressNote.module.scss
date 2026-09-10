@@ -87,6 +87,11 @@
     display: none;
   }
 
+  .source {
+    color: s.$text;
+    border-bottom: 0.5px solid s.$hairline_link;
+  }
+
   .inline {
     flex-direction: column;
     align-items: flex-start;

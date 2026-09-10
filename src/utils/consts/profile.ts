@@ -60,9 +60,9 @@ export const Chapters = [
 export const MusicIntro = {
   before: 'Yandex',
   middle:
-    'Music — the top music streaming service\nby number of listeners subscribers in Russia. \nPart of the Yandex',
+    'Music — the\u00A0top music streaming service\nby\u00A0number of\u00A0listeners subscribers in\u00A0Russia. \nPart of the\u00A0Yandex',
   after:
-    'Plus subscription. The total\nnumber of Plus subscribers is over 40 million',
+    'Plus subscription. The\u00A0total\nnumber of\u00A0Plus subscribers is over 40\u00A0million',
 } as const;
 
 export const YangoIntro = {

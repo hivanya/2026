@@ -38,13 +38,13 @@
 
 @include s.mobile {
   .section {
-    padding-top: 10px;
+    padding-top: 30px;
     padding-bottom: 31px;
   }
 
   .stage {
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
   }
 
   .left,
