@@ -9,7 +9,7 @@
 }
 
 .box {
-  @include s.box;
+  @include s.sheet_box;
 }
 
 .card {

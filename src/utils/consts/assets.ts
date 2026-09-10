@@ -53,8 +53,9 @@ export const Assets = {
   skyengPackages: media('/images/skyeng-packages.webp'),
   skyengGrammar: media('/images/skyeng-grammar.webp'),
   skyengLessonsShot: media('/images/skyeng-last-block-1.webp'),
-  skyengLessonsCard: media('/images/skyeng-last-block-2.webp'),
+  skyengMakeYourReconding: media('/images/skyeng-last-block-3.webp'),
   skyengRows: media('/images/skyeng-rows.webp'),
+  skyengMousePoint: media('/images/skyeng-mouse-point.webp'),
 
   skyengScreens: [
     { src: media('/images/skyeng-strip-1.webp'), width: 1635, height: 866 },

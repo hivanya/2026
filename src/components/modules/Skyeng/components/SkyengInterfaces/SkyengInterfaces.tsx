@@ -5,7 +5,7 @@ import { Assets } from '@/utils/consts';
 
 import classes from './SkyengInterfaces.module.scss';
 
-const Gap = 20;
+const Gap = 22;
 const StartsAt = '25%' as const;
 
 export const SkyengInterfaces: React.FC = () => (

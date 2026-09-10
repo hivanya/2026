@@ -41,8 +41,12 @@
   left: 46.25cqw;
 
   width: 99cqw;
-  height: auto;
-  aspect-ratio: 396 / 316;
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 396 / 316;
+  }
 }
 
 @include s.below_desktop {

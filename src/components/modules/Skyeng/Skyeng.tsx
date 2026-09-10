@@ -4,7 +4,6 @@ import { Sheet } from '@/components/ui';
 
 import { SkyengCards } from './components/SkyengCards/SkyengCards';
 import { SkyengInterfaces } from './components/SkyengInterfaces/SkyengInterfaces';
-import { SkyengLessons } from './components/SkyengLessons/SkyengLessons';
 import { SkyengPackages } from './components/SkyengPackages/SkyengPackages';
 
 export const Skyeng: React.FC = () => (
@@ -12,6 +11,5 @@ export const Skyeng: React.FC = () => (
     <SkyengInterfaces />
     <SkyengPackages />
     <SkyengCards />
-    <SkyengLessons />
   </Sheet>
 );

@@ -8,9 +8,11 @@ interface Props extends React.PropsWithChildren {
 }
 
 export const Sheet: React.FC<Props> = ({ className, children }) => (
-  <div data-surface="light" className={clsx(classes.sheet, className)}>
-    <span aria-hidden className={classes.grabber} />
+  <div className={classes.holder}>
+    <div data-surface="light" className={clsx(classes.sheet, className)}>
+      <span aria-hidden className={classes.grabber} />
 
-    {children}
+      {children}
+    </div>
   </div>
 );
